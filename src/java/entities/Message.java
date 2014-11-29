@@ -17,12 +17,11 @@ import javax.persistence.Id;
  */
 @Entity
 public class Message implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String message;
+    private String message ;
 
     public String getMessage() {
         return message;
@@ -31,6 +30,7 @@ public class Message implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+    
 
     public Long getId() {
         return id;
@@ -64,5 +64,5 @@ public class Message implements Serializable {
     public String toString() {
         return "entities.Message[ id=" + id + " ]";
     }
-
+    
 }
