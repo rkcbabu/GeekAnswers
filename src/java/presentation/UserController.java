@@ -6,8 +6,10 @@ import presentation.util.PaginationHelper;
 import boundary.UserFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -17,20 +19,82 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import javax.persistence.TypedQuery;
 
-@ManagedBean(name="userController")
+
+
+
+
+
+@ManagedBean(name = "userController")
 
 @SessionScoped
 public class UserController implements Serializable {
 
-    private User current;
+    private User current=new User();
     private DataModel items = null;
     @EJB
     private boundary.UserFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+   private String loginEmail;
+   private String loginPassword;
+
+    public String getLoginPassword() {
+        return loginPassword;
+    }
+
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
+    }
 
     public UserController() {
+       
+    }
+
+    
+    public String handleLogin(){
+        
+        String loginQuery="SELECT s FROM User s WHERE s.email=:email AND s.password=:password";
+        
+
+
+        
+        TypedQuery<User> query=getFacade().getEM().createQuery(loginQuery,User.class);
+        query.setParameter("email", getLoginEmail());
+        query.setParameter("password",getLoginPassword());
+        User usr=query.getSingleResult();
+        if(usr!=null){
+            current=usr;
+            current.setLastLoginDate(new Date());
+          //  getFacade().getEM().merge(current);
+            return "dashboard";
+        }
+        else
+        {
+            FacesContext fc=FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Invalid Login","Invalid Login: Please check your username of password"));
+            return "Create";
+        }
+        
+    }
+
+    public String getLoginEmail() {
+        return loginEmail;
+    }
+
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
+    }
+    
+    public User getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(User current) {
+        this.current = current;
     }
 
     public User getSelected() {
@@ -77,7 +141,7 @@ public class UserController implements Serializable {
     public String prepareCreate() {
         current = new User();
         selectedItemIndex = -1;
-        return "Create";
+        return "dashboard";
     }
 
     public String create() {
