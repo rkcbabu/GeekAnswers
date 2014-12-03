@@ -22,7 +22,7 @@ import javax.persistence.Temporal;
 public class Answer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String Content;
     @Temporal(javax.persistence.TemporalType.DATE)
