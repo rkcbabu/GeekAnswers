@@ -1,12 +1,15 @@
 package presentation;
 
-import boundary.AnswerFacade;
 import entities.Answer;
+import presentation.util.JsfUtil;
+import presentation.util.PaginationHelper;
+import boundary.AnswerFacade;
+
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -14,12 +17,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import presentation.util.JsfUtil;
-import presentation.util.PaginationHelper;
 
-@ManagedBean(name="answerController")
-
-
+@Named("answerController")
 @SessionScoped
 public class AnswerController implements Serializable {
 
