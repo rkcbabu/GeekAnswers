@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -31,6 +32,11 @@ public class Answer implements Serializable {
     private String status;
     private boolean valid;
 
+    @ManyToOne()
+    private Question question;
+    
+    @ManyToOne()
+    private User user;
 
     public String getContent() {
         return Content;

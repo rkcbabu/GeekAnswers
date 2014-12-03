@@ -12,22 +12,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Chaulagai
  */
 @Entity
-public class Tag implements Serializable {
+public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    private String code ; 
     
-    @ManyToMany(mappedBy = "tags")
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private List<Question> questions;
+    
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Reputation> reputations;
 
     public String getTitle() {
         return title;
@@ -36,7 +40,16 @@ public class Tag implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
     
+
     public Long getId() {
         return id;
     }
@@ -55,10 +68,10 @@ public class Tag implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tag)) {
+        if (!(object instanceof Category)) {
             return false;
         }
-        Tag other = (Tag) object;
+        Category other = (Category) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -67,7 +80,7 @@ public class Tag implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Tag[ id=" + id + " ]";
+        return "entities.Category[ id=" + id + " ]";
     }
     
 }

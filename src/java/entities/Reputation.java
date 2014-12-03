@@ -20,15 +20,19 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Reputation implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long point;
     private String name;
+
+    @ManyToOne()
+    private User user;
     
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    private User user ;
+    @ManyToOne()
+    private Category category;
 
     public Long getPoint() {
         return point;
@@ -45,7 +49,6 @@ public class Reputation implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
 
     public Long getId() {
         return id;
@@ -79,5 +82,5 @@ public class Reputation implements Serializable {
     public String toString() {
         return "entities.Reputation[ id=" + id + " ]";
     }
-    
+
 }

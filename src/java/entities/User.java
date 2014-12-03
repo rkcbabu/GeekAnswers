@@ -7,6 +7,8 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +35,15 @@ public class User implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastLoginDate;
     private String type;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Question> questions;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Answer> answers;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reputation> reputations;
     
 //    @OneToMany(mappedBy = "user")
 //    private Reputation reputation;

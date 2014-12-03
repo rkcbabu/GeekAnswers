@@ -7,10 +7,15 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -31,6 +36,18 @@ public class Question implements Serializable {
     private Date modifiedDate;
     private String status;
     private boolean vote;
+    
+    @ManyToOne()
+    private User user ;
+    
+    @ManyToOne()
+    private Category category;
+    
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Answer> answers;
+    
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    private List<Tag> tags;
 
     public String getTitle() {
         return title;
