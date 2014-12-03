@@ -1,7 +1,8 @@
-/build/
-/dist/
-/setup/
-/test/
-/src/conf/
-/nbproject/
+/build/*
+/dist/*
+/setup/*
+/test/*
+/src/conf/*
+/nbproject/*
 /build.xml
+/nbproject/project.properties
