@@ -32,7 +32,7 @@ import javax.persistence.TypedQuery;
 @SessionScoped
 public class UserController implements Serializable {
 
-    private User current=new User();
+    private User current;
     private DataModel items = null;
     @EJB
     private boundary.UserFacade ejbFacade;
@@ -55,6 +55,11 @@ public class UserController implements Serializable {
     }
 
     
+    public User loggedInUser(){
+        return (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+    }
+    
+    
     public String handleLogin(){
         
         String loginQuery="SELECT s FROM User s WHERE s.email=:email AND s.password=:password";
@@ -65,11 +70,19 @@ public class UserController implements Serializable {
         TypedQuery<User> query=getFacade().getEM().createQuery(loginQuery,User.class);
         query.setParameter("email", getLoginEmail());
         query.setParameter("password",getLoginPassword());
-        User usr=query.getSingleResult();
+        
+        User usr=query.getResultList().get(0);
         if(usr!=null){
-            current=usr;
-            current.setLastLoginDate(new Date());
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", usr);
+            
+            usr.setLastLoginDate(new Date());
+            
+            
+            getFacade().edit(usr);
+            
           //  getFacade().getEM().merge(current);
+            
+            
             return "dashboard";
         }
         else
@@ -146,6 +159,8 @@ public class UserController implements Serializable {
 
     public String create() {
         try {
+            current.setLastLoginDate(new Date());
+            current.setRegisterDate(new Date());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("UserCreated"));
             return prepareCreate();

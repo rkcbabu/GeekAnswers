@@ -6,8 +6,19 @@
         <title>User Dashboard </title>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <h:outputText value="#{userController.current.firstName}"/>
+        
+        <h:outputLabel value="This is user dashboard"/>
+        
+        <h:outputLabel value="First name"/><br/>
+        <h:outputText value="#{userController.loggedInUser().firstName}"/><br/>
+        
+         <h:outputLabel value="Last name"/><br/>
+         <h:outputText value="#{userController.loggedInUser().lastName}"/><br/>
+        
+         <h:outputLabel value="Email"/><br/>
+         <h:outputText value="#{userController.loggedInUser().email}"/><br/>
+        
+        
     </h:body>
 </html>
 

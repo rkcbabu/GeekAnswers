@@ -38,9 +38,9 @@ public class User implements Serializable {
     private String lastName ;
     private String email;
     private String password ; 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date registerDate;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date lastLoginDate;
     private String type;
     
