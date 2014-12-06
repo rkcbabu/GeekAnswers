@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/boundary/AbstractFacade.java</file>
-            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/boundary/AnswerFacade.java</file>
-            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/entities/Tag.java</file>
-            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/presentation/AnswerController.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/entities/Question.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/presentation/QuestionController.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/web/question/Create.xhtml</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/boundary/QuestionFacade.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/presentation/UserController.java</file>
         </group>
     </open-files>
 </project-private>

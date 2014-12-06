@@ -8,21 +8,19 @@ import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 
@@ -70,14 +68,21 @@ public class UserController implements Serializable {
     
     
     
-    public int isUserLoggedIn(){
+    public int isUserLoggedIn() throws IOException{
         
         User u=(User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
         
        if(u!=null)
            return 1;
-       else
+       else{
+           
+           ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
+           
+      //  FacesContext.getCurrentInstance().getExternalContext().redirect("../user/login.xhtml");
+           
         return 0;
+       }
     }
     
     public String handleLogin() throws IOException{

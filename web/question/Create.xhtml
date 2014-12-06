@@ -32,10 +32,22 @@
         
         <ui:define name="body">
             
+            
+              <h:panelGroup id="wholepanel2" layout="block" rendered="#{userController.isUserLoggedIn() eq 1}">
+            hello eq 1
+            
+        </h:panelGroup>
+        
+          <h:panelGroup id="wholepanel1s" layout="block" rendered="#{userController.isUserLoggedIn() ne 1}">
+            hello not eq 1
+            
+        </h:panelGroup>
+            
+            
             <c:choose>
     
     <c:when test="#{userController.isUserLoggedIn()==1}">
-    
+      
         
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
