@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
@@ -23,6 +25,15 @@ import javax.persistence.Temporal;
  * @author Chaulagai
  */
 @Entity
+
+
+@NamedQueries({
+    
+    @NamedQuery(name="my.questions",query="SELECT s FROM Question s WHERE s.user=:user")
+})
+
+
+
 public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,6 +50,14 @@ public class Question implements Serializable {
     
     @ManyToOne()
     private User user ;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
     @ManyToOne()
     private Category category;

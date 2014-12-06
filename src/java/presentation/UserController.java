@@ -4,13 +4,16 @@ import entities.User;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import boundary.UserFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -29,7 +32,7 @@ import javax.persistence.TypedQuery;
 
 @ManagedBean(name = "userController")
 
-@SessionScoped
+@RequestScoped
 public class UserController implements Serializable {
 
     private User current;
@@ -54,14 +57,32 @@ public class UserController implements Serializable {
        
     }
 
+    public String distrotyUserSession(){
+      //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("logged_in_user");
+
+        return "User session destroyed";
+        //logged_in_user
+    }
     
     public User loggedInUser(){
         return (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
     }
     
     
-    public String handleLogin(){
+    
+    public int isUserLoggedIn(){
         
+        User u=(User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+        
+       if(u!=null)
+           return 1;
+       else
+        return 0;
+    }
+    
+    public String handleLogin() throws IOException{
+        
+        //System.err.println("output");
         String loginQuery="SELECT s FROM User s WHERE s.email=:email AND s.password=:password";
         
 
@@ -71,8 +92,11 @@ public class UserController implements Serializable {
         query.setParameter("email", getLoginEmail());
         query.setParameter("password",getLoginPassword());
         
-        User usr=query.getResultList().get(0);
-        if(usr!=null){
+        
+      
+        try{
+            User usr=query.getResultList().get(0);
+            //System.out.println(usr.getEmail());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", usr);
             
             usr.setLastLoginDate(new Date());
@@ -83,13 +107,24 @@ public class UserController implements Serializable {
           //  getFacade().getEM().merge(current);
             
             
+            FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
+            
             return "dashboard";
+            
+            
+            
+            
+            
         }
-        else
+        catch(Exception e)
+       
         {
+           // e.printStackTrace();
             FacesContext fc=FacesContext.getCurrentInstance();
             fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Invalid Login","Invalid Login: Please check your username of password"));
-            return "Create";
+           FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+
+             return "login";
         }
         
     }
@@ -162,6 +197,10 @@ public class UserController implements Serializable {
             current.setLastLoginDate(new Date());
             current.setRegisterDate(new Date());
             getFacade().create(current);
+            
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
+
+            
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("UserCreated"));
             return prepareCreate();
         } catch (Exception e) {

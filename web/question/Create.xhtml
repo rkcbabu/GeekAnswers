@@ -3,13 +3,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    
+    
+    
+   
+    
 
     <ui:composition template="/template.xhtml">
+        
+        
+    
+        
         <ui:define name="title">
-            <h:outputText value="#{bundle.CreateQuestionTitle}"></h:outputText>
+            
+ <h:outputText value="#{bundle.CreateQuestionTitle}"></h:outputText>
+            
+
+            
+               
+               
         </ui:define>
+        
+        
+         
+        
         <ui:define name="body">
+            
+            <c:choose>
+    
+    <c:when test="#{userController.isUserLoggedIn()==1}">
+    
+        
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -17,20 +44,25 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateQuestionLabel_title}" for="title" />
                     <h:inputText id="title" value="#{questionController.selected.title}" title="#{bundle.CreateQuestionTitle_title}" />
+                   
                     <h:outputLabel value="#{bundle.CreateQuestionLabel_content}" for="content" />
                     <h:inputText id="content" value="#{questionController.selected.content}" title="#{bundle.CreateQuestionTitle_content}" />
-                    <h:outputLabel value="#{bundle.CreateQuestionLabel_createdDate}" for="createdDate" />
-                    <h:inputText id="createdDate" value="#{questionController.selected.createdDate}" title="#{bundle.CreateQuestionTitle_createdDate}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateQuestionLabel_modifiedDate}" for="modifiedDate" />
-                    <h:inputText id="modifiedDate" value="#{questionController.selected.modifiedDate}" title="#{bundle.CreateQuestionTitle_modifiedDate}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                   
+                  
+                    
+                    
                     <h:outputLabel value="#{bundle.CreateQuestionLabel_status}" for="status" />
                     <h:inputText id="status" value="#{questionController.selected.status}" title="#{bundle.CreateQuestionTitle_status}" />
-                    <h:outputLabel value="#{bundle.CreateQuestionLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{questionController.selected.id}" title="#{bundle.CreateQuestionTitle_id}" />
+                   
+              
+                      <h:outputLabel value="User id" for="useid" />
+                      <h:outputLabel id="user_id" value="#{sessionScope.logged_in_user.id}" />
+                      
+                                   
+                      
+                   
+                    
+                    
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{questionController.create}" value="#{bundle.CreateQuestionSaveLink}" />
@@ -41,7 +73,27 @@
                 <br />
                 <h:link outcome="/index" value="#{bundle.CreateQuestionIndexLink}"/>
             </h:form>
-        </ui:define>
-    </ui:composition>
+        
+        
+        
+         </c:when>
+        <c:otherwise>
+            <ui:define name="body">
+                <h:outputLabel value="Click here to login first"/>
+            <h:commandLink action="../user/login.xhtml"/>
+            </ui:define>
+        </c:otherwise>
 
+        </c:choose>
+        
+        </ui:define>
+        
+        
+        
+        
+        
+        
+    </ui:composition>
+        
+   
 </html>

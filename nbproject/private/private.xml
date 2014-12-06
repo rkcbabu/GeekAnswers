@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/boundary/AbstractFacade.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/boundary/AnswerFacade.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/entities/Tag.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/presentation/AnswerController.java</file>
+        </group>
     </open-files>
 </project-private>

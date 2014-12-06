@@ -18,6 +18,10 @@
          <h:outputLabel value="Email"/><br/>
          <h:outputText value="#{userController.loggedInUser().email}"/><br/>
         
+         
+         <h:link outcome="/question/List.xhtml" value="View my questions" />
+                  <h:link outcome="/question/Create.xhtml" value="New question" />
+
         
     </h:body>
 </html>

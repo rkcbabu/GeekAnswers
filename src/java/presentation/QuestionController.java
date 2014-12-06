@@ -4,11 +4,16 @@ import entities.Question;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import boundary.QuestionFacade;
+import entities.User;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -20,16 +25,39 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean(name="questionController")
 
-@SessionScoped
+@RequestScoped
 public class QuestionController implements Serializable {
 
     private Question current;
+    private User currentUser;
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
     private DataModel items = null;
     @EJB
     private boundary.QuestionFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    
+    @PostConstruct
+   public void addUserId(){
+       try{
+       User u=(User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+      
+           setCurrentUser(u);
+       }
+       catch(Exception e){
+           FacesContext.getCurrentInstance().addMessage(null , new FacesMessage(FacesMessage.SEVERITY_ERROR,"User is not logged in yet","not logged in"));
+           
+       }
+   }
+    
     public QuestionController() {
     }
 
@@ -82,6 +110,10 @@ public class QuestionController implements Serializable {
 
     public String create() {
         try {
+              
+            
+            current.setCreatedDate(new Date());
+            current.setUser(currentUser);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("QuestionCreated"));
             return prepareCreate();
@@ -99,6 +131,7 @@ public class QuestionController implements Serializable {
 
     public String update() {
         try {
+            current.setModifiedDate(new Date());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("QuestionUpdated"));
             return "View";
