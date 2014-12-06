@@ -5,6 +5,7 @@
  */
 package common;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,16 +16,16 @@ import java.util.List;
 public class ListFilter<T,R> {
     
     
-    public List<T> getFilteredList(List<T> list,R elm, Predicate pred){
+    public List<T> execute(List<T> list,R elm, Predicate pred){
+      //  System.out.println(elm);
+        System.out.println(list.size());
+        List<T> templist=new ArrayList();
         
-        List<T> templist=list;
         
-        Iterator it=templist.iterator();
-        
-        while(it.hasNext()){
-            
-           if(pred.execute(it.hasNext(),elm))
-               it.remove();
+       for(T item:list){
+          
+          if(pred.execute(item,elm))
+              templist.add(item);
         }
         
         

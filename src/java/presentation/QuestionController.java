@@ -4,18 +4,26 @@ import entities.Question;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import boundary.QuestionFacade;
+import common.Functor;
+import common.ListFilter;
+import common.Predicate;
+import common.QuestionAuthorCheckPredicate;
 import entities.User;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -84,7 +92,33 @@ public class QuestionController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    List<Question> mylist=getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()});
+                    
+                    
+                    Predicate pred=new QuestionAuthorCheckPredicate();
+                    ListFilter<Question,User> functor=new ListFilter();
+                    
+User curuser=(User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+
+
+if(curuser==null)
+                    try {
+                       
+                           ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
+                        
+                    } catch (IOException ex) {
+                        Logger.getLogger(QuestionController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+
+                    
+                    //System.out.println("userid from cc="+getCurrentUser().getId());
+                    
+                    List<Question> filteredList=functor.execute(mylist, curuser, pred);
+                    
+                    return new ListDataModel(filteredList);
+                    // return new ListDataModel(mylist);
                 }
             };
         }
