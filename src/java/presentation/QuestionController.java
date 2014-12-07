@@ -30,8 +30,9 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.persistence.TypedQuery;
 
-@ManagedBean(name="questionController")
+@ManagedBean(name = "questionController")
 
 @RequestScoped
 public class QuestionController implements Serializable {
@@ -51,21 +52,20 @@ public class QuestionController implements Serializable {
     private boundary.QuestionFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private List<Question> questions;
     
     @PostConstruct
-   public void addUserId(){
-       try{
-       User u=(User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
-      
-           setCurrentUser(u);
-       }
-       catch(Exception e){
-           FacesContext.getCurrentInstance().addMessage(null , new FacesMessage(FacesMessage.SEVERITY_ERROR,"User is not logged in yet","not logged in"));
-           
-       }
-   }
-    
+    public void addUserId() {
+        try {
+            User u = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+
+            setCurrentUser(u);
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "User is not logged in yet", "not logged in"));
+
+        }
+    }
+
     public QuestionController() {
     }
 
@@ -92,31 +92,27 @@ public class QuestionController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    List<Question> mylist=getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()});
-                    
-                    
-                    Predicate pred=new QuestionAuthorCheckPredicate();
-                    ListFilter<Question,User> functor=new ListFilter();
-                    
-User curuser=(User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+                    List<Question> mylist = getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()});
 
+                    Predicate pred = new QuestionAuthorCheckPredicate();
+                    ListFilter<Question, User> functor = new ListFilter();
 
-if(curuser==null)
-                    try {
-                       
-                           ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
-                        
-                    } catch (IOException ex) {
-                        Logger.getLogger(QuestionController.class.getName()).log(Level.SEVERE, null, ex);
+                    User curuser = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+
+                    if (curuser == null) {
+                        try {
+
+                            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+                            context.redirect(context.getRequestContextPath() + "/faces/user/login.xhtml");
+
+                        } catch (IOException ex) {
+                            Logger.getLogger(QuestionController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
 
-
-                    
                     //System.out.println("userid from cc="+getCurrentUser().getId());
-                    
-                    List<Question> filteredList=functor.execute(mylist, curuser, pred);
-                    
+                    List<Question> filteredList = functor.execute(mylist, curuser, pred);
+
                     return new ListDataModel(filteredList);
                     // return new ListDataModel(mylist);
                 }
@@ -144,8 +140,7 @@ context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
 
     public String create() {
         try {
-              
-            
+
             current.setCreatedDate(new Date());
             current.setUser(currentUser);
             getFacade().create(current);
@@ -247,7 +242,11 @@ context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
         recreateModel();
         return "List";
     }
-
+    public List<Question> getAll(){
+        String query = "SELECT e FROM Question e ORDER BY e.createdDate DESC ";
+        TypedQuery <Question> q1 = ejbFacade.getEM().createQuery(query, Question.class);
+        return q1.getResultList();
+    }
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }

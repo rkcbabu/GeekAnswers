@@ -23,11 +23,6 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.TypedQuery;
 
-
-
-
-
-
 @ManagedBean(name = "userController")
 
 @RequestScoped
@@ -39,9 +34,9 @@ public class UserController implements Serializable {
     private boundary.UserFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    
-   private String loginEmail;
-   private String loginPassword;
+
+    private String loginEmail;
+    private String loginPassword;
 
     public String getLoginPassword() {
         return loginPassword;
@@ -52,86 +47,68 @@ public class UserController implements Serializable {
     }
 
     public UserController() {
-       
+
     }
 
-    public String distrotyUserSession(){
-      //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("logged_in_user");
+    public String distrotyUserSession() {
+        //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("logged_in_user");
 
         return "User session destroyed";
         //logged_in_user
     }
-    
-    public User loggedInUser(){
-        return (User)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+
+    public User loggedInUser() {
+        return (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
     }
-    
-    
-    
-    public int isUserLoggedIn() throws IOException{
-        
-        User u=(User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
-        
-       if(u!=null)
-           return 1;
-       else{
-           
-           ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
-           
+
+    public int isUserLoggedIn() throws IOException {
+
+        User u = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+
+        if (u != null) {
+            return 1;
+        } else {
+
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            context.redirect(context.getRequestContextPath() + "/faces/user/login.xhtml");
+
       //  FacesContext.getCurrentInstance().getExternalContext().redirect("../user/login.xhtml");
-           
-        return 0;
-       }
+            return 0;
+        }
     }
-    
-    public String handleLogin() throws IOException{
-        
+
+    public String handleLogin() throws IOException {
+
         //System.err.println("output");
-        String loginQuery="SELECT s FROM User s WHERE s.email=:email AND s.password=:password";
-        
+        String loginQuery = "SELECT s FROM User s WHERE s.email=:email AND s.password=:password";
 
-
-        
-        TypedQuery<User> query=getFacade().getEM().createQuery(loginQuery,User.class);
+        TypedQuery<User> query = getFacade().getEM().createQuery(loginQuery, User.class);
         query.setParameter("email", getLoginEmail());
-        query.setParameter("password",getLoginPassword());
-        
-        
-      
-        try{
-            User usr=query.getResultList().get(0);
+        query.setParameter("password", getLoginPassword());
+
+        try {
+            User usr = query.getResultList().get(0);
             //System.out.println(usr.getEmail());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", usr);
-            
-            usr.setLastLoginDate(new Date());
-            
-            
-            getFacade().edit(usr);
-            
-          //  getFacade().getEM().merge(current);
-            
-            
-            FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
-            
-            return "dashboard";
-            
-            
-            
-            
-            
-        }
-        catch(Exception e)
-       
-        {
-           // e.printStackTrace();
-            FacesContext fc=FacesContext.getCurrentInstance();
-            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Invalid Login","Invalid Login: Please check your username of password"));
-           FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 
-             return "login";
+            usr.setLastLoginDate(new Date());
+
+            getFacade().edit(usr);
+
+          //  getFacade().getEM().merge(current);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
+
+            return "dashboard";
+
+        } catch (Exception e) {
+            // e.printStackTrace();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Login", "Invalid Login: Please check your username of password"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+
+            return "login";
         }
-        
+
     }
 
     public String getLoginEmail() {
@@ -141,7 +118,7 @@ context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
     public void setLoginEmail(String loginEmail) {
         this.loginEmail = loginEmail;
     }
-    
+
     public User getCurrent() {
         return current;
     }
@@ -202,10 +179,9 @@ context.redirect(context.getRequestContextPath()+"/faces/user/login.xhtml" );
             current.setLastLoginDate(new Date());
             current.setRegisterDate(new Date());
             getFacade().create(current);
-            
-                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
 
-            
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
+
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("UserCreated"));
             return prepareCreate();
         } catch (Exception e) {

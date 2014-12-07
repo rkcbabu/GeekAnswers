@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
@@ -28,7 +29,7 @@ import javax.persistence.Temporal;
 //   @NamedQuery(name="login_query",query="SELECT id FROM User s WHERE s.email=:email AND s.password=:password")
 //
 //})
-
+@Table(name="Users")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

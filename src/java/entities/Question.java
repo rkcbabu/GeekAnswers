@@ -29,7 +29,9 @@ import javax.persistence.Temporal;
 
 @NamedQueries({
     
-    @NamedQuery(name="my.questions",query="SELECT s FROM Question s WHERE s.user=:user")
+    @NamedQuery(name="my.questions",query="SELECT s FROM Question s WHERE s.user=:user"),
+    @NamedQuery(name="main.questions",query="SELECT e FROM Question e ORDER by e.createdDate DESC")
+   
 })
 
 

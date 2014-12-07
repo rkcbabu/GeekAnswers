@@ -27,11 +27,14 @@ public class QuestionFacade extends AbstractFacade<Question> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
     public QuestionFacade() {
         super(Question.class);
     }
 
+    public EntityManager getEM(){
+        return em;
+    }    
 //    @Override
 //    public List<Question> findAll() {
 //        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();

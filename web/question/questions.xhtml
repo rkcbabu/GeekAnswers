@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition>
+        <h:head>
+            <title>All Questions</title>
+        </h:head>
+        <h:body>
+           
+                <c:forEach items="#{questionController.all}" var="questions" >
+                    <h:outputLink value="/answer/List" >
+                        <h:outputText value="#{questions.title}" /><br/>
+                    </h:outputLink>
+                    <h:outputText value="#{questions.content}" /><br/>
+                    <h:outputText value="#{questions.createdDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText><br/>
+                    <h:outputText value="#{questions.user.email}" /><br/><hr/><hr/>
+                </c:forEach>
+            
+        </h:body>
+    </ui:composition>
+</html>
