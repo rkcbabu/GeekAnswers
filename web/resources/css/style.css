@@ -1,0 +1,27 @@
+#header{
+    height:110px;
+	background-color: #DFE2DB;
+	font-size: 50px;
+       text-align: center;
+       color: #191919;
+}
+#menu{
+    text-align: center;
+}
+#askquestion{
+    text-align: right;
+}
+.txtborder{
+    padding: 10px;
+    border-color: red;
+}
+#wrap{
+    width: 90%;
+}
+#footer{
+    height:30px;
+	background-color: #DFE2DB;
+	font-size: 10px;
+       text-align: center;
+       color: #191919;
+}
