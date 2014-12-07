@@ -4,6 +4,7 @@ import entities.User;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import boundary.UserFacade;
+import common.UserType;
 import java.io.IOException;
 
 import java.io.Serializable;
@@ -178,6 +179,7 @@ public class UserController implements Serializable {
         try {
             current.setLastLoginDate(new Date());
             current.setRegisterDate(new Date());
+            current.setType(UserType.Visitor);
             getFacade().create(current);
 
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);

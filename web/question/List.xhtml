@@ -24,7 +24,10 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListQuestionTitle_title}"/>
                             </f:facet>
+                            <h:link outcome="/question/Detail.xhtml?id=#{item.id}">
+                            
                             <h:outputText value="#{item.title}"/>
+                            </h:link>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

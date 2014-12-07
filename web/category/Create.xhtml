@@ -13,15 +13,21 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
+            
+            
+            <h:panelGroup id="wholepanel2" layout="block" rendered="#{userController.isUserLoggedIn() eq 1}">
+           
+            
+    
+            
+            
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateCategoryLabel_title}" for="title" />
                     <h:inputText id="title" value="#{categoryController.selected.title}" title="#{bundle.CreateCategoryTitle_title}" />
                     <h:outputLabel value="#{bundle.CreateCategoryLabel_code}" for="code" />
                     <h:inputText id="code" value="#{categoryController.selected.code}" title="#{bundle.CreateCategoryTitle_code}" />
-                    <h:outputLabel value="#{bundle.CreateCategoryLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{categoryController.selected.id}" title="#{bundle.CreateCategoryTitle_id}" />
-                </h:panelGrid>
+                    </h:panelGrid>
                 <br />
                 <h:commandLink action="#{categoryController.create}" value="#{bundle.CreateCategorySaveLink}" />
                 <br />
@@ -31,6 +37,15 @@
                 <br />
                 <h:link outcome="/index" value="#{bundle.CreateCategoryIndexLink}"/>
             </h:form>
+            
+            
+            
+                </h:panelGroup>
+        
+          <h:panelGroup id="wholepanel1s" layout="block" rendered="#{userController.isUserLoggedIn() ne 1}">
+           You are not logged in yet
+        </h:panelGroup>
+            
         </ui:define>
     </ui:composition>
 
