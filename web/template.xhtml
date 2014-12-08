@@ -7,19 +7,24 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
+         <style type="text/css">
+        .ui-layout-unit{
+             border: none;
+        }
+    </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
          <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
 
-    <h:body id="wrap">
-             <p:layout fullPage="true">
+    <h:body>
+        <p:layout fullPage="true" >
             
             
-                 <p:layoutUnit position="north" size="180">
+                 <p:layoutUnit position="north" size="180" styleClass="ui-layout-unit" >
                 <div id="header">
-                    <h:graphicImage library="images" name="bar.jpg" alt="photo" width="100%" />
+                    <h:graphicImage library="images" name="bitmap.png" alt="photo" width="100%" />
                 
                 </div>
                      <h:form>
@@ -36,16 +41,16 @@
             </p:layoutUnit>
          
           
-            <p:layoutUnit position="center">
+            <p:layoutUnit position="center" styleClass="ui-layout-unit" >
                 <ui:insert name="body"/>
             </p:layoutUnit>
-                 <p:layoutUnit position="south" size="50">
+                 <p:layoutUnit position="south" size="50" styleClass="ui-layout-unit" >
                 <div id="footer">
                 GEEK ANSWERS
                 
                 </div>
             </p:layoutUnit>
-                 <p:layoutUnit position="west" size="190" collapsible="false">
+                 <p:layoutUnit position="west" size="190" collapsible="false" styleClass="ui-layout-unit" >
                     <p:menu>
                         <p:submenu>
                             <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />

@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
@@ -24,7 +25,7 @@ import javax.persistence.Temporal;
  * @author Chaulagai
  */
 @Entity
-
+@Table(name="Users")
 //@NamedQueries({
 //   @NamedQuery(name="login_query",query="SELECT id FROM User s WHERE s.email=:email AND s.password=:password")
 //

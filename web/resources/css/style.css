@@ -1,9 +1,9 @@
 #header{
     height:110px;
-	background-color: #DFE2DB;
-	font-size: 50px;
-       text-align: center;
-       color: #191919;
+    background-color: #DFE2DB;
+    font-size: 50px;
+    text-align: center;
+    color: #191919;
 }
 #menu{
     text-align: center;
@@ -20,8 +20,17 @@
 }
 #footer{
     height:30px;
-	background-color: #DFE2DB;
-	font-size: 10px;
-       text-align: center;
-       color: #191919;
+    background-color: #DFE2DB;
+    font-size: 10px;
+    text-align: center;
+    color: #191919;
+    padding-top: 5px;
+}
+#right{
+
+}
+.questionTitle{
+    font-size: 18px;
+    color: #558C89;
+    font-family: "Calibri";
 }
