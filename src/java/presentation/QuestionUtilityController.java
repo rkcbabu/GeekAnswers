@@ -44,9 +44,23 @@ public class QuestionUtilityController {
     private Question question;
     private String footer;
     private Answer answer;
+    private String questionVoteMessage="";
 
     public Answer getAnswer() {
         return answer;
+    }
+
+    public String getQuestionVoteMessage() {
+        return questionVoteMessage;
+    }
+
+    public void setQuestionVoteMessage(String questionVoteMessage) {
+        this.questionVoteMessage = questionVoteMessage;
+    }
+    
+    public void thumbsUpHandller(){
+        this.questionVoteMessage="Voted successfully";
+        
     }
 
     public void setAnswer(Answer answer) {
