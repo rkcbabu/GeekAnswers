@@ -14,15 +14,19 @@ import javax.faces.context.FacesContext;
  * @author acer
  */
 
+
 public  class Common {
 
+    public Common(){
+        
+    }
     public String getRequestValue(String key){
         
-        return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(key);
+        return(String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(key);
       
     }
     public Object getSession(String key){
-         return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(key);
+         return (Object) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(key);
       
      
     }
