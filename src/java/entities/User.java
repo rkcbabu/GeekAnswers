@@ -25,7 +25,7 @@ import javax.persistence.Temporal;
  * @author Chaulagai
  */
 @Entity
-@Table(name="Users")
+//@Table(name="Users")
 //@NamedQueries({
 //   @NamedQuery(name="login_query",query="SELECT id FROM User s WHERE s.email=:email AND s.password=:password")
 //

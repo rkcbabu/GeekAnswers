@@ -83,6 +83,7 @@ public class UserController implements Serializable {
         //System.err.println("output");
         String loginQuery = "SELECT s FROM User s WHERE s.email=:email AND s.password=:password";
 
+       // System.out.println(loginQuery);
         TypedQuery<User> query = getFacade().getEM().createQuery(loginQuery, User.class);
         query.setParameter("email", getLoginEmail());
         query.setParameter("password", getLoginPassword());
