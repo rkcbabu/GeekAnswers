@@ -45,6 +45,8 @@ public class QuestionUtilityController {
     private String footer;
     private Answer answer;
     private String questionVoteMessage="";
+    
+    
 
     public Answer getAnswer() {
         return answer;
@@ -58,8 +60,13 @@ public class QuestionUtilityController {
         this.questionVoteMessage = questionVoteMessage;
     }
     
-    public void thumbsUpHandller(){
-        this.questionVoteMessage="Voted successfully";
+    public void questionThumbsUpHandller(){
+        this.questionVoteMessage="Voted up successfully";
+        
+    }
+    
+     public void questionThumbsDownHandller(){
+        this.questionVoteMessage="Voted down successfully";
         
     }
 
@@ -123,10 +130,19 @@ public class QuestionUtilityController {
     @PostConstruct
     public void generateQuestion(){
         
-       // Long id=Long.parseLong(common.getRequestValue("id"));
-        Long id=401L;
+        try{
+        Long mid=Long.parseLong(common.getRequestValue("id"));
+         question=this.questionFacade.find(mid);
+           // System.out.println("question id="+mid);
+        }
+        catch(Exception e){
+            System.out.println("exception");
+            
+        }
+        
+      //  Long id=401L;
        // System.out.println("id="+id);
-        question=this.questionFacade.find(id);
+       
   
     }
    

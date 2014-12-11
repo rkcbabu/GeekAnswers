@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAnswerVoteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAnswerVoteEmpty}" rendered="#{answerVoteController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{answerVoteController.items.rowCount > 0}">
+                    <h:outputText value="#{answerVoteController.pagination.pageFirstItem + 1}..#{answerVoteController.pagination.pageLastItem + 1}/#{answerVoteController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{answerVoteController.previous}" value="#{bundle.Previous} #{answerVoteController.pagination.pageSize}" rendered="#{answerVoteController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{answerVoteController.next}" value="#{bundle.Next} #{answerVoteController.pagination.pageSize}" rendered="#{answerVoteController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{answerVoteController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAnswerVoteTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{answerVoteController.prepareView}" value="#{bundle.ListAnswerVoteViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{answerVoteController.prepareEdit}" value="#{bundle.ListAnswerVoteEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{answerVoteController.destroy}" value="#{bundle.ListAnswerVoteDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{answerVoteController.prepareCreate}" value="#{bundle.ListAnswerVoteCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAnswerVoteIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

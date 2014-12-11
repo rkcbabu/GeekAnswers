@@ -37,8 +37,8 @@
           
           <p:panelGrid columns="1">
       
-              <p:outputLabel value="89"/>
-          <p:commandButton  actionListener="#{questionUtility.thumbsUpHandller()}" update="questionMessage" icon="fa-thumbs-o-up" value="like">
+              <p:outputLabel value="#{questionUtility}"/>
+              <p:commandButton  actionListener="#{questionUtility.questionThumbsUpHandller()}" update="questionMessage" icon="fa-thumbs-o-up" value="like">
           
             
           </p:commandButton>
@@ -46,7 +46,7 @@
 </p:panelGrid>
         
             
-          <p:commandButton  actionListener="#{questionUtility.thumbsUpHandller()}" update="questionMessage" icon="fa-thumbs-o-down" value="Dislike">
+          <p:commandButton  actionListener="#{questionUtility.questionThumbsDownHandller()}" update="questionMessage" icon="fa-thumbs-o-down" value="Dislike">
           
             
           </p:commandButton>
