@@ -96,7 +96,7 @@ public class QuestionController implements Serializable {
 
                     Predicate pred = new QuestionAuthorCheckPredicate();
                     ListFilter<Question, User> functor = new ListFilter();
-
+                   
                     User curuser = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
 
                     if (curuser == null) {

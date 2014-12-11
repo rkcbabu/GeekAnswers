@@ -38,3 +38,22 @@
     background-color: #424348;
     color: red;
 }
+.dash-title{
+    font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 52.7999992370606px;
+}
+.dash-content{
+    font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.3999996185303px;
+}
+html { 
+  background-color: #B9B1A8;
+}

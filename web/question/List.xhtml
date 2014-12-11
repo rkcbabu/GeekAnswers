@@ -24,9 +24,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListQuestionTitle_title}"/>
                             </f:facet>
-                            <h:link outcome="/question/Detail.xhtml?id=#{item.id}">
-                            
-                            <h:outputText value="#{item.title}"/>
+                            <h:link outcome="question/Detail.xhtml?id=#{item.id}">
+
+                                <h:outputText value="#{item.title}"/>
                             </h:link>
                         </h:column>
                         <h:column>
@@ -63,16 +63,16 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </h:column>
-                        
-                        
+
+
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Author"/>
                             </f:facet>
                             <h:outputText value="#{item.user.firstName }"/>
-                             <h:outputText value="  #{item.user.lastName }"/>
+                            <h:outputText value="  #{item.user.lastName }"/>
                         </h:column>
-                        
+
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>

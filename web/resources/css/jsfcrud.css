@@ -7,7 +7,7 @@ body {
     color: #3a4f54;
     background-color:  #FFFFFF;
     font-size: small;
-     border-top-width: 10px;
+    border-top-width: 10px;
     border-bottom-width: 10px;
     border-left-width: 10px;
     border-right-width: 10px;
@@ -83,4 +83,22 @@ tr.jsfcrud_even_row {
     position: absolute;
     left: 50%;
     top: 50%;
+}
+.ui-panel .ui-panel-titlebar{
+    background-color: #F3843E;
+}
+.dash-panel {
+    font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    background-color: #B9B1A8;
+    width:50%;
+}
+.left-menu{
+    width:99.99%;
+}
+.question-panel{
+    width:75%;
+    background-color: #F0F0F0
+}
+.question-panel .ui-panel .ui-panel-footer{
+    background-color: #B6B6B6;
 }

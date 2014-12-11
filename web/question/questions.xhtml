@@ -32,7 +32,7 @@ and open the template in the editor.
                         <h:commandLink action="#{questionController.next}" value="#{bundle.Next} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasNextPage}"/>
 
                         <c:forEach items="#{questionController.all}" var="questions" >
-                            <p:panel id="question" header="#{questions.title}" footer="By #{questions.user.firstName} #{questions.user.lastName}" >
+                            <p:panel id="question" styleClass="question-panel" header="#{questions.title}" >
                                 <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
                                     <h:outputText value="#{questions.title}" styleClass="questionTitle"/><br/>
                                 </h:outputLink>
@@ -40,6 +40,9 @@ and open the template in the editor.
                                 <h:outputText value="#{questions.createdDate}">
                                     <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </h:outputText>
+                                <f:facet name="footer">
+                                    <h:outputText value="By #{questions.user.firstName} #{questions.user.lastName}" />
+                                </f:facet>
                             </p:panel>
                             <br/>
                         </c:forEach>
