@@ -33,7 +33,7 @@ and open the template in the editor.
 
                         <c:forEach items="#{questionController.all}" var="questions" >
                             <p:panel id="question" header="#{questions.title}" footer="By #{questions.user.firstName} #{questions.user.lastName}" >
-                                <h:outputLink value="/question/Detail.xhtml?id=#{questions.id}" >
+                                <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
                                     <h:outputText value="#{questions.title}" styleClass="questionTitle"/><br/>
                                 </h:outputLink>
                                 <h:outputText value="#{questions.content}" styleClass="questionTitle"/><br/>
