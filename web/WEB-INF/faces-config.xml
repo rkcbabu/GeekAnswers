@@ -8,11 +8,7 @@
             <base-name>/Resource/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
-        <resource-bundle>
-            <base-name>/Resource/Bundle</base-name>
-            <var>bundle</var>
-        </resource-bundle>
-        <resource-bundle>
+               <resource-bundle>
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>

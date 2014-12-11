@@ -55,4 +55,17 @@ public class Common {
         }
 
     }
+    
+    
+        public void redirectHome() {
+
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            context.redirect(context.getRequestContextPath());
+        } catch (IOException ex) {
+            Logger.getLogger(Common.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
 }

@@ -7,11 +7,14 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -38,6 +41,9 @@ public class Answer implements Serializable {
     @ManyToOne()
     private User user;
 
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "answer")
+    private List<AnswerVote> votes;
+    
     public String getContent() {
         return Content;
     }

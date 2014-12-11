@@ -40,6 +40,7 @@ public class QuestionUtilityController {
     
        
     private Common common;
+    private User user;
     
     private Question question;
     private String footer;
@@ -61,8 +62,12 @@ public class QuestionUtilityController {
     }
     
     public void questionThumbsUpHandller(){
+        if(this.user!=null){
         this.questionVoteMessage="Voted up successfully";
-        
+        }
+        else{
+            common.redirectLogin();
+        }
     }
     
      public void questionThumbsDownHandller(){
@@ -124,6 +129,7 @@ public class QuestionUtilityController {
          common=new Common();
         question=new Question();
         answer=new Answer();
+        user=new User();
      
     }
     
@@ -134,9 +140,20 @@ public class QuestionUtilityController {
         Long mid=Long.parseLong(common.getRequestValue("id"));
          question=this.questionFacade.find(mid);
            // System.out.println("question id="+mid);
+         
+          User sessionUser;
+         sessionUser=(User)common.getSession("logged_in_user");
+         if(sessionUser!=null){
+             this.user=sessionUser;
+         }
+         
+         
+         
+         
         }
         catch(Exception e){
             System.out.println("exception");
+            
             
         }
         

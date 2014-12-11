@@ -48,11 +48,25 @@ public class Question implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date modifiedDate;
     private String status;
-    private boolean vote;
+  
     
     @ManyToOne()
     private User user ;
 
+    @ManyToOne()
+    private Category category;
+    
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<Answer> answers;
+    
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    private List<Tag> tags;
+
+    
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    private List<QuestionVote> votes;
+    
+    
     public User getUser() {
         return user;
     }
@@ -60,16 +74,7 @@ public class Question implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    
-    @ManyToOne()
-    private Category category;
-    
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<Answer> answers;
-    
-    @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Tag> tags;
-
+ 
     public String getTitle() {
         return title;
     }
@@ -134,14 +139,6 @@ public class Question implements Serializable {
         this.tags = tags;
     }
 
-    public boolean isVote() {
-        return vote;
-    }
-
-    public void setVote(boolean vote) {
-        this.vote = vote;
-    }
-    
 
     public Long getId() {
         return id;

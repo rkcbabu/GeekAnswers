@@ -59,6 +59,10 @@ public class User implements Serializable {
     
 //    @OneToMany(mappedBy = "user")
 //    private Reputation reputation;
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Vote> votes;
+    
     public String getFirstName() {
         return firstName;
     }
