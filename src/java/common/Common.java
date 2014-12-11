@@ -25,6 +25,7 @@ public class Common {
 
     public String getRequestValue(String key) {
 
+        
         return (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(key);
 
     }
