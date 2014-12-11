@@ -17,22 +17,40 @@ and open the template in the editor.
             <h:outputStylesheet library="css" name="jsfcrud.css"/>
             <h:outputStylesheet library="css" name="style.css"/>
         </h:head>
-        
+
         <ui:define name="body" >
-        <h:body>
-            
-                <c:forEach items="#{questionController.all}" var="questions" >
-                    <h:outputLink value="/answer/List" >
-                        <h:outputText value="#{questions.title}" styleClass="questionTitle"/><br/>
-                    </h:outputLink>
-                    <h:outputText value="#{questions.content}" styleClass="questionTitle"/><br/>
-                    <h:outputText value="#{questions.createdDate}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText><br/>
-                    <h:outputText value="#{questions.user.email}" /><br/><hr/><hr/>
-                </c:forEach>
-           
-        </h:body>
+            <h:body>
+                <!--Pagination-->
+                <h:form styleClass="jsfcrud_list_form">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListQuestionEmpty}" rendered="#{questionController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{questionController.items.rowCount > 0}">
+                        <h:outputText value="#{questionController.pagination.pageFirstItem + 1}..#{questionController.pagination.pageLastItem + 1}/#{questionController.pagination.itemsCount}"/>
+                        <h:commandLink action="#{questionController.previous}" value="#{bundle.Previous} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasPreviousPage}"/>
+                        <h:commandLink action="#{questionController.next}" value="#{bundle.Next} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasNextPage}"/>
+
+                        <c:forEach items="#{questionController.all}" var="questions" >
+                            <p:panel id="question" header="#{questions.title}" footer="By #{questions.user.firstName} #{questions.user.lastName}" >
+                                <h:outputLink value="/question/Detail.xhtml?id=#{questions.id}" >
+                                    <h:outputText value="#{questions.title}" styleClass="questionTitle"/><br/>
+                                </h:outputLink>
+                                <h:outputText value="#{questions.content}" styleClass="questionTitle"/><br/>
+                                <h:outputText value="#{questions.createdDate}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:panel>
+                            <br/>
+                        </c:forEach>
+                    </h:panelGroup>
+                    <br />
+                    <h:commandLink action="#{questionController.prepareCreate}" value="#{bundle.ListQuestionCreateLink}"/>
+                    <br />
+                    <br />
+                    <h:link outcome="/index" value="#{bundle.ListQuestionIndexLink}"/>
+                </h:form>
+            </h:body>
         </ui:define>
     </ui:composition>
 </html>
