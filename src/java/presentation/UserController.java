@@ -59,12 +59,13 @@ public class UserController implements Serializable {
     }
 
     public User loggedInUser() {
-        return (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+        FacesContext cur=FacesContext.getCurrentInstance();
+        return (User) cur.getExternalContext().getSessionMap().get("logged_in_user");
     }
 
     public int isUserLoggedIn() throws IOException {
-
-        User u = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+ FacesContext cur=FacesContext.getCurrentInstance();
+        User u = (User) cur.getExternalContext().getSessionMap().get("logged_in_user");
 
         if (u != null) {
             return 1;
