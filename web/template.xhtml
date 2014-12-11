@@ -31,7 +31,7 @@
                     <h:graphicImage library="images" name="bitmap.png" alt="photo" width="100%" />
 
                 </div>
-                <h:form>
+                <h:form prependId="false" id="template">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                         <p:menuitem value="#{bundle.Login}" outcome="/user/login" icon="ui-icon-key"/>
@@ -52,21 +52,23 @@
                 <div id="footer"> COPYRIGHT @ GEEK ANSWERS </div>
             </p:layoutUnit>
             <p:layoutUnit position="west" size="190" collapsible="false" styleClass="ui-layout-unit" >
+                <h:form>
                 <p:menu>
                     <p:submenu>
 
-                        <p:menuitem outcome="/answer/List" value="Show All Answer Items"/>
-                        <p:menuitem url="/category/List" value="Show All Category Items"/>
-                        <p:menuitem url="/comment/List" value="Show All Comment Items"/>
-                        <p:menuitem url="/question/List" value="Show All Question Items"/>
-                        <p:menuitem url="/reputation/List" value="Show All Reputation Items"/>
-                        <p:menuitem url="/tag/List" value="Show All Tag Items"/>
-                        <p:menuitem url="/user/List" value="Show All User Items"/>
-                        <p:menuitem url="question/questions" value="Question Lists" />
+                        <p:menuitem outcome="/answer/List.xhtml" value="Show All Answer Items"/>
+                        <p:menuitem url="/category/List.xhtml" value="Show All Category Items"/>
+                        <p:menuitem url="/comment/List.xhtml" value="Show All Comment Items"/>
+                        <p:menuitem url="/question/List.xhtml" value="Show All Question Items"/>
+                        <p:menuitem url="/reputation/List.xhtml" value="Show All Reputation Items"/>
+                        <p:menuitem url="/tag/List.xhtml" value="Show All Tag Items"/>
+                        <p:menuitem url="/user/List.xhtml" value="Show All User Items"/>
+                        <p:menuitem url="question/questions.xhtml" value="Question Lists" />
 
                     </p:submenu>
 
                 </p:menu>
+                    </h:form>
             </p:layoutUnit>
         </p:layout>
     </h:body>
