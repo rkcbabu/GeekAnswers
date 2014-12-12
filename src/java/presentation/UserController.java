@@ -23,6 +23,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "userController")
 
@@ -57,14 +58,24 @@ public class UserController implements Serializable {
         return "User session destroyed";
         //logged_in_user
     }
-
+    public void logout() throws IOException{
+        if (isLoggedIn()){
+             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        }
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath() + "/index.xhtml");
+    }
+    public boolean isLoggedIn(){
+        
+        return ((User)loggedInUser()==null)?false:true;
+    }
     public User loggedInUser() {
         FacesContext cur=FacesContext.getCurrentInstance();
         return (User) cur.getExternalContext().getSessionMap().get("logged_in_user");
     }
 
     public int isUserLoggedIn() throws IOException {
- FacesContext cur=FacesContext.getCurrentInstance();
+        FacesContext cur=FacesContext.getCurrentInstance();
         User u = (User) cur.getExternalContext().getSessionMap().get("logged_in_user");
 
         if (u != null) {
@@ -100,7 +111,6 @@ public class UserController implements Serializable {
 
           //  getFacade().getEM().merge(current);
             FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
-
             return "dashboard";
 
         } catch (Exception e) {

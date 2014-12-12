@@ -89,7 +89,6 @@ tr.jsfcrud_even_row {
 }
 .dash-panel {
     font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
-    background-color: #B9B1A8;
     width:50%;
 }
 .left-menu{
@@ -97,7 +96,6 @@ tr.jsfcrud_even_row {
 }
 .question-panel{
     width:75%;
-    background-color: #F0F0F0
 }
 .question-panel .ui-panel .ui-panel-footer{
     background-color: #B6B6B6;
