@@ -24,7 +24,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListQuestionTitle_title}"/>
                             </f:facet>
-                            <h:link outcome="question/Detail.xhtml?id=#{item.id}">
+                            <h:link outcome="Detail.xhtml?id=#{item.id}">
 
                                 <h:outputText value="#{item.title}"/>
                             </h:link>
@@ -86,7 +86,7 @@
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{questionController.prepareCreate}" value="#{bundle.ListQuestionCreateLink}"/>
+                <h:commandLink action="#{questionController.prepareCreate()}" value="#{bundle.ListQuestionCreateLink}"/>
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListQuestionIndexLink}"/>

@@ -17,29 +17,32 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletRequest;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+
 
 /**
  *
  * @author acer
  */
-@ManagedBean(name = "questionUtility")
-@Stateless
+@ManagedBean(name="questionUtility")
 
+@RequestScoped
 public class QuestionUtilityController {
 
     @EJB
     private AnswerFacade answerFacade;
     @EJB
     private QuestionFacade questionFacade;
+    
+    @Inject
+    private UserController userController;
+    
 
     private Common common;
     private User user;
@@ -164,8 +167,9 @@ public class QuestionUtilityController {
             User sessionUser;
 
        //  sessionUser=(User)common.getSession("logged_in_user");
-            sessionUser = (User) (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user"));
-
+            //System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
+          sessionUser = (User) (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user"));
+            //sessionUser=userController.getLoggedInUser();
             System.out.println("Logged in uid="+sessionUser.getId());
             if (sessionUser != null) {
                 this.user = sessionUser;
