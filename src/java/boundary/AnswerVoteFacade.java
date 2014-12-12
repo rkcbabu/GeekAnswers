@@ -7,6 +7,7 @@ package boundary;
 
 import entities.Answer;
 import entities.AnswerVote;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,7 +37,9 @@ public class AnswerVoteFacade extends AbstractFacade<AnswerVote> {
         query.setParameter("answer", a);
 
         try {
-            return query.getResultList().size();
+             List list=query.getResultList();
+             
+           return Integer.parseInt(list.get(0).toString());
         } catch (Exception e) {
             return 0;
         }
