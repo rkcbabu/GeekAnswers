@@ -6,9 +6,11 @@
 package boundary;
 
 import entities.Answer;
+import entities.AnswerVote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -16,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class AnswerFacade extends AbstractFacade<Answer> {
+
     @PersistenceContext(unitName = "GeekAnswersPU")
     private EntityManager em;
 
@@ -27,5 +30,7 @@ public class AnswerFacade extends AbstractFacade<Answer> {
     public AnswerFacade() {
         super(Answer.class);
     }
-    
+
+  
+
 }

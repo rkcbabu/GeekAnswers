@@ -4,9 +4,13 @@ import entities.QuestionVote;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import boundary.QuestionVoteFacade;
+import entities.Question;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,6 +21,10 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @ManagedBean(name = "questionVoteController")
 @SessionScoped
@@ -28,9 +36,18 @@ public class QuestionVoteController implements Serializable {
     private boundary.QuestionVoteFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    @PersistenceContext(unitName = "GeekAnswersPU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
 
+    
     public QuestionVoteController() {
     }
+    
+
+    
+   
 
     public QuestionVote getSelected() {
         if (current == null) {
@@ -226,6 +243,17 @@ public class QuestionVoteController implements Serializable {
             }
         }
 
+    }
+
+    public void persist(Object object) {
+        try {
+            utx.begin();
+            em.persist(object);
+            utx.commit();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
@@ -30,7 +31,8 @@ import javax.persistence.Temporal;
 @NamedQueries({
     
     @NamedQuery(name="my.questions",query="SELECT s FROM Question s WHERE s.user=:user"),
-    @NamedQuery(name="main.questions",query="SELECT e FROM Question e ORDER by e.createdDate DESC")
+    @NamedQuery(name="main.questions",query="SELECT e FROM Question e ORDER by e.createdDate DESC"),
+    
    
 })
 
@@ -67,8 +69,18 @@ public class Question implements Serializable {
     private List<QuestionVote> votes;
     
     
+  
+    
     public User getUser() {
         return user;
+    }
+
+    public List<QuestionVote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<QuestionVote> votes) {
+        this.votes = votes;
     }
 
     public void setUser(User user) {

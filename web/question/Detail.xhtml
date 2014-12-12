@@ -32,7 +32,7 @@
       <p:panel id="question" footer="#{questionUtility.footer}"  header="#{questionUtility.question.title}" style="margin-bottom:20px" class="question">
         <h:panelGrid columns="2" cellpadding="10">
           
-            <h:outputText value="#{questionUtility.question.content}" />
+            <h:outputText value="#{questionUtility.questionVoteCount}" />
         </h:panelGrid>
           
           <p:panelGrid columns="1">
@@ -82,7 +82,9 @@
            
             <h:inputTextarea rows="10" cols="150" style="border: 1px solid #90b4bd" value="#{questionUtility.answer.content}"></h:inputTextarea>
             <br/>
-            <p:commandButton value="Submit answer" id="answerButton"   styleClass="ui-priority-primary"  action="#{questionUtility.addAnswer()}"/>
+            <p:commandButton value="Submit answer" id="answerButton"   styleClass="ui-priority-primary"  action="#{questionUtility.addAnswer()}">
+                <f:param name="id" value="#{questionUtility.question.id}"/>
+            </p:commandButton>
 
             
             

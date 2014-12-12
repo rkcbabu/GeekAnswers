@@ -5,10 +5,12 @@
  */
 package boundary;
 
+import entities.Answer;
 import entities.AnswerVote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,4 +30,16 @@ public class AnswerVoteFacade extends AbstractFacade<AnswerVote> {
         super(AnswerVote.class);
     }
     
+      public int countAnswerVote(Answer a) {
+        TypedQuery<AnswerVote> query = em.createNamedQuery("answer.vote.count", AnswerVote.class);
+
+        query.setParameter("answer", a);
+
+        try {
+            return query.getResultList().size();
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
 }

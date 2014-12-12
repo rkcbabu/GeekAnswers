@@ -12,11 +12,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author acer
  */
+
+@NamedQueries({
+    @NamedQuery(name = "answer.vote.count",query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer=:answer")
+
+})
 @Entity
 
 @DiscriminatorValue("A")

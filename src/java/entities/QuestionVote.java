@@ -12,17 +12,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author acer
  */
+
+@NamedQueries({
+    @NamedQuery(name = "question.vote.count",query = "SELECT SUM(v.vote) FROM QuestionVote v WHERE v.question=:question"),
+
+})
+
 @Entity
 @DiscriminatorValue("Q")
 public class QuestionVote extends Vote implements Serializable {
    
     @ManyToOne
     private Question question;
+
+    public QuestionVote() {
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
     
     
  
