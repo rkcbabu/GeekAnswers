@@ -133,6 +133,11 @@ public class QuestionUtilityController {
 
     
     
+    public int getAnswerVote(Answer s){
+          int vote = this.answerVoteFacade.countAnswerVote(s);
+       // System.out.println("question vote=" + vote);
+        return vote;
+    }
     
     
     public boolean hasQuestionVoted() {
@@ -259,7 +264,8 @@ public class QuestionUtilityController {
     }
 
     
-     public void answerThumbsUpHandller() {
+     public void answerThumbsUpHandller(Answer ans) {
+         this.answer=ans;
         try {
             if (Objects.equals(this.user.getId(), this.answer.getUser().getId())) {
                 this.answerVoteMessage = "You are not allowed to vote own answer";
@@ -295,7 +301,8 @@ public class QuestionUtilityController {
     }
 
    
-          public void answerThumbsDownHandller() {
+          public void answerThumbsDownHandller(Answer ans) {
+              answer=ans;
         try {
             if (Objects.equals(this.user.getId(), this.answer.getUser().getId())) {
                 this.answerVoteMessage = "You are not allowed to vote own answer";

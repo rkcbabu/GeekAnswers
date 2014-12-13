@@ -51,6 +51,10 @@
              <f:param name="id" value="#{questionUtility.question.id}"/>
           </p:commandButton>
       </p:panelGrid>
+            <h:panelGrid columns="2" cellpadding="10">
+          
+                <h:outputText value="#{questionUtility.question.content}" />
+        </h:panelGrid>
           
           
     </p:panel>
@@ -63,9 +67,9 @@
               
              <p:panelGrid columns="1" class="voting_panel">
       
-                 <p:outputLabel value="#{questionUtility.answerVoteMessage}" id="ans_vote_count#{ans.id}"/>
+                 <p:outputLabel value="#{questionUtility.getAnswerVote(ans)}" id="ans_vote_count#{ans.id}"/>
               
-                 <p:commandButton  action="#{questionUtility.answerThumbsUpHandller()}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-up" value="like">
+                 <p:commandButton  action="#{questionUtility.answerThumbsUpHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-up" value="like">
                  
                   <f:param name="aid" value="#{questionUtility.answer.id}"/>
                   <f:param name="id" value="#{questionUtility.question.id}"/>
@@ -74,7 +78,7 @@
 
         
             
-          <p:commandButton  action="#{questionUtility.answerThumbsDownHandller()}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-down" value="Dislike">
+          <p:commandButton  action="#{questionUtility.answerThumbsDownHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-down" value="Dislike">
           
              <f:param name="aid" value="#{questionUtility.answer.id}"/>
              <f:param name="id" value="#{questionUtility.question.id}"/>

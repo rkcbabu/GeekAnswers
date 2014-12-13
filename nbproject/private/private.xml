@@ -5,12 +5,19 @@
             <url>web/question/questions.xhtml</url>
             <bookmark id="1">
                 <name/>
-                <line>59</line>
+                <line>44</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/entities/AnswerVote.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/entities/QuestionVote.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/boundary/AnswerVoteFacade.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/presentation/QuestionUtilityController.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/src/java/boundary/QuestionVoteFacade.java</file>
+            <file>file:/D:/MSCS-MUM/EA/Project/GeekAnwers/web/question/Detail.xhtml</file>
+        </group>
     </open-files>
 </project-private>
