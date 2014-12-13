@@ -21,7 +21,8 @@ import javax.persistence.NamedQuery;
  */
 
 @NamedQueries({
-    @NamedQuery(name = "answer.vote.count",query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer=:answer")
+    @NamedQuery(name = "answer.vote.count",query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer=:answer"),
+    @NamedQuery(name = "answer.vote.find.id",query = "SELECT v.id FROM AnswerVote v WHERE v.user=:user AND v.answer=:answer")
 
 })
 @Entity

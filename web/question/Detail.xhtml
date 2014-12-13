@@ -32,13 +32,13 @@
       <p:panel id="question" footer="#{questionUtility.footer}"  header="#{questionUtility.question.title}" style="margin-bottom:20px" class="question">
         <h:panelGrid columns="2" cellpadding="10">
           
-            <h:outputText value="#{questionUtility.questionVoteCount}" />
+            <h:outputText value="#{questionUtility.questionVoteCount}"  id="questionVoteCounter"/>
         </h:panelGrid>
           
           <p:panelGrid columns="1" class="voting_panel">
       
               <p:outputLabel value="#{questionUtility.questionVoteMessage}"/>
-              <p:commandButton  action="#{questionUtility.questionThumbsUpHandller()}" update="questionMessage" icon="fa-thumbs-o-up" value="like">
+              <p:commandButton  action="#{questionUtility.questionThumbsUpHandller()}" update="questionMessage,questionVoteCounter" icon="fa-thumbs-o-up" value="like">
                  
                   <f:param name="id" value="#{questionUtility.question.id}"/>
           </p:commandButton>
@@ -46,7 +46,7 @@
 
         
             
-          <p:commandButton  action="#{questionUtility.questionThumbsDownHandller()}" update="questionMessage" icon="fa-thumbs-o-down" value="Dislike">
+          <p:commandButton  action="#{questionUtility.questionThumbsDownHandller()}" update="questionMessage,questionVoteCounter" icon="fa-thumbs-o-down" value="Dislike">
           
              <f:param name="id" value="#{questionUtility.question.id}"/>
           </p:commandButton>

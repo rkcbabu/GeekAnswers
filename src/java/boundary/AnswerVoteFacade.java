@@ -7,6 +7,7 @@ package boundary;
 
 import entities.Answer;
 import entities.AnswerVote;
+import entities.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,6 +31,24 @@ public class AnswerVoteFacade extends AbstractFacade<AnswerVote> {
     public AnswerVoteFacade() {
         super(AnswerVote.class);
     }
+    
+    
+     public Long getAnswerVoteId(User u,Answer a) {
+        TypedQuery<AnswerVote> query = em.createNamedQuery("answer.vote.find.id", AnswerVote.class);
+
+        query.setParameter("answer", a);
+        query.setParameter("user", u);
+
+        try {
+             Object ob=query.getResultList().get(0);
+             
+           return Long.parseLong(ob.toString());
+        } catch (Exception e) {
+            return 0L;
+        }
+
+    }
+    
     
       public int countAnswerVote(Answer a) {
         TypedQuery<AnswerVote> query = em.createNamedQuery("answer.vote.count", AnswerVote.class);

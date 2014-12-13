@@ -131,49 +131,60 @@ public class QuestionUtilityController {
         this.questionVoteMessage = questionVoteMessage;
     }
 
-    public Long hasQuestionVoted() {
+    
+    
+    
+    
+    public boolean hasQuestionVoted() {
         String queryString = "SELECT COUNT(s) FROM QuestionVote s WHERE s.user=:user AND s.question=:question";
         TypedQuery<QuestionVote> query;
         query = em.createQuery(queryString, QuestionVote.class);
         query.setParameter("user", this.user);
         query.setParameter("question", this.question);
-        List<QuestionVote> count;
+ 
         try {
 
-            count = query.getResultList();
-            if (count.isEmpty()) {
-                return 0L;
+            
+            List list=query.getResultList();
+             
+          
+            
+            if (Integer.parseInt(list.get(0).toString())==0) {
+                return false;
             } else {
-                return count.get(0).getId();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("new vote gonna register now");
-            return 0L;
-        }
-
-    }
-    public Long hasAnswerVoted() {
-        String queryString = "SELECT COUNT(s) FROM AnswerVote s WHERE s.user=:user AND s.answer=:answer";
-        TypedQuery<AnswerVote> query;
-        query = em.createQuery(queryString, AnswerVote.class);
-        query.setParameter("user", this.user);
-        query.setParameter("answer", this.answer);
-        List<AnswerVote> count;
-        try {
-
-            count = query.getResultList();
-            if (count.isEmpty()) {
-                return 0L;
-            } else {
-                return count.get(0).getId();
+                return true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("new answer vote gonna register now");
-            return 0L;
+           return false;
+        }
+
+    }
+    public boolean hasAnswerVoted() {
+        String queryString = "SELECT COUNT(s) FROM AnswerVote s WHERE s.user=:user AND s.answer=:answer";
+        TypedQuery<AnswerVote> query;
+        query = em.createQuery(queryString, AnswerVote.class);
+        query.setParameter("user", this.user);
+        query.setParameter("answer", this.answer);
+       
+        try {
+
+             List list=query.getResultList();
+             
+          
+            
+            if (Integer.parseInt(list.get(0).toString())==0) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("new answer vote gonna register now");
+           return false;
         }
 
     }
@@ -187,13 +198,12 @@ public class QuestionUtilityController {
                 questionVote.setUser(user);
                 questionVote.setVote(1);
                 questionVote.setQuestion(question);
-                Long preVoteId;
-                preVoteId = hasQuestionVoted();
+               
 
-                if (preVoteId > 0L) {
-                    questionVote = questionVoteFacade.find(preVoteId);
+                if ( hasQuestionVoted()) {
+                   questionVote = questionVoteFacade.find(questionVoteFacade.getQuestionVoteId(user, question));
                     questionVote.setVote(1);
-                    em.merge(questionVote);
+                   questionVoteFacade.edit(questionVote);
                     System.out.println("vote up added");
                     this.questionVoteMessage = "Vote changed to vote up";
                 } else {
@@ -223,14 +233,13 @@ public class QuestionUtilityController {
                 this.questionVote.setVote(-1);
                 this.questionVote.setQuestion(question);
 
-                Long preVoteId;
-                preVoteId = hasQuestionVoted();
+                
 
-                if (preVoteId > 0L) {
-                    questionVote = questionVoteFacade.find(preVoteId);
+                if (hasQuestionVoted()) {
+                    questionVote = questionVoteFacade.find(questionVoteFacade.getQuestionVoteId(user, question));
                     questionVote.setVote(-1);
 
-                    em.merge(questionVote);
+                    questionVoteFacade.edit(questionVote);
                     System.out.println("vote down added");
                     this.questionVoteMessage = "Vote changed to vote down";
                 } else {
@@ -261,14 +270,12 @@ public class QuestionUtilityController {
                 this.answerVote.setVote(1);
                 this.answerVote.setAnswer(answer);
 
-                Long preVoteId;
-                preVoteId = hasAnswerVoted();
-
-                if (preVoteId > 0L) {
-                    answerVote = answerVoteFacade.find(preVoteId);
+               
+                if (hasAnswerVoted()) {
+                    answerVote = answerVoteFacade.find(answerVoteFacade.getAnswerVoteId(user, answer));
                     answerVote.setVote(1);
 
-                    em.merge(answerVote);
+                   answerVoteFacade.edit(answerVote);
                     System.out.println("vote down added");
                     this.answerVoteMessage = "Vote changed to vote down";
                 } else {
@@ -299,14 +306,14 @@ public class QuestionUtilityController {
                 this.answerVote.setVote(-1);
                 this.answerVote.setAnswer(answer);
 
-                Long preVoteId;
-                preVoteId = hasAnswerVoted();
+               
 
-                if (preVoteId > 0L) {
-                    answerVote = answerVoteFacade.find(preVoteId);
+                if (hasAnswerVoted()) {
+                    answerVote = answerVoteFacade.find(answerVoteFacade.getAnswerVoteId(user, answer));
                     answerVote.setVote(-1);
 
-                    em.merge(answerVote);
+                    answerVoteFacade.edit(answerVote);
+                            
                     System.out.println("vote down added");
                     this.answerVoteMessage = "Vote changed to vote down";
                 } else {
