@@ -32,33 +32,59 @@
       <p:panel id="question" footer="#{questionUtility.footer}"  header="#{questionUtility.question.title}" style="margin-bottom:20px" class="question">
         <h:panelGrid columns="2" cellpadding="10">
           
-            <h:outputText value="#{questionUtility.question.content}" />
+            <h:outputText value="#{questionUtility.questionVoteCount}"  id="questionVoteCounter"/>
         </h:panelGrid>
           
-          <p:panelGrid columns="1">
+          <p:panelGrid columns="1" class="voting_panel">
       
               <p:outputLabel value="#{questionUtility.questionVoteMessage}"/>
-              <p:commandButton  action="#{questionUtility.questionThumbsUpHandller()}" update="questionMessage" icon="fa-thumbs-o-up" value="like">
-          
+              <p:commandButton  action="#{questionUtility.questionThumbsUpHandller()}" update="questionMessage,questionVoteCounter" icon="fa-thumbs-o-up" value="like">
+                 
                   <f:param name="id" value="#{questionUtility.question.id}"/>
           </p:commandButton>
       
-</p:panelGrid>
+
         
             
-          <p:commandButton  action="#{questionUtility.questionThumbsDownHandller()}" update="questionMessage" icon="fa-thumbs-o-down" value="Dislike">
+          <p:commandButton  action="#{questionUtility.questionThumbsDownHandller()}" update="questionMessage,questionVoteCounter" icon="fa-thumbs-o-down" value="Dislike">
           
              <f:param name="id" value="#{questionUtility.question.id}"/>
           </p:commandButton>
-      
+      </p:panelGrid>
+            <h:panelGrid columns="2" cellpadding="10">
+          
+                <h:outputText value="#{questionUtility.question.content}" />
+        </h:panelGrid>
           
           
     </p:panel>
       
       
       <c:forEach  items="#{questionUtility.question.answers}" var="ans">
-          
+          <p:outputLabel id="answerMessage#{ans.id}" value="#{questionUtility.answerVoteMessage}"/>
+
           <p:panel    header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" class="answer">
+              
+             <p:panelGrid columns="1" class="voting_panel">
+      
+                 <p:outputLabel value="#{questionUtility.getAnswerVote(ans)}" id="ans_vote_count#{ans.id}"/>
+              
+                 <p:commandButton  action="#{questionUtility.answerThumbsUpHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-up" value="like">
+                 
+                  <f:param name="aid" value="#{questionUtility.answer.id}"/>
+                  <f:param name="id" value="#{questionUtility.question.id}"/>
+          </p:commandButton>
+      
+
+        
+            
+          <p:commandButton  action="#{questionUtility.answerThumbsDownHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-down" value="Dislike">
+          
+             <f:param name="aid" value="#{questionUtility.answer.id}"/>
+             <f:param name="id" value="#{questionUtility.question.id}"/>
+          </p:commandButton>
+      </p:panelGrid>  
+              
         <h:panelGrid columns="2" cellpadding="10">
           
             <h:outputText value="#{ans.content}" />
@@ -82,7 +108,9 @@
            
             <h:inputTextarea rows="10" cols="150" style="border: 1px solid #90b4bd" value="#{questionUtility.answer.content}"></h:inputTextarea>
             <br/>
-            <p:commandButton value="Submit answer" id="answerButton"   styleClass="ui-priority-primary"  action="#{questionUtility.addAnswer()}"/>
+            <p:commandButton value="Submit answer" id="answerButton"   styleClass="ui-priority-primary"  action="#{questionUtility.addAnswer()}">
+                <f:param name="id" value="#{questionUtility.question.id}"/>
+            </p:commandButton>
 
             
             

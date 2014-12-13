@@ -5,10 +5,15 @@
  */
 package boundary;
 
+import entities.AnswerVote;
+import entities.Question;
 import entities.QuestionVote;
+import entities.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -16,6 +21,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class QuestionVoteFacade extends AbstractFacade<QuestionVote> {
+
     @PersistenceContext(unitName = "GeekAnswersPU")
     private EntityManager em;
 
@@ -27,5 +33,39 @@ public class QuestionVoteFacade extends AbstractFacade<QuestionVote> {
     public QuestionVoteFacade() {
         super(QuestionVote.class);
     }
+
     
+    
+         public Long getQuestionVoteId(User u,Question q) {
+        TypedQuery<QuestionVote> query = em.createNamedQuery("question.vote.find.id", QuestionVote.class);
+
+        query.setParameter("question", q);
+        query.setParameter("user", u);
+
+        try {
+             Object ob=query.getResultList().get(0);
+             
+           return Long.parseLong(ob.toString());
+        } catch (Exception e) {
+            return 0L;
+        }
+
+    }
+    
+    public int countQuestionVote(Question q) {
+       
+        TypedQuery<QuestionVote> vote_up_query = em.createNamedQuery("question.vote.count", QuestionVote.class);
+        vote_up_query.setParameter("question", q);
+      // vote_up_query.
+
+        try {
+          List list=vote_up_query.getResultList();
+           return Integer.parseInt(list.get(0).toString());
+          
+            
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
 }

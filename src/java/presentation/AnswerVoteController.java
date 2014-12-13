@@ -57,10 +57,11 @@ public class AnswerVoteController implements Serializable {
         vote.setUser(null);
         vote.setAnswer(null);
 
-         if(hasVoted())
-        ejbFacade.edit(vote);
-         else
-              ejbFacade.create(vote); 
+        if (hasVoted()) {
+            ejbFacade.edit(vote);
+        } else {
+            ejbFacade.create(vote);
+        }
 
     }
 
@@ -84,14 +85,12 @@ public class AnswerVoteController implements Serializable {
         vote.setVote(1);
         vote.setUser(null);
         vote.setAnswer(null);
-        
-        
 
-           
-         if(hasVoted())
-        ejbFacade.edit(vote);
-         else
-              ejbFacade.create(vote); 
+        if (hasVoted()) {
+            ejbFacade.edit(vote);
+        } else {
+            ejbFacade.create(vote);
+        }
 
     }
 
