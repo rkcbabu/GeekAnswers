@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
@@ -17,11 +18,14 @@ import javax.faces.context.FacesContext;
  *
  * @author acer
  */
+
 public class Common {
 
     public Common() {
 
     }
+    
+    
 
     public String getRequestValue(String key) {
 

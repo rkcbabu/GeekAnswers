@@ -10,7 +10,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javax.annotation.Resource;
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
+import javax.ejb.EJBContext;
+import javax.ejb.SessionContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -22,6 +26,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
@@ -40,6 +45,12 @@ public class UserController implements Serializable {
     private String loginEmail;
     private String loginPassword;
 
+    
+   
+    
+    
+    
+    
     public String getLoginPassword() {
         return loginPassword;
     }
@@ -109,6 +120,7 @@ public class UserController implements Serializable {
 
             getFacade().edit(usr);
 
+             
           //  getFacade().getEM().merge(current);
             FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
             return "dashboard";
