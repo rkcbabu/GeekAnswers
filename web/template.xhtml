@@ -40,8 +40,10 @@
                         <p:menuitem value="#{userController.current.firstName} #{userController.current.lastName}" outcome="/user/dashboard" rendered="#{userController.loggedIn eq true}"/>
                         <p:menuitem value="Register" outcome="user/Create" rendered="#{userController.loggedIn eq false}" />
                         <f:facet name="options">
-                            <p:inputText style="margin-right:10px" placeholder="Search"/>
-                            <p:commandButton value="Search" type="button" icon="ui-icon-search"/>
+<!--                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+                            <p:commandButton value="Search" type="button" icon="ui-icon-search"/>-->
+                            <p:inputText  value="#{searchController.searchKey}"  placeholder="Search"/>
+                            <p:commandButton action="#{searchController.process}" value="Search"  icon="ui-icon-search"/>
                         </f:facet>
                     </p:menubar>
                 </h:form>

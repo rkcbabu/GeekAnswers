@@ -35,6 +35,11 @@ public class QuestionFacade extends AbstractFacade<Question> {
     public EntityManager getEM(){
         return em;
     }    
+    public List<Question> search(String searchKey){
+        TypedQuery<Question> query = em.createQuery("SELECT c FROM Question c WHERE c.title like :searchKey  OR c.Content LIKE :searchKey", Question.class); 
+        query.setParameter("searchKey", "%"+searchKey+"%");
+            return query.getResultList();
+    }
 //    @Override
 //    public List<Question> findAll() {
 //        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();

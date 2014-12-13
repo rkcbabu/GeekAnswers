@@ -14,7 +14,10 @@
             
         </ui:define>
         <ui:define name="body">
-            
+            #{searchController.searchKey}<hr/>
+            <h:outputText id="outputMessage" value="#{searchController.searchQuestions()}" />
+            =>ON track ;
+            <hr/>
             <h:link outcome="/answer/List" value="Show All Answer Items"/>
         <br />
         <h:link outcome="/category/List" value="Show All Category Items"/>
