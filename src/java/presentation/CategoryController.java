@@ -6,6 +6,7 @@ import presentation.util.PaginationHelper;
 import boundary.CategoryFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -29,7 +30,8 @@ public class CategoryController implements Serializable {
     private boundary.CategoryFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+   
+    
     public CategoryController() {
     }
 
@@ -44,7 +46,9 @@ public class CategoryController implements Serializable {
     private CategoryFacade getFacade() {
         return ejbFacade;
     }
-
+    public List<Category> getAll(){
+        return getFacade().findAll();
+    }
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {

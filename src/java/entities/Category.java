@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -20,6 +21,7 @@ import javax.persistence.OneToMany;
  * @author Chaulagai
  */
 @Entity
+@NamedQuery(name="Category.findCodes",query="SELECT e.code from Category e")
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

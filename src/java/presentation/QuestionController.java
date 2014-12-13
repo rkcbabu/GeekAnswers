@@ -8,6 +8,7 @@ import common.Functor;
 import common.ListFilter;
 import common.Predicate;
 import common.QuestionAuthorCheckPredicate;
+import entities.Category;
 import entities.User;
 import java.io.IOException;
 
@@ -53,7 +54,7 @@ public class QuestionController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Question> questions;
-    
+
     @PostConstruct
     public void addUserId() {
         try {
@@ -96,7 +97,7 @@ public class QuestionController implements Serializable {
 
                     Predicate pred = new QuestionAuthorCheckPredicate();
                     ListFilter<Question, User> functor = new ListFilter();
-                   
+
                     User curuser = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
 
                     if (curuser == null) {
@@ -132,10 +133,11 @@ public class QuestionController implements Serializable {
         return "View";
     }
 
-    public String prepareCreate() {
+    public void prepareCreate() throws IOException {
         current = new Question();
         selectedItemIndex = -1;
-        return "Create";
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath() + "/index.xhtml");
     }
 
     public String create() {
@@ -145,7 +147,8 @@ public class QuestionController implements Serializable {
             current.setUser(currentUser);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("QuestionCreated"));
-            return prepareCreate();
+            prepareCreate();
+            return null;
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Resource/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -242,11 +245,13 @@ public class QuestionController implements Serializable {
         recreateModel();
         return "List";
     }
-    public List<Question> getAll(){
+
+    public List<Question> getAll() {
         String query = "SELECT e FROM Question e ORDER BY e.createdDate DESC ";
-        TypedQuery <Question> q1 = ejbFacade.getEM().createQuery(query, Question.class);
+        TypedQuery<Question> q1 = ejbFacade.getEM().createQuery(query, Question.class);
         return q1.getResultList();
     }
+
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }

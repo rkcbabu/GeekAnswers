@@ -14,7 +14,7 @@
         </ui:define>
         <ui:define name="body">
             
-            <h:inputSecret value="#{userController.isUserLoggedIn()}" id="user_id"/>
+<!--            <h:inputSecret value="#{userController.isUserLoggedIn()}" id="user_id"/>-->
             <p:panel id="basic" styleClass="dash-panel" header="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" style="margin-bottom: 10px">
                 <h:panelGrid columns="2" cellpadding="10">
                     <h:graphicImage library="images" name="avatar.gif" height="100" width="140"  />

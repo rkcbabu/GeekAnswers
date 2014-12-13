@@ -20,7 +20,7 @@ and open the template in the editor.
         
         <ui:define name="body" >
         <h:body>
-            
+            <p:panel class="question-panel">
                 <c:forEach items="#{questionController.all}" var="questions" >
                     <h:outputLink value="/answer/List" >
                         <h:outputText value="#{questions.title}" styleClass="questionTitle"/><br/>
@@ -31,7 +31,7 @@ and open the template in the editor.
                     </h:outputText><br/>
                     <h:outputText value="#{questions.user.email}" /><br/><hr/><hr/>
                 </c:forEach>
-           
+            </p:panel>
         </h:body>
         </ui:define>
     </ui:composition>

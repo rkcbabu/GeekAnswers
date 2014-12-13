@@ -36,7 +36,9 @@
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                         <p:menuitem value="#{bundle.Login}" outcome="/user/login" icon="ui-icon-key" rendered="#{userController.loggedIn eq false}"/>
                         <p:menuitem value="#{bundle.Logout}" action="#{userController.logout()}" icon="ui-icon-power" rendered="#{userController.loggedIn eq true}"/>
-                        <p:menuitem value="Ask Question"  icon="ui-icon-help"/>
+                        <p:menuitem value="Ask Question" outcome="/question/Create" icon="ui-icon-help"/>
+                        <p:menuitem value="#{userController.current.firstName} #{userController.current.lastName}" outcome="/user/dashboard" rendered="#{userController.loggedIn eq true}"/>
+                        <p:menuitem value="Register" outcome="user/Create" rendered="#{userController.loggedIn eq false}" />
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
                             <p:commandButton value="Search" type="button" icon="ui-icon-search"/>
