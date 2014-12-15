@@ -7,12 +7,13 @@ package presentation;
 
 import boundary.QuestionFacade;
 import entities.Question;
+import interceptor.LogInterceptor;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 
 /**
  *
@@ -20,7 +21,7 @@ import javax.inject.Named;
  */
 @Named(value = "searchController")
 @javax.enterprise.context.RequestScoped
-
+@Interceptors(LogInterceptor.class)
 public class SearchController {
     @EJB
     private QuestionFacade questionFacade;
@@ -40,7 +41,8 @@ public class SearchController {
         this.searchKey = ""; 
     }
     public String process(){
-//        System.out.println(searchKey);
+        System.out.println(searchKey);
+        System.out.println(" Executing method : SearchController.search()" );
 //        System.out.println(questionFacade.search(searchKey));
         return "index.xhtml?searchKey="+searchKey+"&faces-redirect=true&includeViewParams=true"; //finding
     }
