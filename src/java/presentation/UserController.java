@@ -8,13 +8,13 @@ import common.UserType;
 import java.io.IOException;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.Resource;
-import javax.annotation.security.RunAs;
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
-import javax.ejb.EJBContext;
-import javax.ejb.SessionContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -26,9 +26,10 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.mail.Session;
 import javax.persistence.TypedQuery;
-import javax.servlet.http.HttpSession;
+import mailservice.MailServices;
 
 @ManagedBean(name = "userController")
 
@@ -45,14 +46,12 @@ public class UserController implements Serializable {
     private String loginEmail;
     private String loginPassword;
 
-    
-   
-    
-    
-    
-    
     public String getLoginPassword() {
         return loginPassword;
+    }
+
+    public UserType[] getUserTypes() {
+        return UserType.values();
     }
 
     public void setLoginPassword(String loginPassword) {
@@ -69,24 +68,46 @@ public class UserController implements Serializable {
         return "User session destroyed";
         //logged_in_user
     }
-    public void logout() throws IOException{
-        if (isLoggedIn()){
-             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+
+    @Asynchronous
+    public void sendWelcomeEmail() throws MessagingException, UnsupportedEncodingException {
+        MailServices.sendEmail(current.getEmail(), "Welcome to Geek Answers", ""
+                + "Hello, " + current.getFirstName() + " " +current.getLastName() + "\n"
+                + "\n\n"
+                + "Welcome to Geek Answers!!\n"
+                + "Thank you for registering with us. We hope you will find all your questions "
+                + "answered by the best gurus around in MUM. Don't forget to upvote the answers "
+                + "you feel right so that the gurus will be encouraged to continue answering and "
+                + "sharing their valuable knowledge in future.\n\n"
+                + "Here is your login information \n"
+                + "Login :" + current.getEmail() + "\n"
+                + "Password :" + current.getPassword() + "\n\n"
+                + "Please report any problems, bugs or errors to geekanswers18@gmail.com\n"
+                + "Thank you,\n"
+                + "Geek Answers Team");
+
+    }
+
+    public void logout() throws IOException {
+        if (isLoggedIn()) {
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         }
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect(ec.getRequestContextPath() + "/index.xhtml");
     }
-    public boolean isLoggedIn(){
-        
-        return ((User)loggedInUser()==null)?false:true;
+
+    public boolean isLoggedIn() {
+
+        return ((User) loggedInUser() == null) ? false : true;
     }
+
     public User loggedInUser() {
-        FacesContext cur=FacesContext.getCurrentInstance();
+        FacesContext cur = FacesContext.getCurrentInstance();
         return (User) cur.getExternalContext().getSessionMap().get("logged_in_user");
     }
 
     public int isUserLoggedIn() throws IOException {
-        FacesContext cur=FacesContext.getCurrentInstance();
+        FacesContext cur = FacesContext.getCurrentInstance();
         User u = (User) cur.getExternalContext().getSessionMap().get("logged_in_user");
 
         if (u != null) {
@@ -96,7 +117,7 @@ public class UserController implements Serializable {
             ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
             context.redirect(context.getRequestContextPath() + "/faces/user/login.xhtml");
 
-      //  FacesContext.getCurrentInstance().getExternalContext().redirect("../user/login.xhtml");
+            //  FacesContext.getCurrentInstance().getExternalContext().redirect("../user/login.xhtml");
             return 0;
         }
     }
@@ -106,7 +127,7 @@ public class UserController implements Serializable {
         //System.err.println("output");
         String loginQuery = "SELECT s FROM User s WHERE s.email=:email AND s.password=:password";
 
-       // System.out.println(loginQuery);
+        // System.out.println(loginQuery);
         TypedQuery<User> query = getFacade().getEM().createQuery(loginQuery, User.class);
         query.setParameter("email", getLoginEmail());
         query.setParameter("password", getLoginPassword());
@@ -120,10 +141,9 @@ public class UserController implements Serializable {
 
             getFacade().edit(usr);
 
-             
-          //  getFacade().getEM().merge(current);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
-            return "dashboard";
+            //  getFacade().getEM().merge(current);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/GeekAnwers/index.xhtml");
+            return "index";
 
         } catch (Exception e) {
             // e.printStackTrace();
@@ -201,15 +221,26 @@ public class UserController implements Serializable {
 
     public String create() {
         try {
-            current.setLastLoginDate(new Date());
-            current.setRegisterDate(new Date());
-            current.setType(UserType.Visitor);
-            getFacade().create(current);
+            if (!getFacade().userExists(current.getEmail())){
+                current.setLastLoginDate(new Date());
+                current.setRegisterDate(new Date());
+                System.out.println("new");
+                if (current.getType() == null) {
+                    current.setType(UserType.Member);
+                }
+                getFacade().create(current);
+                //System.out.println("Im inside user create");
+                sendWelcomeEmail();
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
 
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
-
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("UserCreated"));
-            return prepareCreate();
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("UserCreated"));
+                return prepareCreate();
+            }
+            else{
+                JsfUtil.addErrorMessage( ResourceBundle.getBundle("/Resource/Bundle").getString("UserExists"));
+                System.out.println("old");
+                return ("/index.xhtml");
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Resource/Bundle").getString("PersistenceErrorOccured"));
             return null;

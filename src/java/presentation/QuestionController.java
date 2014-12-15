@@ -81,7 +81,9 @@ public class QuestionController implements Serializable {
     private QuestionFacade getFacade() {
         return ejbFacade;
     }
-
+    public List<Question> getNewQuestions(){
+        return ejbFacade.getQuestions();
+    }
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {

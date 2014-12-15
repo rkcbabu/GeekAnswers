@@ -40,6 +40,10 @@ public class QuestionFacade extends AbstractFacade<Question> {
         query.setParameter("searchKey", "%"+searchKey+"%");
             return query.getResultList();
     }
+    public List<Question> getQuestions(){
+        TypedQuery<Question> query = em.createQuery("SELECT q FROM Question q ORDER BY q.createdDate DESC",Question.class);
+        return query.getResultList();
+    }
 //    @Override
 //    public List<Question> findAll() {
 //        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();

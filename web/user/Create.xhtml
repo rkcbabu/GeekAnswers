@@ -15,45 +15,35 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.CreateUserLabel_firstName}" for="firstName" />
-                    <p:inputText id="firstName" value="#{userController.selected.firstName}" title="#{bundle.CreateUserTitle_firstName}" />
-                    <p:outputLabel value="#{bundle.CreateUserLabel_lastName}" for="lastName" />
-                    <p:inputText id="lastName" value="#{userController.selected.lastName}" title="#{bundle.CreateUserTitle_lastName}" />
-                    <p:outputLabel value="#{bundle.CreateUserLabel_email}" for="email" />
-                    
-                    
-                    
-                    
-                    <p:inputText id="email" required="true" label="email" 
-		requiredMessage="Please enter your email address."
-		validatorMessage="Invalid email format"
-		value="#{userController.selected.email}" >
- 
-	  <f:validateRegex
-		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
- 
-	</p:inputText>
-                    
-                    
-                    
-                    <p:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />
-                    <p:password id="password" value="#{userController.selected.password}" title="#{bundle.CreateUserTitle_password}" feedback="true" inline="true"/>
-                    
-                    
-                    
-                    
-                    <p:outputLabel value="#{bundle.CreateUserLabel_type}" for="type" />
-                    <p:inputText id="type" value="#{userController.selected.type}" title="#{bundle.CreateUserTitle_type}" />
-                </h:panelGrid>
-                <br />
-                <p:commandLink action="#{userController.create}" value="#{bundle.CreateUserSaveLink}" />
-                <br />
-                <br />
-                <p:commandLink action="#{userController.prepareList}" value="#{bundle.CreateUserShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <p:link outcome="/index" value="#{bundle.CreateUserIndexLink}"/>
+                <p:panel header="Create a User" styleClass="dash-panel">
+                    <h:panelGrid columns="2" cellspacing="10" cellpadding="20" >
+                        <p:outputLabel value="#{bundle.CreateUserLabel_firstName}" for="firstName" />
+                        <p:inputText id="firstName" value="#{userController.selected.firstName}" title="#{bundle.CreateUserTitle_firstName}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_lastName}" for="lastName" />
+                        <p:inputText id="lastName" value="#{userController.selected.lastName}" title="#{bundle.CreateUserTitle_lastName}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_email}" for="email" />
+                        <p:inputText id="email" required="true" label="email" 
+                                     requiredMessage="Please enter your email address."
+                                     validatorMessage="Invalid email format"
+                                     value="#{userController.selected.email}" >
+                            <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />
+                        <p:password id="password" value="#{userController.selected.password}" title="#{bundle.CreateUserTitle_password}" feedback="true" inline="true"/>
+
+                        <p:outputLabel value="#{bundle.CreateUserLabel_type}" rendered="#{userController.loggedInUser().type eq 'Administrator'}" for="type" />
+                        <p:selectOneMenu id="type" rendered="#{userController.loggedInUser().type eq 'Administrator'}" value="#{userController.selected.type}" >
+                            <f:selectItems value="#{userController.userTypes}" var="all" >
+                                <f:selectItem itemValue="#{all}" itemLabel="#{all.label}" />
+                            </f:selectItems>
+                        </p:selectOneMenu> 
+
+                        <p:commandButton styleClass="btn btn-primary btn" action="#{userController.create}" value="#{bundle.CreateUserSaveLink}" />
+                    </h:panelGrid>
+
+                </p:panel>
             </h:form>
         </ui:define>
     </ui:composition>

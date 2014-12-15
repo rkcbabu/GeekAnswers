@@ -10,8 +10,21 @@ package common;
  * @author acer
  */
 public enum UserType {
-    Administrator,
-    Member,
-    Visitor
+    Administrator("Administrator"),
+    Member("Member"),
+    Visitor("Visitor");
+    
+    private String label;
+
+    public String getLabel() {
+        return label;
+    }
+
+    UserType(String label){
+        this.label = label;
+    }
+    public void setLabel(String label) {
+        this.label = label;
+    }
     
 }

@@ -30,7 +30,7 @@
                                 <h:outputLabel value="Category " for="category" />
                                 <p:selectOneMenu id="category" value="#{questionController.selected.category}" >
                                     <f:selectItems value="#{categoryController.all}" var="all" >
-                                        <f:selectItem itemValue="#{all.id}" itemLabel="#{all.title.toString}" />
+                                        <f:selectItem itemValue="#{all.id}" itemLabel="#{all}" />
                                     </f:selectItems>
                                 </p:selectOneMenu>
                                 
