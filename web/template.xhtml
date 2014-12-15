@@ -9,8 +9,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
-        <h:outputStylesheet library="css" name="jsfcrud.css"/>
-        <h:outputStylesheet library="css" name="style.css"/>
+       
 
         <link  rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
 
@@ -18,6 +17,8 @@
     </h:head>
 
     <h:body>
+         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
         <p:layout fullPage="true" >
             <p:layoutUnit position="north" size="180" styleClass="ui-layout-unit" >
                 <div id="header">
@@ -51,14 +52,14 @@
                     <p:menu>
                         <p:submenu>
 
-                            <p:menuitem outcome="/answer/List.xhtml" value="Show All Answer Items"/>
-                            <p:menuitem url="/category/List.xhtml" value="Show All Category Items"/>
-                            <p:menuitem url="/comment/List.xhtml" value="Show All Comment Items"/>
-                            <p:menuitem url="/question/List.xhtml" value="Show All Question Items"/>
-                            <p:menuitem url="/reputation/List.xhtml" value="Show All Reputation Items"/>
-                            <p:menuitem url="/tag/List.xhtml" value="Show All Tag Items"/>
-                            <p:menuitem url="/user/List.xhtml" value="Show All User Items"/>
-                            <p:menuitem url="question/questions.xhtml" value="Question Lists" />
+                            <p:menuitem outcome="/answer/List.xhtml" value="Show All Answer "/>
+                            <p:menuitem url="/category/List.xhtml" value="Show All Category "/>
+                            <p:menuitem url="/comment/List.xhtml" value="Show All Comment "/>
+                            <p:menuitem url="/question/List.xhtml" value="Show All Question "/>
+                            <p:menuitem url="/reputation/List.xhtml" value="Show All Reputation "/>
+                            <p:menuitem url="/tag/List.xhtml" value="Show All Tag "/>
+                            <p:menuitem url="/user/List.xhtml" value="Show All User "/>
+                            <p:menuitem url="question/questions.xhtml" value="Question " />
 
                         </p:submenu>
 

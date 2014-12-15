@@ -5,6 +5,21 @@
     text-align: center;
     color: #191919;
 }
+body{
+    left:20%;
+    background: red;
+}
+.ui-layout-resizer, .ui-layout-resizer-north, ui-layout-resizer-open, .ui-layout-resizer-north-open 
+{
+    display: none;
+}
+.ui-layout-unit {
+padding: 0.2em 0em;
+border: 0px none;
+overflow: auto;
+/* color: #fff; */
+left:auto;
+}
 #menu{
     text-align: center;
 }
@@ -20,7 +35,7 @@
 }
 #footer{
     height:30px;
-    background-color: #DFE2DB;
+    background-color: #626266;
     font-size: 13px;
     text-align: center;
     color: #191919;
@@ -54,3 +69,82 @@
     font-weight: 500;
     line-height: 26.3999996185303px;
 }
+table{
+    padding: 5px;
+    margin: 15px;
+    width: 90%
+}
+table th{
+    padding: 10px;
+    text-align: center;
+    background: #46b8da;
+    color: #fff;
+    
+}
+table td{
+    padding:10px;
+}
+
+table td a{
+    display: inline-block;
+
+    padding: 5px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+background-image: none;
+border: 1px solid transparent;
+border-radius: 4px;
+background: #46b8da;
+}
+.ui-layout-resizer, .ui-layout-resizer-north, ui-layout-resizer-open, .ui-layout-resizer-north-open {
+display: none;
+background: #f3f3f3;
+}
+.ui-widget-content {
+background: #f3f3f3;
+color: #333333;
+}
+.ui-panel .ui-panel-titlebar {
+background-color: #3E3E3E;
+}
+.ui-panel .ui-panel-content {
+border: 0;
+background: #DDDEE9;
+padding: 0.5em 1em;
+}
+form.jsfcrud_list_form th, td th {
+/* font-size: x-small; */
+/* color: #DFE2DB; */
+border-top-style: solid;
+border-bottom-style: solid;
+border-left-style: solid;
+border-right-style: solid;
+border-top-width: 1px;
+/* border-bottom-width: 10px; */
+border-left-width: 1px;
+border-right-width: 1px;
+border-top-color: #b2d5d6;
+border-bottom-color: #b2d5d6;
+border-left-color: #90b4bd;
+border-right-color: #90b4bd;
+letter-spacing: 3px;
+text-align: left;
+padding-top: 6px;
+padding-bottom: 6px;
+padding-left: 6px;
+padding-right: 6px;
+/* background-color: #424348; */
+}
+

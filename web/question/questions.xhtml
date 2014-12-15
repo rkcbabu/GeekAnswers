@@ -14,14 +14,16 @@ and open the template in the editor.
     <ui:composition template="/template.xhtml">
         <h:head>
             <title>All Questions</title>
-            <h:outputStylesheet library="css" name="jsfcrud.css"/>
-            <h:outputStylesheet library="css" name="style.css"/>
+           
         </h:head>
         
         <ui:define name="body" >
         <h:body>
-            <p:panel class="question-panel">
+             <h:outputStylesheet library="css" name="jsfcrud.css"/>
+            <h:outputStylesheet library="css" name="style.css"/>
+           <p:panel class="question-holder">
                 <c:forEach items="#{questionController.all}" var="questions" >
+                    <p:panel styleClass="question-content">
                     <h:outputLink value="/answer/List" >
                         <h:outputText value="#{questions.title}" styleClass="questionTitle"/><br/>
                     </h:outputLink>
@@ -29,6 +31,7 @@ and open the template in the editor.
                     <h:outputText value="#{questions.createdDate}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText><br/>
+                     </p:panel>
                 </c:forEach>
             </p:panel>
         </h:body>

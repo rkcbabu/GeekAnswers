@@ -22,14 +22,14 @@ table {
 }
 
 form.jsfcrud_list_form th, td th {
-    font-size: x-small;
-    color:  #DFE2DB;
+    /* font-size: x-small; */
+    /* color: #DFE2DB; */
     border-top-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
     border-right-style: solid;
     border-top-width: 1px;
-    border-bottom-width: 10px;
+    /* border-bottom-width: 10px; */
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-color: #b2d5d6;
@@ -42,8 +42,8 @@ form.jsfcrud_list_form th, td th {
     padding-bottom: 6px;
     padding-left: 6px;
     padding-right: 6px;
-    background-color:#424348
-}
+    /* background-color:#424348
+ */}
 
 td {
     vertical-align: top;
@@ -88,15 +88,17 @@ tr.jsfcrud_even_row {
     background-color: #F3843E;
 }
 .dash-panel {
-    font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
     width:50%;
 }
 .left-menu{
     width:99.99%;
 }
-.question-panel{
-    width:75%;
-}
+
 .question-panel .ui-panel .ui-panel-footer{
     background-color: #B6B6B6;
+}
+.question-holder{
+    width: 75%;
+    background: white;
 }
