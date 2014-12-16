@@ -86,10 +86,12 @@ tr.jsfcrud_even_row {
 }
 .ui-panel .ui-panel-titlebar{
     background-color: #F3843E;
+    color: white;
 }
 .dash-panel {
     /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
     width:50%;
+   alignment-baseline: central;
 }
 .left-menu{
     width:99.99%;

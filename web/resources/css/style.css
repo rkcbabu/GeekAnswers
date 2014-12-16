@@ -77,7 +77,7 @@ table{
 table th{
     padding: 10px;
     text-align: center;
-    background: #46b8da;
+    background: #16A085;
     color: #fff;
     
 }
@@ -118,6 +118,7 @@ color: #333333;
 }
 .ui-panel .ui-panel-titlebar {
 background-color: #3E3E3E;
+color: white;
 }
 .ui-panel .ui-panel-content {
 border: 0;
@@ -147,4 +148,18 @@ padding-left: 6px;
 padding-right: 6px;
 /* background-color: #424348; */
 }
-
+.ui-panel .ui-panel-content_btn btn-primary btn{
+    background: red;
+}
+.commandbutton-width{
+    width: 100px;
+}
+.voting_panel{
+    width: 10%;
+}
+.question-panel{
+    width: 80%;
+}
+.ui-panel-footer ui-widget-content{
+    text-align: right;
+}
