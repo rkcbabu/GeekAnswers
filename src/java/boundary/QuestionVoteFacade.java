@@ -68,4 +68,24 @@ public class QuestionVoteFacade extends AbstractFacade<QuestionVote> {
         }
 
     }
+    
+    
+     public int countTotalQuestionVotesOfUser(User u) {
+       
+        TypedQuery<QuestionVote> query = em.createNamedQuery("question.vote.count.user", QuestionVote.class);
+        query.setParameter("user", u);
+      // vote_up_query.
+
+        try {
+          List list=query.getResultList();
+          if(list.isEmpty()) return 0;
+           return Integer.parseInt(list.get(0).toString());
+          
+            
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
+    
 }

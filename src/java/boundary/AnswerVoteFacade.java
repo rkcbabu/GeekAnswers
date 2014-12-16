@@ -7,11 +7,13 @@ package boundary;
 
 import entities.Answer;
 import entities.AnswerVote;
+import entities.Category;
 import entities.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -64,4 +66,23 @@ public class AnswerVoteFacade extends AbstractFacade<AnswerVote> {
         }
 
     }
+      
+      
+       public int countAnswerVote(User u, Category c) {
+       Query query = em.createNamedQuery("answer.category.vote.count");
+
+        query.setParameter("user", u);
+        query.setParameter("category", c);
+
+        try {
+             List list=query.getResultList();
+             
+           return Integer.parseInt(list.get(0).toString());
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
+      
+      
 }

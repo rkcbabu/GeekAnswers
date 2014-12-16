@@ -19,10 +19,10 @@ import javax.persistence.NamedQuery;
  *
  * @author acer
  */
-
 @NamedQueries({
-    @NamedQuery(name = "answer.vote.count",query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer=:answer"),
-    @NamedQuery(name = "answer.vote.find.id",query = "SELECT v.id FROM AnswerVote v WHERE v.user=:user AND v.answer=:answer")
+    @NamedQuery(name = "answer.vote.count", query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer=:answer"),
+    @NamedQuery(name = "answer.vote.find.id", query = "SELECT v.id FROM AnswerVote v WHERE v.user=:user AND v.answer=:answer"),
+    @NamedQuery(name = "answer.category.vote.count", query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.user=:user AND v.answer.question.category=:category")
 
 })
 @Entity
@@ -33,7 +33,6 @@ public class AnswerVote extends Vote implements Serializable {
     public AnswerVote() {
     }
 
-    
     public Answer getAnswer() {
         return answer;
     }
@@ -41,12 +40,8 @@ public class AnswerVote extends Vote implements Serializable {
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
-   
-    
-    
+
     @ManyToOne
     private Answer answer;
-    
-    
-    
+
 }

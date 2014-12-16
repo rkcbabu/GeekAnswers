@@ -26,6 +26,7 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "question.vote.up.count",query = "SELECT SUM(v.vote) FROM QuestionVote v WHERE v.vote=1 AND v.question=:question"),
     @NamedQuery(name = "question.vote.down.count",query = "SELECT SUM(v.vote) FROM QuestionVote v WHERE v.vote=-1 AND v.question=:question"),
     @NamedQuery(name = "question.vote.find.id",query = "SELECT v.id FROM QuestionVote v WHERE v.user=:user AND v.question=:question"),
+    @NamedQuery(name = "question.vote.count.user",query = "SELECT SUM(v.vote) FROM QuestionVote v WHERE v.user=:user"),
 
 })
 

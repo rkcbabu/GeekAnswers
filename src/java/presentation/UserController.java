@@ -4,15 +4,21 @@ import entities.User;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import boundary.UserFacade;
+import boundary.UserLevelFacade;
+import common.EventList;
 import common.UserType;
+import entities.userlevel.UserLevel;
+import entities.userlevel.UserLevel1;
+import entities.userlevel.UserLevel2;
+import entities.userlevel.UserLevel3;
+import entities.userlevel.UserLevel4;
+import entities.userlevel.UserLevel5;
 import java.io.IOException;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
-import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -26,8 +32,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.mail.MessagingException;
-import javax.mail.Session;
 import javax.persistence.TypedQuery;
 import mailservice.MailServices;
 
@@ -35,11 +41,19 @@ import mailservice.MailServices;
 
 @RequestScoped
 public class UserController implements Serializable {
+    @EJB
+    private UserLevelFacade userLevelFacade;
 
     private User current;
     private DataModel items = null;
     @EJB
     private boundary.UserFacade ejbFacade;
+    
+   
+    
+    @Inject
+    EventHandler eventHandler;
+    
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -58,7 +72,9 @@ public class UserController implements Serializable {
         this.loginPassword = loginPassword;
     }
 
+     
     public UserController() {
+       // userLevel=userLevelFacade.getInitialUserLevel();
 
     }
 
@@ -140,6 +156,7 @@ public class UserController implements Serializable {
             usr.setLastLoginDate(new Date());
 
             getFacade().edit(usr);
+            eventHandler.triggerEvent(EventList.USER_LOGIN);
 
             //  getFacade().getEM().merge(current);
             FacesContext.getCurrentInstance().getExternalContext().redirect("/GeekAnwers/index.xhtml");
@@ -228,10 +245,19 @@ public class UserController implements Serializable {
                 if (current.getType() == null) {
                     current.setType(UserType.Member);
                 }
+                
+                
+               
+                //current.setUserlevel(userLevelFacade.getInitialUserLevel());
+               current.setUserlevel(userLevelFacade.getInitialUserLevel());
+
+                
                 getFacade().create(current);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
+
+                eventHandler.triggerEvent(EventList.USER_REGISTRATION);
                 //System.out.println("Im inside user create");
                 sendWelcomeEmail();
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
 
                 JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("UserCreated"));
                 return prepareCreate();

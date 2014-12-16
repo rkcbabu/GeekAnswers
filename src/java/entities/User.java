@@ -6,6 +6,7 @@
 package entities;
 
 import common.UserType;
+import entities.userlevel.UserLevel;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -16,23 +17,22 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Chaulagai
+ * 
  */
 @Entity
-@Table(name="Users")
+//@Table(name="Users")
 //@NamedQueries({
 //   @NamedQuery(name="login_query",query="SELECT id FROM User s WHERE s.email=:email AND s.password=:password")
 //
 //})
 
-@XmlRootElement
+
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,9 +52,6 @@ public class User implements Serializable {
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Question> questions;
-    public List<Question> getQuestions() {
-        return questions;
-    }
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Answer> answers;
@@ -65,8 +62,36 @@ public class User implements Serializable {
 //    @OneToMany(mappedBy = "user")
 //    private Reputation reputation;
     
+    
+     public List<Question> getQuestions() {
+       return questions;
+   }
+    
+    
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Vote> votes;
+    
+     private int totalPoint;
+    
+    @ManyToOne
+    private UserLevel userlevel;
+
+    public int getTotalPoint() {
+        return totalPoint;
+    }
+
+    public void setTotalPoint(int totalPoint) {
+        this.totalPoint = totalPoint;
+    }
+
+    public UserLevel getUserlevel() {
+        return userlevel;
+    }
+
+    public void setUserlevel(UserLevel userlevel) {
+        this.userlevel = userlevel;
+    }
+    
     
     public String getFirstName() {
         return firstName;

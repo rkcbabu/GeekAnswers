@@ -10,6 +10,7 @@ import boundary.AnswerVoteFacade;
 import boundary.QuestionFacade;
 import boundary.QuestionVoteFacade;
 import common.Common;
+import common.EventList;
 import entities.Answer;
 import entities.AnswerVote;
 import entities.Question;
@@ -27,6 +28,7 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -51,6 +53,9 @@ public class QuestionUtilityController {
     private AnswerFacade answerFacade;
     @EJB
     private QuestionFacade questionFacade;
+    
+    @Inject
+    private EventHandler eventHandler;
 
     private Common common;
     private User user;
@@ -215,6 +220,7 @@ public class QuestionUtilityController {
                     //  em.persist(questionVote);
 
                     questionVoteFacade.create(questionVote);
+                    eventHandler.triggerEvent(EventList.QUESTION_LIKED);
 
                     this.questionVoteMessage = "Vote added: Vote up";
                 }
@@ -251,6 +257,7 @@ public class QuestionUtilityController {
                     //  em.persist(questionVote);
 
                     questionVoteFacade.create(questionVote);
+                     eventHandler.triggerEvent(EventList.QUESTION_DISLIKED);
 
                     this.questionVoteMessage = "Vote added: Vote down";
                 }
@@ -288,6 +295,7 @@ public class QuestionUtilityController {
                     //  em.persist(questionVote);
 
                     answerVoteFacade.create(answerVote);
+                     eventHandler.triggerEvent(EventList.ANSWER_LIKED,answer.getQuestion().getUser(),answer.getQuestion().getCategory());
 
                     this.answerVoteMessage = "Vote added: Vote down";
                 }
@@ -327,6 +335,7 @@ public class QuestionUtilityController {
                     //  em.persist(questionVote);
 
                     answerVoteFacade.create(answerVote);
+                     eventHandler.triggerEvent(EventList.ANSWER_DISLIKED,answer.getQuestion().getUser(),answer.getQuestion().getCategory());
 
                     this.answerVoteMessage = "Vote added: Vote down";
                 }
@@ -353,6 +362,8 @@ public class QuestionUtilityController {
         //  System.out.println("user="+usr.getFirstName());
         answer.setUser(usr);
         answerFacade.create(answer);
+        
+         eventHandler.triggerEvent(EventList.QUESTION_ANSWERED);
 
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
