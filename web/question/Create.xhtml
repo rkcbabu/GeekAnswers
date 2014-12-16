@@ -25,7 +25,7 @@
                                 <h:inputText id="title" value="#{questionController.selected.title}" title="#{bundle.CreateQuestionTitle_title}" />
 
                                 <h:outputLabel value="Content" for="content" />
-                                <h:inputTextarea rows="10" cols="60" id="content" value="#{questionController.selected.content}" title="#{bundle.CreateQuestionTitle_content}" />
+                                <h:inputTextarea styleClass="preformatted" rows="10" cols="60" id="content" value="#{questionController.selected.content}" title="#{bundle.CreateQuestionTitle_content}" />
 
                                 <h:outputLabel value="Category " for="category" />
                                 <p:selectOneMenu id="category" value="#{questionController.selected.category}" >

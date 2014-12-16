@@ -97,10 +97,33 @@ tr.jsfcrud_even_row {
     width:99.99%;
 }
 
-.question-panel .ui-panel .ui-panel-footer{
-    background-color: #B6B6B6;
+.question-panel .ui-panel{
+    width:75%;
 }
 .question-holder{
     width: 75%;
     background: white;
+}
+.question-content .panel-header{
+    
+}
+.question-content .panel-footer{
+    background:none;
+    text-align: right;
+}
+.question-content .questionFooter{
+    font-size:10px;
+}
+.questionHeader{
+    font-size:22px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: right;
+}
+.questionContent{
+    font-size:14px;
+    text-align: right;
+    white-space: pre-wrap;
+}
+.ui-layout-unit-content ui-widget-content{
+    overflow-y: hidden !important;
 }
