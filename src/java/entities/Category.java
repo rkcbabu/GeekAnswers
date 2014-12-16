@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -22,6 +23,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQuery(name="Category.findCodes",query="SELECT e.code from Category e")
+@XmlRootElement
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

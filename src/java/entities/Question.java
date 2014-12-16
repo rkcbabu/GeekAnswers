@@ -20,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +40,7 @@ import javax.persistence.Transient;
 
 
 
+@XmlRootElement
 public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,6 +78,7 @@ public class Question implements Serializable {
         return user;
     }
 
+    @XmlTransient
     public List<QuestionVote> getVotes() {
         return votes;
     }
@@ -135,6 +139,7 @@ public class Question implements Serializable {
         this.category = category;
     }
 
+    @XmlTransient
     public List<Answer> getAnswers() {
         return answers;
     }
@@ -143,6 +148,7 @@ public class Question implements Serializable {
         this.answers = answers;
     }
 
+    @XmlTransient
     public List<Tag> getTags() {
         return tags;
     }

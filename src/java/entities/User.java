@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -31,6 +32,7 @@ import javax.persistence.Temporal;
 //
 //})
 
+@XmlRootElement
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
