@@ -14,53 +14,62 @@ and open the template in the editor.
     <ui:composition template="/template.xhtml">
         <h:head>
             <title>All Questions</title>
-
+          
         </h:head>
 
         <ui:define name="body" >
             <h:body>
+            <h:outputStylesheet library="css" name="jsfcrud.css"/>
+            <h:outputStylesheet library="css" name="style.css"/>
                 <h:form>
-                    <h:outputStylesheet library="css" name="jsfcrud.css"/>
-                    <h:outputStylesheet library="css" name="style.css"/>
-                    <h:panelGroup rendered="#{questionController.items.rowCount > 0}">
-                        <h:outputText value="#{questionController.pagination.pageFirstItem + 1}..#{questionController.pagination.pageLastItem + 1}/#{questionController.pagination.itemsCount}"/>
-                        <h:commandLink action="#{questionController.previous}" value="#{bundle.Previous} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasPreviousPage}"/>
-                        <h:commandLink action="#{questionController.next}" value="#{bundle.Next} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasNextPage}"/>
-                        <p:panel class="question-holder">
-                            <c:forEach items="#{questionController.all}" var="questions" >
-                                <p:panel styleClass="question-content">
-                                    <h:outputText style="font-size:20px" value="Hello "  id="questionVoteCounter"/>
-<!--                                    <p:panelGrid>
-                                        <p:column>
-                                            <p:column style="width:5%;border: none; text-align: center">
-                                                <h:outputText style="font-size:20px" value="#{questionUtility.questionVoteCount}"  id="questionVoteCounter"/>
-                                            </p:column>
-                                        </p:column>
-
-                                        <p:column>
-                                        </p:column>
-                                    </p:panelGrid>-->
-                                    <div class="panel-header">
-                                        <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
-                                            <h:outputText value="#{questions.title}" styleClass="questionHeader"/><br/>
+                    <p:tabView>
+                        <p:tab title="Most Recent">
+                            <h:panelGrid styleClass="" columns="2" cellpadding="10">
+                                <c:forEach items="#{questionController.all}" var="questions" >
+                                    <p:panel styleClass="panelgrid-height">                        
+                                        <div class="panel-header">
+                                            <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
+                                                <h:outputText style="background:none" value="#{questions.title}" styleClass="questionHeader"/><br/>
+                                            </h:outputLink>
+                                        </div>
+                                        <h:outputText value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
+                                        <h:outputLink value="Detail.xhtml?id=#{questions.id}" rendered="#{questions.contentShrunk.length() gt 250}">
+                                            <h:outputText value="(Read More....)" styleClass="questionContent"/>                                    
                                         </h:outputLink>
-                                    </div>
-                                    <h:outputText value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
-                                    <h:outputLink value="Detail.xhtml?id=#{questions.id}" rendered="#{questions.contentShrunk.length() gt 250}">
-                                        <h:outputText value="(Read More....)" styleClass="questionContent"/>                                    
-                                    </h:outputLink>
-                                    <div class="panel-footer">
-                                        <hr/>
-                                        <h:outputText styleClass="questionFooter" value="Asked by #{questions.user.firstName} #{questions.user.lastName} on" />
-                                        <h:outputText styleClass="questionFooter" value="#{questions.createdDate}" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </h:outputText><br/>
-                                    </div>
-                                </p:panel>
-                            </c:forEach>
-                        </p:panel>
-                        <h:outputText escape="false" value="#{bundle.ListQuestionEmpty}" rendered="#{questionController.items.rowCount == 0}"/>
-                    </h:panelGroup>
+                                        <div class="panel-footer">
+                                            <h:outputText styleClass="questionFooter" value="Asked by #{questions.user.firstName} #{questions.user.lastName} on" />
+                                            <h:outputText styleClass="questionFooter" value="#{questions.createdDate}" >
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </div>
+                                    </p:panel>
+                                </c:forEach>         
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Popular">
+                            <h:panelGrid columns="2" cellpadding="10" cellspacing="5" >
+                                <c:forEach items="#{questionController.popularAll}" var="questions" >
+                                    <p:panel >
+                                        <div class="panel-header">
+                                            <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
+                                                <h:outputText value="#{questions.title}" styleClass="questionHeader"/><br/>
+                                            </h:outputLink>
+                                        </div>
+                                        <h:outputText style="question-content" value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
+                                        <h:outputLink value="Detail.xhtml?id=#{questions.id}" rendered="#{questions.contentShrunk.length() gt 250}">
+                                            <h:outputText value="(Read More....)" styleClass="questionContent"/>                                    
+                                        </h:outputLink>
+                                        <div class="panel-footer">
+                                            <h:outputText styleClass="questionFooter" value="Asked by #{questions.user.firstName} #{questions.user.lastName} on" />
+                                            <h:outputText styleClass="questionFooter" value="#{questions.createdDate}" >
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </div>
+                                    </p:panel>
+                                </c:forEach>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
                 </h:form>
             </h:body>
         </ui:define>

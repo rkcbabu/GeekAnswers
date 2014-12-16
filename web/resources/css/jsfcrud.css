@@ -92,6 +92,7 @@ tr.jsfcrud_even_row {
     /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
     width:75%;
    alignment-baseline: central;
+   
 }
 .left-menu{
     width:99.99%;
@@ -104,7 +105,7 @@ tr.jsfcrud_even_row {
     width: 75%;
 }
 .question-content .panel-header{
-    
+   background: none; 
 }
 .question-content .panel-footer{
     background:none;
@@ -125,4 +126,15 @@ tr.jsfcrud_even_row {
 }
 .ui-layout-unit-content ui-widget-content{
     overflow-y: hidden !important;
+}
+.ui-panel-content ui-widget-content{
+   
+}
+.ui-panel-content.ui-widget-content{
+     background: #E1EEFB;
+    font-size: 30px;
+}
+.panelgrid-height{
+    height: 400px;
+    overflow-y: hidden;
 }

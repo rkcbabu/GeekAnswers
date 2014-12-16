@@ -18,11 +18,11 @@
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
         <p:layout fullPage="true" >
-            <p:layoutUnit position="north" >
+            <p:layoutUnit position="north" size="190">
                 <div id="header" styleClass="main-header" >
                     <h:graphicImage library="images" name="bitmap.png" alt="photo" width="100%" />
                 </div>
-                <h:form prependId="false" id="template">
+                <h:form prependId="false" id="template" >
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                         <p:menuitem value="#{bundle.Login}" outcome="/user/login" icon="ui-icon-key" rendered="#{userController.loggedIn eq false}"/>
@@ -42,7 +42,7 @@
             <p:layoutUnit position="center" styleClass="ui-layout-unit" >
                 <ui:insert name="body"/>
             </p:layoutUnit>
-            <p:layoutUnit position="south" size="40" styleClass="ui-layout-unit" >
+            <p:layoutUnit position="south" size="50" styleClass="ui-layout-unit" >
                 <div id="footer"> YOUR QUESTIONS ANSWERED BY THE GENIUSES </div>
             </p:layoutUnit>
             <p:layoutUnit position="west" size="220" collapsible="false" styleClass="left-menu" >
