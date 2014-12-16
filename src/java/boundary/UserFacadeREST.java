@@ -5,7 +5,9 @@
  */
 package boundary;
 
+import entities.Question;
 import entities.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,7 +26,7 @@ import javax.ws.rs.Produces;
  * @author Chaulagai
  */
 @Stateless
-@Path("entities.user")
+@Path("user")
 public class UserFacadeREST extends AbstractFacade<User> {
     @PersistenceContext(unitName = "GeekAnswersPU")
     private EntityManager em;
@@ -59,14 +61,22 @@ public class UserFacadeREST extends AbstractFacade<User> {
     public User find(@PathParam("id") Long id) {
         return super.find(id);
     }
-
+    
+    @GET
+    @Path("questionsById/{userId}")
+    @Produces({"application/xml", "application/json"})
+    public List<Question> questionsById(@PathParam("userId") Long userId) {
+        User user = super.find(userId); 
+          return (user !=null) ? (super.find(userId)).getQuestions(): new ArrayList<Question>();
+    }
+    
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
     public List<User> findAll() {
         return super.findAll();
     }
-
+    
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})

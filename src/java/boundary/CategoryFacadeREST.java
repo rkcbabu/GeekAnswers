@@ -6,6 +6,8 @@
 package boundary;
 
 import entities.Category;
+import entities.Question;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,7 +26,7 @@ import javax.ws.rs.Produces;
  * @author Chaulagai
  */
 @Stateless
-@Path("entities.category")
+@Path("category")
 public class CategoryFacadeREST extends AbstractFacade<Category> {
     @PersistenceContext(unitName = "GeekAnswersPU")
     private EntityManager em;
@@ -60,6 +62,14 @@ public class CategoryFacadeREST extends AbstractFacade<Category> {
         return super.find(id);
     }
 
+    @GET
+    @Path("questionsById/{categoryId}")
+    @Produces({"application/xml", "application/json"})
+    public List<Question> questionsById(@PathParam("categoryId") Long categoryId) {
+        Category category = super.find(categoryId); 
+          return (category !=null) ? (super.find(categoryId)).getQuestions(): new ArrayList<Question>();
+    }
+    
     @GET
     @Override
     @Produces({"application/xml", "application/json"})

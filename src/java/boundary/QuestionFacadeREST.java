@@ -24,7 +24,7 @@ import javax.ws.rs.Produces;
  * @author Chaulagai
  */
 @Stateless
-@Path("entities.question")
+@Path("question")
 public class QuestionFacadeREST extends AbstractFacade<Question> {
     @PersistenceContext(unitName = "GeekAnswersPU")
     private EntityManager em;

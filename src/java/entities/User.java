@@ -52,6 +52,9 @@ public class User implements Serializable {
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Question> questions;
+    public List<Question> getQuestions() {
+        return questions;
+    }
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Answer> answers;

@@ -36,7 +36,9 @@ public class Category implements Serializable {
     
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private List<Question> questions;
-    
+    public List<Question> getQuestions() {
+        return questions;
+    }
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Reputation> reputations;
 
