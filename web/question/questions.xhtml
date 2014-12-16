@@ -20,34 +20,47 @@ and open the template in the editor.
         <ui:define name="body" >
             <h:body>
                 <h:form>
-                <h:outputStylesheet library="css" name="jsfcrud.css"/>
-                <h:outputStylesheet library="css" name="style.css"/>
-                <h:panelGroup rendered="#{questionController.items.rowCount > 0}">
-                    <h:outputText value="#{questionController.pagination.pageFirstItem + 1}..#{questionController.pagination.pageLastItem + 1}/#{questionController.pagination.itemsCount}"/>
-                    <h:commandLink action="#{questionController.previous}" value="#{bundle.Previous} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasPreviousPage}"/>
-                    <h:commandLink action="#{questionController.next}" value="#{bundle.Next} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasNextPage}"/>
-                    <p:panel class="question-holder">
-                        <c:forEach items="#{questionController.all}" var="questions" >
-                            <p:panel styleClass="question-content">
-                                <div class="panel-header">
-                                    <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
-                                        <h:outputText value="#{questions.title}" styleClass="questionHeader"/><br/>
-                                    </h:outputLink>
-                                </div>
-                                <h:outputText value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
+                    <h:outputStylesheet library="css" name="jsfcrud.css"/>
+                    <h:outputStylesheet library="css" name="style.css"/>
+                    <h:panelGroup rendered="#{questionController.items.rowCount > 0}">
+                        <h:outputText value="#{questionController.pagination.pageFirstItem + 1}..#{questionController.pagination.pageLastItem + 1}/#{questionController.pagination.itemsCount}"/>
+                        <h:commandLink action="#{questionController.previous}" value="#{bundle.Previous} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasPreviousPage}"/>
+                        <h:commandLink action="#{questionController.next}" value="#{bundle.Next} #{questionController.pagination.pageSize}" rendered="#{questionController.pagination.hasNextPage}"/>
+                        <p:panel class="question-holder">
+                            <c:forEach items="#{questionController.all}" var="questions" >
+                                <p:panel styleClass="question-content">
+                                    <h:outputText style="font-size:20px" value="Hello "  id="questionVoteCounter"/>
+<!--                                    <p:panelGrid>
+                                        <p:column>
+                                            <p:column style="width:5%;border: none; text-align: center">
+                                                <h:outputText style="font-size:20px" value="#{questionUtility.questionVoteCount}"  id="questionVoteCounter"/>
+                                            </p:column>
+                                        </p:column>
 
-                                <div class="panel-footer">
-                                    <hr/>
-                                    <h:outputText styleClass="questionFooter" value="Asked by #{questions.user.firstName} #{questions.user.lastName} on" />
-                                    <h:outputText styleClass="questionFooter" value="#{questions.createdDate}" >
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText><br/>
-                                </div>
-                            </p:panel>
-                        </c:forEach>
-                    </p:panel>
-                    <h:outputText escape="false" value="#{bundle.ListQuestionEmpty}" rendered="#{questionController.items.rowCount == 0}"/>
-                </h:panelGroup>
+                                        <p:column>
+                                        </p:column>
+                                    </p:panelGrid>-->
+                                    <div class="panel-header">
+                                        <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
+                                            <h:outputText value="#{questions.title}" styleClass="questionHeader"/><br/>
+                                        </h:outputLink>
+                                    </div>
+                                    <h:outputText value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
+                                    <h:outputLink value="Detail.xhtml?id=#{questions.id}" rendered="#{questions.contentShrunk.length() gt 250}">
+                                        <h:outputText value="(Read More....)" styleClass="questionContent"/>                                    
+                                    </h:outputLink>
+                                    <div class="panel-footer">
+                                        <hr/>
+                                        <h:outputText styleClass="questionFooter" value="Asked by #{questions.user.firstName} #{questions.user.lastName} on" />
+                                        <h:outputText styleClass="questionFooter" value="#{questions.createdDate}" >
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText><br/>
+                                    </div>
+                                </p:panel>
+                            </c:forEach>
+                        </p:panel>
+                        <h:outputText escape="false" value="#{bundle.ListQuestionEmpty}" rendered="#{questionController.items.rowCount == 0}"/>
+                    </h:panelGroup>
                 </h:form>
             </h:body>
         </ui:define>

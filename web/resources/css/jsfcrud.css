@@ -90,7 +90,7 @@ tr.jsfcrud_even_row {
 }
 .dash-panel {
     /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
-    width:50%;
+    width:75%;
    alignment-baseline: central;
 }
 .left-menu{
@@ -102,7 +102,6 @@ tr.jsfcrud_even_row {
 }
 .question-holder{
     width: 75%;
-    background: white;
 }
 .question-content .panel-header{
     

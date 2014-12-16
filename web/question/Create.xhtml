@@ -22,10 +22,10 @@
                         <p:panel header="Create New Question" styleClass="dash-panel" style="margin-bottom:20px">
                             <h:panelGrid columns="2" cellpadding="100">
                                 <h:outputLabel value="Title " for="title" />
-                                <h:inputText id="title" value="#{questionController.selected.title}" title="#{bundle.CreateQuestionTitle_title}" />
+                                <h:inputText id="title" size="60" value="#{questionController.selected.title}" title="#{bundle.CreateQuestionTitle_title}" required="true" requiredMessage="Please Enter the title"/>
 
                                 <h:outputLabel value="Content" for="content" />
-                                <h:inputTextarea styleClass="preformatted" rows="10" cols="60" id="content" value="#{questionController.selected.content}" title="#{bundle.CreateQuestionTitle_content}" />
+                                <h:inputTextarea styleClass="preformatted" rows="10" cols="60" id="content" value="#{questionController.selected.content}" required="true" requiredMessage="Please Enter the Content" title="#{bundle.CreateQuestionTitle_content}" />
 
                                 <h:outputLabel value="Category " for="category" />
                                 <p:selectOneMenu id="category" value="#{questionController.selected.category}" >
@@ -50,11 +50,7 @@
                         <h:commandLink action="../user/login.xhtml"/>
                     </ui:define>
                 </c:otherwise>
-
             </c:choose>
-
-
-
         </ui:define>
     </ui:composition>
 

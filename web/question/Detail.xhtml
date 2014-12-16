@@ -59,7 +59,7 @@
                             </p:row>
                         </p:panelGrid>
                     </p:panel>
-                    <c:forEach  items="#{questionUtility.question.answers}" var="ans">
+                    <c:forEach items="#{questionUtility.question.answers}" var="ans">
                         <p:outputLabel id="answerMessage#{ans.id}" value="#{questionUtility.answerVoteMessage}"/>
                         <p:panel header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" class="answer">
                             <p:panelGrid styleClass="question-detail-question-box">
@@ -73,7 +73,7 @@
                                 </p:row>
                                 <p:row>
                                     <p:column style="width:5%;border: none"> 
-                                        <p:commandButton  action="#{questionUtility.answerThumbsUpHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-up" value="Yay">
+                                        <p:commandButton  action="#{questionUtility.answerThumbsUpHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa fa-thumbs-o-up" value="Yay">
                                             <f:param name="aid" value="#{questionUtility.answer.id}"/>
                                             <f:param name="id" value="#{questionUtility.question.id}"/>
                                         </p:commandButton>
@@ -81,7 +81,7 @@
                                 </p:row> 
                                 <p:row>
                                     <p:column style="width:5%;border: none">
-                                        <p:commandButton  action="#{questionUtility.answerThumbsDownHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-down" value="Nay">
+                                        <p:commandButton  action="#{questionUtility.answerThumbsDownHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa fa-thumbs-o-down" value="Nay">
                                             <f:param name="aid" value="#{questionUtility.answer.id}"/>
                                             <f:param name="id" value="#{questionUtility.question.id}"/>
                                         </p:commandButton>
@@ -95,34 +95,18 @@
                         </p:panel>
                     </c:forEach>
 
-
-
                     <p:panel    header="Write your Answer" style="margin-bottom:20px">
                         <h:panelGrid columns="2" cellpadding="10">
-
-
                             <h:inputTextarea rows="10" cols="120" style="border: 1px solid #90b4bd" value="#{questionUtility.answer.content}"></h:inputTextarea>
                             <br/>
                             <p:commandButton value="Submit answer" id="answerButton"   styleClass="ui-priority-primary"  action="#{questionUtility.addAnswer()}">
                                 <f:param name="id" value="#{questionUtility.question.id}"/>
                             </p:commandButton>
-
-
-
                         </h:panelGrid>
                     </p:panel>
-
-
-
-
-
-
-
                 </h:form>
-
             </ui:define>
         </ui:composition>
-
     </h:body>
 </html>
 

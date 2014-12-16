@@ -113,7 +113,7 @@ display: none;
 background: #f3f3f3;
 }
 .ui-widget-content {
-background: #f3f3f3;
+background: none;
 color: #333333;
 }
 .ui-panel .ui-panel-titlebar {
@@ -122,7 +122,7 @@ color: white;
 }
 .ui-panel .ui-panel-content {
 border: 0;
-background: #DDDEE9;
+background: none;
 padding: 0.5em 1em;
 }
 form.jsfcrud_list_form th, td th {
@@ -162,4 +162,8 @@ padding-right: 6px;
 }
 .ui-panel-footer ui-widget-content{
     text-align: right;
+}
+.ui-icon.fa {
+     text-indent:0px;
+     background-image:none;
 }
