@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,6 +48,7 @@ public class Question implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    @Column(length=5000)
     private String Content;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
@@ -165,7 +167,11 @@ public class Question implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+    public String getContentShrunk(){
+        if (Content.length()>255)
+            return Content.substring(0,255);
+        return Content;
+    }
     @Override
     public int hashCode() {
         int hash = 0;
