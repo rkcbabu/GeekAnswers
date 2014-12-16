@@ -51,7 +51,7 @@
                                     </p:commandButton>
                                 </p:column>
                                 <p:column rowspan="200">
-                                        <h:outputText value="#{questionUtility.question.content}" styleClass="questionContent" />
+                                    <h:outputText value="#{questionUtility.question.content}" styleClass="questionContent" />
                                 </p:column>
                             </p:row>
                             <p:row>
@@ -61,42 +61,38 @@
                     </p:panel>
                     <c:forEach  items="#{questionUtility.question.answers}" var="ans">
                         <p:outputLabel id="answerMessage#{ans.id}" value="#{questionUtility.answerVoteMessage}"/>
-
-                        <p:panel    header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" class="answer">
-
-                            <p:panelGrid columns="1" class="voting_panel">
-
-                                <p:outputLabel value="#{questionUtility.getAnswerVote(ans)}" id="ans_vote_count#{ans.id}"/>
-
-                                <p:commandButton  action="#{questionUtility.answerThumbsUpHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-up" value="like">
-
-                                    <f:param name="aid" value="#{questionUtility.answer.id}"/>
-                                    <f:param name="id" value="#{questionUtility.question.id}"/>
-                                </p:commandButton>
-
-
-
-
-                                <p:commandButton  action="#{questionUtility.answerThumbsDownHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-down" value="Dislike">
-
-                                    <f:param name="aid" value="#{questionUtility.answer.id}"/>
-                                    <f:param name="id" value="#{questionUtility.question.id}"/>
-                                </p:commandButton>
-                            </p:panelGrid>  
-
-                            <h:panelGrid columns="2" cellpadding="10">
-
-                                <h:outputText value="#{ans.content}" />
-                            </h:panelGrid>
-
-
-
-
+                        <p:panel header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" class="answer">
+                            <p:panelGrid styleClass="question-detail-question-box">
+                                <p:row>
+                                    <p:column style="width:5%;border: none; text-align: center">
+                                        <h:outputText style="font-size:20px" value="#{questionUtility.getAnswerVote(ans)}" id="ans_vote_count#{ans.id}"/>
+                                    </p:column>
+                                    <p:column rowspan="200">
+                                         <h:outputText value="#{ans.content}" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="width:5%;border: none"> 
+                                        <p:commandButton  action="#{questionUtility.answerThumbsUpHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-up" value="Yay">
+                                            <f:param name="aid" value="#{questionUtility.answer.id}"/>
+                                            <f:param name="id" value="#{questionUtility.question.id}"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:row> 
+                                <p:row>
+                                    <p:column style="width:5%;border: none">
+                                        <p:commandButton  action="#{questionUtility.answerThumbsDownHandller(ans)}" update="answerMessage#{ans.id},ans_vote_count#{ans.id}" icon="fa-thumbs-o-down" value="Nay">
+                                            <f:param name="aid" value="#{questionUtility.answer.id}"/>
+                                            <f:param name="id" value="#{questionUtility.question.id}"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                    
+                                </p:row>
+                                <p:row>
+                                    <p:column>&nbsp;</p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </p:panel>
-
-
-
-
                     </c:forEach>
 
 
@@ -105,7 +101,7 @@
                         <h:panelGrid columns="2" cellpadding="10">
 
 
-                            <h:inputTextarea rows="10" cols="150" style="border: 1px solid #90b4bd" value="#{questionUtility.answer.content}"></h:inputTextarea>
+                            <h:inputTextarea rows="10" cols="120" style="border: 1px solid #90b4bd" value="#{questionUtility.answer.content}"></h:inputTextarea>
                             <br/>
                             <p:commandButton value="Submit answer" id="answerButton"   styleClass="ui-priority-primary"  action="#{questionUtility.addAnswer()}">
                                 <f:param name="id" value="#{questionUtility.question.id}"/>
