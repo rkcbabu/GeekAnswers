@@ -11,6 +11,8 @@ import entities.Category;
 import entities.User;
 import entities.interaction.UserInteraction;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -56,7 +58,24 @@ public class EventHandler {
         this.ui = uit;
         uit.setInteractionDate(new Date());
         uit.setUser(user);
+        try{
         userInteractionFacade.create(uit);
+        }
+        catch(Exception e){
+            try {
+                UserInteraction newInteraction=uit.getClass().newInstance();
+                newInteraction.setUser(user);
+                newInteraction.setInteractionDate(new Date());
+                userInteractionFacade.create(newInteraction);
+                
+                
+                
+            } catch (InstantiationException ex) {
+                Logger.getLogger(EventHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(EventHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         // user.updateUserlevel
         
         userLevelController.handleuserLevel(user);

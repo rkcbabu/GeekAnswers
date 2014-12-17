@@ -362,6 +362,9 @@ public class QuestionUtilityController {
         //  System.out.println("user="+usr.getFirstName());
         answer.setUser(usr);
         answerFacade.create(answer);
+        //questionFacade.getEM().refresh(question);
+        
+        
         
          eventHandler.triggerEvent(EventList.QUESTION_ANSWERED);
 
