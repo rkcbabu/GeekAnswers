@@ -17,14 +17,6 @@ import javax.ejb.Stateless;
 
 @Singleton
 public class Timer {
-    @EJB
-    private QuestionFacade questionFacade;
-    
-    @EJB
-    private UserFacade userFacade;
-    
-    private Question question;
-    
     @Schedule (dayOfWeek="*")
     public void sendSubscriptionMail(){
         
