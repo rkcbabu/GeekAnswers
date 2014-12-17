@@ -4,12 +4,15 @@ import entities.Question;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
 import boundary.QuestionFacade;
+import boundary.UserInteractionFacade;
+import common.EventList;
 import common.Functor;
 import common.ListFilter;
 import common.Predicate;
 import common.QuestionAuthorCheckPredicate;
 import entities.Category;
 import entities.User;
+import entities.interaction.QuestionCreation;
 import java.io.IOException;
 
 import java.io.Serializable;
@@ -31,13 +34,19 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 @ManagedBean(name = "questionController")
 
 @RequestScoped
 public class QuestionController implements Serializable {
+    @EJB
+    private UserInteractionFacade userInteractionFacade;
 
+    @Inject
+    EventHandler eventHandler;
+    
     private Question current;
     private User currentUser;
 
@@ -51,6 +60,8 @@ public class QuestionController implements Serializable {
     private DataModel items = null;
     @EJB
     private boundary.QuestionFacade ejbFacade;
+    
+    
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Question> questions;
@@ -78,6 +89,10 @@ public class QuestionController implements Serializable {
         return current;
     }
 
+     public List<Question> getPopularAll() {
+        return getFacade().getPopular();
+    }
+    
     private QuestionFacade getFacade() {
         return ejbFacade;
     }
@@ -148,6 +163,10 @@ public class QuestionController implements Serializable {
             current.setCreatedDate(new Date());
             current.setUser(currentUser);
             getFacade().create(current);
+            
+            eventHandler.triggerEvent(EventList.QUESTION_CREATION);
+           
+            
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Resource/Bundle").getString("QuestionCreated"));
             prepareCreate();
             return null;
@@ -253,9 +272,7 @@ public class QuestionController implements Serializable {
         TypedQuery<Question> q1 = ejbFacade.getEM().createQuery(query, Question.class);
         return q1.getResultList();
     }
-    public List<Question> getPopularAll() {
-        return getFacade().getPopular();
-    }
+
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
