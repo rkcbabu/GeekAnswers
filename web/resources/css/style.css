@@ -37,17 +37,10 @@ left:auto;
     color: #191919;
     padding-top: 5px;
 }
-#right{
-
-}
 .questionTitle{
     font-size: 18px;
     color: #558C89;
     font-family: "Calibri";
-}
-#left{
-    background-color: #424348;
-    color: red;
 }
 .dash-title{
     font-family: Candara, Calibri, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
@@ -69,6 +62,7 @@ table{
     padding: 5px;
     margin: 15px;
     width: 90%
+
 }
 table th{
     padding: 10px;
@@ -102,8 +96,6 @@ user-select: none;
 background-image: none;
 border: 1px solid transparent;
 border-radius: 4px;
-
-    /* background: #46b8da; */
 }
 .ui-layout-resizer, .ui-layout-resizer-north, ui-layout-resizer-open, .ui-layout-resizer-north-open {
 display: none;
@@ -119,7 +111,7 @@ color: white;
 }
 .ui-panel .ui-panel-content {
 /* border: 0; */
-background: #f3f3f3;
+background: #DFE4E6;
 padding: 0.5em 1em;
 }
 form.jsfcrud_list_form th, td th {
@@ -171,4 +163,13 @@ font-size: small;
 }
 .main-header{
     size:100px;
+}
+.dash-panel {
+    /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
+    width:75%;
+   alignment-baseline: central;
+   
+}
+.ui-panel-content ui-widget-content{
+    background: red;
 }

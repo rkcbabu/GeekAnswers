@@ -17,7 +17,7 @@ import javax.ejb.Stateless;
 
 @Singleton
 public class Timer {
-    @Schedule (dayOfWeek="*")
+//    @Schedule (dayOfWeek="*")
     public void sendSubscriptionMail(){
         
     }

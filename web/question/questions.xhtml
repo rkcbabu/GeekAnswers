@@ -24,12 +24,13 @@ and open the template in the editor.
                 <h:form>
                     <p:tabView>
                         <p:tab title="Most Recent">
-                            <h:panelGrid styleClass="" columns="2" cellpadding="10">
+                            <h:panelGrid >
                                 <c:forEach items="#{questionController.all}" var="questions" >
-                                    <p:panel styleClass="panelgrid-height">                        
+                                    <p:panel>                        
                                         <div class="panel-header">
                                             <h:outputLink value="Detail.xhtml?id=#{questions.id}" >
-                                                <h:outputText style="background:none" value="#{questions.title}" styleClass="questionHeader"/><br/>
+                                                <h:outputText value="#{questions.title}" styleClass="questionHeader"/><br/>
+                                                <hr/>
                                             </h:outputLink>
                                         </div>
                                         <h:outputText value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
@@ -47,7 +48,7 @@ and open the template in the editor.
                             </h:panelGrid>
                         </p:tab>
                         <p:tab title="Popular">
-                            <h:panelGrid columns="2" cellpadding="10" cellspacing="5" >
+                            <h:panelGrid>
                                 <c:forEach items="#{questionController.popularAll}" var="questions" >
                                     <p:panel >
                                         <div class="panel-header">

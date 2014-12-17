@@ -88,12 +88,7 @@ tr.jsfcrud_even_row {
     background-color: #F3843E;
     color: white;
 }
-.dash-panel {
-    /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
-    width:75%;
-   alignment-baseline: central;
-   
-}
+
 .left-menu{
     width:99.99%;
 }
@@ -128,11 +123,11 @@ tr.jsfcrud_even_row {
     overflow-y: hidden !important;
 }
 .ui-panel-content ui-widget-content{
-   
+   border: 10px;
 }
-.ui-panel-content.ui-widget-content{
-     background: #E1EEFB;
-    font-size: 30px;
+.bbackbround{
+     background: #DFE4E6;
+   
 }
 .panelgrid-height{
     height: 400px;
