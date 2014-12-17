@@ -15,6 +15,9 @@ and open the template in the editor.
         <ui:define name="body">
             <h:panelGrid rendered="#{searchController.searchQuestions().size()>0}" >
                 <c:forEach items="#{searchController.searchQuestions()}" var="questions" >
+                 <p:panel>  
+                     <b>"#{searchController.searchKey}"</b> search result:
+                 </p:panel>
                     <p:panel>                        
                         <div class="panel-header">
                             <h:outputLink value="#{questionController.baseLink}/Detail.xhtml?id=#{questions.id}" >
@@ -37,7 +40,7 @@ and open the template in the editor.
             </h:panelGrid>
             <h:panelGrid rendered="#{searchController.searchQuestions().size()==0}" >
                  <p:panel>  
-                Sorry, No record found !
+                     Sorry, No record found for <b>"#{searchController.searchKey}"</b>
                  </p:panel>
             </h:panelGrid>
         </ui:define>
