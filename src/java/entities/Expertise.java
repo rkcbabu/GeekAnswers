@@ -25,7 +25,15 @@ import javax.persistence.OneToMany;
     @NamedQuery(name = "user.expertise.total.point", query = "SELECT SUM(e.point) FROM Expertise e WHERE e.user=:user "),
     @NamedQuery(name = "user.expertise.course.total.point", query = "SELECT SUM(e.point) FROM Expertise e WHERE e.user=:user AND e.category=:category"),
     @NamedQuery(name = "user.expertise.average.point", query = "SELECT AVG(e.point) FROM Expertise e WHERE e.user=:user "),
-    @NamedQuery(name = "user.expertise.course.average.point", query = "SELECT AVG(e.point) FROM Expertise e WHERE e.user=:user AND e.category=:category"),}
+    @NamedQuery(name = "user.expertise.course.average.point", query = "SELECT AVG(e.point) FROM Expertise e WHERE e.user=:user AND e.category=:category"),
+
+    @NamedQuery(name = "expert.category.getall.user", query = "SELECT DISTINCT(e.user) FROM Expertise e WHERE e.category=:category ORDER BY e.point DESC"),
+
+  @NamedQuery(name = "expert.getall.user", query = "SELECT DISTINCT(e.user) FROM Expertise e ORDER BY e.point DESC"),
+
+
+
+}
 )
 
 @Entity

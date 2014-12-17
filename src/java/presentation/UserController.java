@@ -10,6 +10,7 @@ import boundary.UserFacade;
 import boundary.UserLevelFacade;
 import common.EventList;
 import common.UserType;
+import entities.Category;
 import entities.Expertise;
 import java.io.IOException;
 
@@ -43,6 +44,8 @@ import mailservice.MailServices;
 @RequestScoped
 public class UserController implements Serializable {
     @EJB
+    private CategoryFacade categoryFacade1;
+    @EJB
     private CategoryFacade categoryFacade;
     @EJB
     private QuestionFacade questionFacade;
@@ -74,6 +77,20 @@ public class UserController implements Serializable {
     private String loginPassword;
     
     
+    
+    
+    public List<User> getAllUsers(Long catid){
+        Category c=null;
+        if(catid==null){
+            catid=Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("courseID"));
+            if(catid>0L){
+                c=this.categoryFacade.find(catid);
+        }
+        
+       
+    }
+        return expertiseFacade.getAllExpert(c);
+    }
     
     public int countTotalUsers(){
         return this.ejbFacade.findAll().size();
@@ -137,8 +154,23 @@ public class UserController implements Serializable {
         return this.expertiseFacade.getUserExpertiseExist(this.loggedInUser());
     }
    
+       public List<Expertise> FetchExpertiseList(User u){
+           if(u!=null){
+           System.out.println("expert uid="+u.getId());
+        return this.expertiseFacade.getUserExpertiseExist(u);
+           }
+           else
+               return 
+                  FetchExpertiseList();
+    }
+   
+public List<Expertise> FetchExpertiseList(){
+         //  System.out.println("expert uid="+id);
+        //return this.expertiseFacade.getAllExpert(null);
+    return this.expertiseFacade.getUserExpertiseExist(this.ejbFacade.find(1102L));
     
-
+    
+    }
     public void logout() throws IOException {
         if (isLoggedIn()) {
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();

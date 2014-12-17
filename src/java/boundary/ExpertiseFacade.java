@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -37,83 +38,85 @@ public class ExpertiseFacade extends AbstractFacade<Expertise> {
     public ExpertiseFacade() {
         super(Expertise.class);
     }
-    
-    
-    
-        public List<Expertise> getUserExpertiseExist(User u){
-         TypedQuery<Expertise> query = em.createNamedQuery("user.expertise.list", Expertise.class);
-        query.setParameter("user", u);
-        
-       
-       
-            try{
-                return query.getResultList();
-               
-            }
-            catch(Exception e){
-                return new ArrayList<Expertise>();
-            }
-       
-        
-       
+
+    public List<User> getAllExpert(Category c) {
+        Query query;
+
+        if (c != null) {
+            query = em.createNamedQuery("expert.category.getall.user");
+            query.setParameter("category", c);
+
+        } else {
+            query = em.createNamedQuery("expert.getall.user");
+
+        }
+
+        return query.getResultList();
     }
-    
-    public Expertise expertiseExist(User u, Category c){
-         TypedQuery<Expertise> query = em.createNamedQuery("user.expertise.category", Expertise.class);
+
+    public List<Expertise> getUserExpertiseExist(User u) {
+        TypedQuery<Expertise> query = em.createNamedQuery("user.expertise.list", Expertise.class);
+        query.setParameter("user", u);
+
+        try {
+            return query.getResultList();
+
+        } catch (Exception e) {
+            return new ArrayList<Expertise>();
+        }
+
+    }
+
+    public Expertise expertiseExist(User u, Category c) {
+        TypedQuery<Expertise> query = em.createNamedQuery("user.expertise.category", Expertise.class);
         query.setParameter("user", u);
         query.setParameter("category", c);
-       
-       
-            try{
-                List<Expertise> list=query.getResultList();
-                if(list.isEmpty()) return null;
-                return list.get(0);
-            }
-            catch(Exception e){
+
+        try {
+            List<Expertise> list = query.getResultList();
+            if (list.isEmpty()) {
                 return null;
             }
-       
-        
-       
+            return list.get(0);
+        } catch (Exception e) {
+            return null;
+        }
+
     }
-    
-    
-    public int getTotalExpertisePoint(User u){
-        
-         TypedQuery<Expertise> query = em.createNamedQuery("user.expertise.total.point", Expertise.class);
+
+    public int getTotalExpertisePoint(User u) {
+
+        TypedQuery<Expertise> query = em.createNamedQuery("user.expertise.total.point", Expertise.class);
         query.setParameter("user", u);
-       
-       
-       
-            try{
-                List  list=query.getResultList();
-                if(list.isEmpty()) return 0;
-                return Integer.parseInt(list.get(0).toString());
-            }
-            catch(Exception e){
+
+        try {
+            List list = query.getResultList();
+            if (list.isEmpty()) {
                 return 0;
             }
+            return Integer.parseInt(list.get(0).toString());
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public void updateExpertise(User u, Category c) {
-        
-        Expertise existing=expertiseExist(u, c);
+
+        Expertise existing = expertiseExist(u, c);
         int expertisePoint = answerVoteFacade.countAnswerVote(u, c);
-      
-        if(existing!=null){
+
+        if (existing != null) {
             // update
             existing.setPoint(expertisePoint);
             this.edit(existing);
-        }
-        else{
+        } else {
             // create new;
-            existing=new Expertise();
+            existing = new Expertise();
             existing.setCategory(c);
             existing.setUser(u);
             existing.setPoint(expertisePoint);
             this.create(existing);
         }
-       
 
     }
 
