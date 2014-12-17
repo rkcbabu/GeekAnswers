@@ -36,7 +36,9 @@ and open the template in the editor.
                 </c:forEach>         
             </h:panelGrid>
             <h:panelGrid rendered="#{searchController.searchQuestions().size()==0}" >
-                There is no record found!
+                 <p:panel>  
+                Sorry, No record found !
+                 </p:panel>
             </h:panelGrid>
         </ui:define>
     </ui:composition>
