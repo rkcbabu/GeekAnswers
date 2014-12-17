@@ -49,12 +49,13 @@ public class QuestionFacade extends AbstractFacade<Question> {
         return query.getResultList();
     }
     public List<Question> getTopUnanswered(){
-        String q = "SELECT q FROM Question q, QuestionVote v ,Answer a "
-                +  "WHERE q NOT IN a "
-                +  "AND q = v.question "
-                +  "ORDER BY v.vote DESC";
-        TypedQuery<Question> query = em.createQuery(q,Question.class);
-        return query.getResultList();
+//        String q = "SELECT q FROM Question q, QuestionVote v ,Answer a "
+//                +  "WHERE q NOT IN (a) "
+//                +  "AND q = v.question "
+//                +  "ORDER BY v.vote DESC "
+//                + "";
+        TypedQuery<Question> query = em.createQuery("SELECT q FROM Question q, QuestionVote v WHERE q NOT IN (SELECT a.question FROM Answer a) AND v.question = q ORDER by v.vote DESC ",Question.class);
+        return query.setMaxResults(3).getResultList();
     }
 //    @Override
 //    public List<Question> findAll() {

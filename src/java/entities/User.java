@@ -19,7 +19,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
@@ -27,7 +26,7 @@ import javax.persistence.Temporal;
  * 
  */
 @Entity
-@Table(name="Users")
+//@Table(name="Users")
 //@NamedQueries({
 //   @NamedQuery(name="login_query",query="SELECT id FROM User s WHERE s.email=:email AND s.password=:password")
 //
@@ -76,7 +75,15 @@ public class User implements Serializable {
     
     @ManyToOne
     private UserLevel userlevel;
+    private boolean subscribed;
 
+    public boolean isSubscribed() {
+        return subscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        this.subscribed = subscribed;
+    }
     public int getTotalPoint() {
         return totalPoint;
     }

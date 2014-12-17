@@ -49,7 +49,6 @@ public class UserController implements Serializable {
     @EJB
     private boundary.UserFacade ejbFacade;
     
-   
     
     @Inject
     EventHandler eventHandler;
@@ -59,7 +58,7 @@ public class UserController implements Serializable {
 
     private String loginEmail;
     private String loginPassword;
-
+    
     public String getLoginPassword() {
         return loginPassword;
     }
@@ -72,13 +71,7 @@ public class UserController implements Serializable {
         this.loginPassword = loginPassword;
     }
 
-     
-    public UserController() {
-       // userLevel=userLevelFacade.getInitialUserLevel();
-
-    }
-
-    public String distrotyUserSession() {
+       public String distrotyUserSession() {
         //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("logged_in_user");
 
         return "User session destroyed";
@@ -245,14 +238,17 @@ public class UserController implements Serializable {
                 if (current.getType() == null) {
                     current.setType(UserType.Member);
                 }
-                
-                
-               
+                      
                 //current.setUserlevel(userLevelFacade.getInitialUserLevel());
                current.setUserlevel(userLevelFacade.getInitialUserLevel());
 
                 
                 getFacade().create(current);
+                
+//                if (!subscriptionFacade.subscribed(current)){
+//                    ;
+//                }
+                
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("logged_in_user", current);
 
                 eventHandler.triggerEvent(EventList.USER_REGISTRATION);

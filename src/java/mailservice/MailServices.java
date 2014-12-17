@@ -35,12 +35,16 @@ public class MailServices {
         try {
  
 			MimeMessage message = new MimeMessage(session);
+                        
 			message.setFrom(new InternetAddress("geekanswers1@gmail.com"));
 			message.setRecipients(MimeMessage.RecipientType.TO,
 				InternetAddress.parse(to));
 			message.setSubject(subject);
 			message.setText(body);
- 
+                        
+                        message.setContent(body, "text/html; charset=utf-8");
+                        message.saveChanges();
+                        
 			Transport.send(message);
  
 			System.out.println("Done");

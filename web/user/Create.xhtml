@@ -39,7 +39,8 @@
                                 <f:selectItem itemValue="#{all}" itemLabel="#{all.label}" />
                             </f:selectItems>
                         </p:selectOneMenu> 
-
+                        <h:outputLabel for="subscribe" value="Subscribe"/>
+                        <h:selectBooleanCheckbox value="#{userController.selected.subscribed}" id="subscribe" />
                         <p:commandButton styleClass="btn btn-primary btn" action="#{userController.create}" value="#{bundle.CreateUserSaveLink}" />
                     </h:panelGrid>
 
