@@ -40,8 +40,20 @@ public class QuestionFacade extends AbstractFacade<Question> {
         query.setParameter("searchKey", "%"+searchKey+"%");
             return query.getResultList();
     }
-    public List<Question> getQuestions(){
+    public List<Question> getQuestions(){    
         TypedQuery<Question> query = em.createQuery("SELECT q FROM Question q ORDER BY q.createdDate DESC",Question.class);
+        return query.getResultList();
+    }
+    public List<Question> getPopular(){
+        TypedQuery<Question> query = em.createQuery("SELECT q FROM Question q, QuestionVote v WHERE q = v.question ORDER BY v.vote DESC",Question.class);
+        return query.getResultList();
+    }
+    public List<Question> getTopUnanswered(){
+        String q = "SELECT q FROM Question q, QuestionVote v ,Answer a "
+                +  "WHERE q NOT IN a "
+                +  "AND q = v.question "
+                +  "ORDER BY v.vote DESC";
+        TypedQuery<Question> query = em.createQuery(q,Question.class);
         return query.getResultList();
     }
 //    @Override

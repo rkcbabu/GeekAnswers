@@ -18,24 +18,26 @@
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputStylesheet library="css" name="style.css"/>
         <p:layout fullPage="true" >
-            <p:layoutUnit position="north" size="190">
-                <div id="header" styleClass="main-header" >
+            <p:layoutUnit position="north" size="140">
+                <div id="header" style="height: 100px" >
                     <h:graphicImage library="images" name="bitmap.png" alt="photo" width="100%" />
                 </div>
-                <h:form prependId="false" id="template" >
-                    <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:menuitem value="#{bundle.Login}" outcome="/user/login" icon="ui-icon-key" rendered="#{userController.loggedIn eq false}"/>
-                        <p:menuitem value="#{bundle.Logout}" action="#{userController.logout()}" icon="ui-icon-power" rendered="#{userController.loggedIn eq true}"/>
-                        <p:menuitem value="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" icon="ui-icon-person" outcome="/user/dashboard" rendered="#{userController.loggedIn eq true}"/>
-                        <p:menuitem value="Register" outcome="/user/Create" icon="ui-icon-unlocked" rendered="#{userController.loggedIn eq false}" />
-                        <p:menuitem value="Ask a Question" outcome="/question/Create" icon="ui-icon-lightbulb" rendered="#{userController.loggedIn eq true}"/>  
-                        <f:facet name="options">
-                            <p:inputText style="margin-right:10px" placeholder="Search"/>
-                            <p:commandButton value="Search" type="button" icon="ui-icon-search"/>
-                        </f:facet>
-                    </p:menubar>
-                </h:form>
+                <div style="height:30px ">
+                    <h:form prependId="false" id="template" >
+                        <p:menubar>
+                            <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                            <p:menuitem value="#{bundle.Login}" outcome="/user/login" icon="ui-icon-key" rendered="#{userController.loggedIn eq false}"/>
+                            <p:menuitem value="#{bundle.Logout}" action="#{userController.logout()}" icon="ui-icon-power" rendered="#{userController.loggedIn eq true}"/>
+                            <p:menuitem value="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" icon="ui-icon-person" outcome="/user/dashboard" rendered="#{userController.loggedIn eq true}"/>
+                            <p:menuitem value="Register" outcome="/user/Create" icon="ui-icon-unlocked" rendered="#{userController.loggedIn eq false}" />
+                            <p:menuitem value="Ask a Question" outcome="/question/Create" icon="ui-icon-lightbulb" rendered="#{userController.loggedIn eq true}"/>  
+                            <f:facet name="options">
+                                <p:inputText style="margin-right:10px" placeholder="Search"/>
+                                <p:commandButton value="Search" type="button" icon="ui-icon-search"/>
+                            </f:facet>
+                        </p:menubar>
+                    </h:form>
+                </div>
             </p:layoutUnit>
 
 

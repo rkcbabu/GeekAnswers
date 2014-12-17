@@ -253,7 +253,9 @@ public class QuestionController implements Serializable {
         TypedQuery<Question> q1 = ejbFacade.getEM().createQuery(query, Question.class);
         return q1.getResultList();
     }
-
+    public List<Question> getPopularAll() {
+        return getFacade().getPopular();
+    }
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
