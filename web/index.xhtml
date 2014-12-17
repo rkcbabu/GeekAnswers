@@ -1,42 +1,16 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-
-        </ui:define>
-        <ui:define name="body">
-            #{searchController.searchKey}<hr/>
-            <h:outputText id="outputMessage" value="#{searchController.searchQuestions()}" />
-            =>ON track ;
-            <!--            <hr/>
-                        <h:link outcome="/answer/List" value="Show All Answer Items"/>
-                        <br />
-                        <h:link outcome="/category/List" value="Show All Category Items"/>
-                        <br />
-                        <h:link outcome="/comment/List" value="Show All Comment Items"/>
-                        <br />
-                        <h:link outcome="/question/List" value="Show All Question Items"/>
-                        <br />
-                        <h:link outcome="/reputation/List" value="Show All Reputation Items"/>
-                        <br />
-                        <h:link outcome="/tag/List" value="Show All Tag Items"/>
-                        <br />
-                        <h:link outcome="/user/List" value="Show All User Items"/>
-                        <br />
-                        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-                        <br />
-                        <h:link outcome="question/questions" value="Question Lists" />-->
-        </ui:define>
+    <ui:composition template="/question/questions.xhtml">
     </ui:composition>
-
 </html>
-
