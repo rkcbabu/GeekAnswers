@@ -27,7 +27,7 @@
                 <p:growl id="msgs" showDetail="true" />
                 <h:form>
                     <p:outputLabel id="questionMessage" value="#{questionUtility.questionVoteMessage}"/>
-                    <p:panel id="question" footer="#{questionUtility.footer}"  header="#{questionUtility.question.title}" style="margin-bottom:20px" class="question">
+                    <p:panel id="question" footer="#{questionUtility.footer}"  header="#{questionUtility.question.title}" style="margin-bottom:20px" styleClass="question">
                         <p:panelGrid styleClass="question-detail-question-box">
                             <p:row>
                                 <p:column style="width:5%;border: none; text-align: center">
@@ -61,7 +61,7 @@
                     </p:panel>
                     <c:forEach items="#{questionUtility.question.answers}" var="ans">
                         <p:outputLabel id="answerMessage#{ans.id}" value="#{questionUtility.answerVoteMessage}"/>
-                        <p:panel header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" class="answer">
+                        <p:panel header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" styleClass="answer">
                             <p:panelGrid styleClass="question-detail-question-box">
                                 <p:row>
                                     <p:column style="width:5%;border: none; text-align: center">
