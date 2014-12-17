@@ -379,7 +379,13 @@ public class QuestionUtilityController {
 
     public String getFooter() {
         String footer;
-        footer = "By:" + this.question.getUser().getFirstName() + " " + this.question.getUser().getLastName();
+        footer = "By:";
+        try{
+        footer+= this.question.getUser().getFirstName() + " " + this.question.getUser().getLastName();
+        }
+        catch(NullPointerException e){
+            footer+=" Unknown User";
+        }
         footer += " On " + question.getCreatedDate();
 
         return footer;
