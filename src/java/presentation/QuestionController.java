@@ -49,7 +49,14 @@ public class QuestionController implements Serializable {
     
     private Question current;
     private User currentUser;
+    private String baseLink ; 
 
+    public String getBaseLink() {
+        if(baseLink == null)
+            baseLink=FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/faces/question";
+        return baseLink;
+    }
+    
     public User getCurrentUser() {
         return currentUser;
     }
