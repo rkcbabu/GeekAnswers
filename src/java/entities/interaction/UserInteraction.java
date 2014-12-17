@@ -29,7 +29,7 @@ import javax.persistence.Transient;
  * @author acer
  */
 @NamedQueries({
-    @NamedQuery(name = "user.interaction.total.point", query = "SELECT COUNT(e.point) FROM Expertise e WHERE e.user=:user")}
+    @NamedQuery(name = "user.interaction.total.point", query = "SELECT SUM(e.point) FROM UserInteraction e WHERE e.user=:user")}
     
 )
 

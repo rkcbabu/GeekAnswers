@@ -39,7 +39,9 @@ public class UserInteractionFacade extends AbstractFacade<UserInteraction> {
       // vote_up_query.
 
         try {
+            
           List list=query.getResultList();
+           // System.out.println("point list="+list);
           if(list.isEmpty()) return 0;
            return Integer.parseInt(list.get(0).toString());
           

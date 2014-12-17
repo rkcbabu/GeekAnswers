@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -224,8 +226,21 @@ public class UserController implements Serializable {
     }
 
     public String prepareCreate() {
-        current = new User();
-        selectedItemIndex = -1;
+        try {
+            current = new User();
+            selectedItemIndex = -1;
+            
+            
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            context.redirect(context.getRequestContextPath() + "/faces/user/dashboard.xhtml");
+            
+            // FacesContext.getCurrentInstance().getExternalContext().redirect(loginEmail);
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            return "dashboard";
+        }
         return "dashboard";
     }
 

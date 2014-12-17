@@ -24,7 +24,7 @@ public class UserLevel1 extends UserLevel implements Serializable {
          //super("Beginner plus", 51, 100, new UserLevel0(), new UserLevel2());
 this.setTitle("Beginner plus");
 this.setMinPoint(0);
-this.setMaxPoint(100);
+this.setMaxPoint(50);
 
     }
 

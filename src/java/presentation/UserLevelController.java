@@ -66,7 +66,7 @@ public class UserLevelController {
         }
         
         if(user.getTotalPoint()>user.getUserlevel().getMaxPoint()){
-           level=this.userLevelTransition.getPrevious(user.getUserlevel());
+           level=this.userLevelTransition.getNext(user.getUserlevel());
             
             if(level!=null){
                 user.setUserlevel(level);
@@ -74,11 +74,15 @@ public class UserLevelController {
                 
                 // send mail for level up notification
                 
-                                System.out.println("Sending mail for level up notification ");
+                System.out.println("Sending mail for level up notification ");
 
                 
             }
+            else{
+                System.out.println("next level not found");
+            }
         }
+       
     }
     
     
@@ -95,6 +99,9 @@ public class UserLevelController {
         
         this.user.setTotalPoint(totalPoint);
         this.userFacade.edit(user);
+        
+        
+        System.out.println("User total point="+totalPoint);
         
         
     }

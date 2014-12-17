@@ -82,7 +82,7 @@ public class EventHandler {
         
         if(uit.isTriggerExpertise()){
             if(this.expertUser!=null){
-                this.expertiseFacade.updateExpertise(user, category);
+                this.expertiseFacade.updateExpertise(expertUser, category);
                  userLevelController.handleuserLevel(expertUser);
                 //expertuser.updateUserlevel
             }
