@@ -1,5 +1,8 @@
 package presentation;
 
+import boundary.CategoryFacade;
+import boundary.ExpertiseFacade;
+import boundary.QuestionFacade;
 import entities.User;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
@@ -7,17 +10,13 @@ import boundary.UserFacade;
 import boundary.UserLevelFacade;
 import common.EventList;
 import common.UserType;
-import entities.userlevel.UserLevel;
-import entities.userlevel.UserLevel1;
-import entities.userlevel.UserLevel2;
-import entities.userlevel.UserLevel3;
-import entities.userlevel.UserLevel4;
-import entities.userlevel.UserLevel5;
+import entities.Expertise;
 import java.io.IOException;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,12 +43,25 @@ import mailservice.MailServices;
 @RequestScoped
 public class UserController implements Serializable {
     @EJB
+    private CategoryFacade categoryFacade;
+    @EJB
+    private QuestionFacade questionFacade;
+    @EJB
+    private ExpertiseFacade expertiseFacade;
+    @EJB
     private UserLevelFacade userLevelFacade;
 
     private User current;
     private DataModel items = null;
     @EJB
     private boundary.UserFacade ejbFacade;
+    
+    
+    
+    
+    
+    
+    
     
     
     @Inject
@@ -60,6 +72,22 @@ public class UserController implements Serializable {
 
     private String loginEmail;
     private String loginPassword;
+    
+    
+    
+    public int countTotalUsers(){
+        return this.ejbFacade.findAll().size();
+    }
+    
+     public int countTotalQuestions(){
+        return this.questionFacade.findAll().size();
+    }
+     
+     public int countTotalCourses(){
+        return this.categoryFacade.findAll().size();
+    }
+     
+    
     
     public String getLoginPassword() {
         return loginPassword;
@@ -98,6 +126,18 @@ public class UserController implements Serializable {
                 + "Geek Answers Team");
 
     }
+    
+    
+    public boolean isAdministrator(User u){
+        
+        System.out.println("usertype="+u.getType()+" next="+UserType.Administrator.toString());
+        return u.getType().toString().equals(UserType.Administrator.toString());
+    }
+    public List<Expertise> getExpertiseList(){
+        return this.expertiseFacade.getUserExpertiseExist(this.loggedInUser());
+    }
+   
+    
 
     public void logout() throws IOException {
         if (isLoggedIn()) {

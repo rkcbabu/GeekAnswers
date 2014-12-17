@@ -4,13 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>User Dashboard </title>
+        <title>My GeekAnswers Dashboard </title>
     </h:head>
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <title>User Dashboard </title>
+            My GeekAnswers Dashboard
         </ui:define>
         <ui:define name="body">
             
@@ -21,18 +22,106 @@
                     <p:column>
                         <h:outputText styleClass="dash-title" value="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" /><br/>
                             <h:outputLabel value="Member since " />
-                            <h:outputText value="#{userController.loggedInUser().registerDate}" >
+                            <h:outputText value="  #{userController.loggedInUser().registerDate}" >
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText><br/>
                             <h:outputLabel value="Email:" />
-                            <h:outputText value="#{userController.loggedInUser().email}"/><br/>
+                            <h:outputText value="  #{userController.loggedInUser().email}"/><br/>
+                            
+                            
+                           
+                            <h:outputLabel value="Points:" />
+                            <h:outputText value="  #{userController.loggedInUser().totalPoint}"/><br/>
+                            
+                             
+                            <h:outputLabel value="Level:" />
+                            <h:outputText value="  #{userController.loggedInUser().userlevel.title}"/><br/>
+                             <br/>
+ <h:outputLabel value="Expertise:" />
+ 
+ 
+ <c:forEach items="#{userController.expertiseList}" var="elist">
+     <br/>  <p:commandButton value="#{elist.category.title}" />
+     
+   
+ </c:forEach>
+ <h:outputLabel rendered="#{userController.expertiseList.size()==0}">
+ Nothing exists, Start answering questions
+ </h:outputLabel>
+ 
+ 
+ 
+                            
+                             <br/>
+
                     </p:column>
                     <f:facet name="footer">
-                        <h:link outcome="/question/List.xhtml" value="View my Questions"/>
+                        <h:link outcome="/question/List.xhtml" value="View my Questions(#{userController.loggedInUser().questions.size()})"/>
                        
                     </f:facet>
                 </h:panelGrid>
             </p:panel>
+            
+            <c:if test="#{not userController.isAdministrator(userController.loggedInUser())}">
+            This page is only accessible for Administrator
+            
+            </c:if>
+            
+            <c:if test="#{userController.isAdministrator(userController.loggedInUser())}">
+                <p:panel header="Site Statatistics">
+             
+                    <p:panelGrid columns="2">
+                        <h:outputLabel>
+                            Users
+                            
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            #{userController.countTotalUsers()}
+                            
+                        </h:outputLabel>
+                        
+                        
+                         <h:outputLabel>
+                            Categories
+                            
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            #{userController.countTotalCourses()}
+                            
+                        </h:outputLabel>
+                        
+                        
+                        <h:outputLabel>
+                            Questions
+                            
+                        </h:outputLabel>
+                        <h:outputLabel>
+                            #{userController.countTotalQuestions()}
+                            
+                        </h:outputLabel>
+                        
+                        <f:facet name="footer">
+                            <h:link outcome="/category/Create.xhtml" value="Create Category"/>
+                            
+                            
+                        </f:facet>
+                        
+                        
+                    </p:panelGrid>
+                    
+                    
+            </p:panel>
+                
+            </c:if>
+          
+           
+          
+            
+            
+          
+            
+            
+            
         </ui:define>
     </ui:composition>
 </html>

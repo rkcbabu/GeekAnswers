@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  * @author acer
  */
 @NamedQueries({
-    @NamedQuery(name = "user.expertise.list", query = "SELECT e FROM Expertise e WHERE e.user=:user"),
+    @NamedQuery(name = "user.expertise.list", query = "SELECT e FROM Expertise e WHERE e.user=:user ORDER BY e.point DESC"),
     @NamedQuery(name = "user.expertise.category", query = "SELECT e FROM Expertise e WHERE e.user=:user AND e.category=:category"),
     @NamedQuery(name = "user.expertise.total.point", query = "SELECT SUM(e.point) FROM Expertise e WHERE e.user=:user "),
     @NamedQuery(name = "user.expertise.course.total.point", query = "SELECT SUM(e.point) FROM Expertise e WHERE e.user=:user AND e.category=:category"),

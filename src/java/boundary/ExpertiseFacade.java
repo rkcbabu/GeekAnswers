@@ -8,6 +8,7 @@ package boundary;
 import entities.Category;
 import entities.Expertise;
 import entities.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -35,6 +36,26 @@ public class ExpertiseFacade extends AbstractFacade<Expertise> {
 
     public ExpertiseFacade() {
         super(Expertise.class);
+    }
+    
+    
+    
+        public List<Expertise> getUserExpertiseExist(User u){
+         TypedQuery<Expertise> query = em.createNamedQuery("user.expertise.list", Expertise.class);
+        query.setParameter("user", u);
+        
+       
+       
+            try{
+                return query.getResultList();
+               
+            }
+            catch(Exception e){
+                return new ArrayList<Expertise>();
+            }
+       
+        
+       
     }
     
     public Expertise expertiseExist(User u, Category c){
