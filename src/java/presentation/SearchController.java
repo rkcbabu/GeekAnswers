@@ -42,9 +42,11 @@ public class SearchController {
     }
     public String process(){
         System.out.println(searchKey);
-        System.out.println(" Executing method : SearchController.search()" );
-//        System.out.println(questionFacade.search(searchKey));
+        System.out.println("Executing method : SearchController.search()" );
+        //System.out.println(questionFacade.search(searchKey));
+        if(searchKey.equals(""))
         return "index.xhtml?searchKey="+searchKey+"&faces-redirect=true&includeViewParams=true"; //finding
+        return "search.xhtml?searchKey="+searchKey+"&faces-redirect=true&includeViewParams=true"; //finding
     }
     public List<Question> searchQuestions(){
         return questionFacade.search(searchKey);
