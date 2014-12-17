@@ -62,10 +62,7 @@
                 </h:panelGrid>
             </p:panel>
             
-            <c:if test="#{not userController.isAdministrator(userController.loggedInUser())}">
-            This page is only accessible for Administrator
-            
-            </c:if>
+          
             
             <c:if test="#{userController.isAdministrator(userController.loggedInUser())}">
                 <p:panel header="Site Statatistics">
