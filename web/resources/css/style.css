@@ -59,26 +59,20 @@ left:auto;
     line-height: 26.3999996185303px;
 }
 table{
-    padding: 5px;
-    margin: 15px;
-    width: 90%
+  
+      width: 90%
 
 }
 table th{
-    padding: 10px;
     text-align: center;
     background: #16A085;
     color: #fff;
     
 }
-table td{
-    padding:10px;
-}
+
 
 table td a{
     display: inline-block;
-
-    padding: 5px 12px;
 margin-bottom: 0;
 font-size: 14px;
 font-weight: 400;
@@ -92,10 +86,7 @@ cursor: pointer;
 -webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;
-user-select: none;
 background-image: none;
-border: 1px solid transparent;
-border-radius: 4px;
 }
 .ui-layout-resizer, .ui-layout-resizer-north, ui-layout-resizer-open, .ui-layout-resizer-north-open {
 display: none;
@@ -185,4 +176,12 @@ border-radius: 6px;
 -webkit-background-clip: padding-box;
 -moz-background-clip: padding;
 background-clip: padding-box;
+}
+.ui-tabs .ui-tabs-panel {
+border-width: 0;
+padding-left: 0;
+padding-top: 0;
+background: none;
+border-bottom-width: 0;
+/* padding-right: 20px; */
 }
