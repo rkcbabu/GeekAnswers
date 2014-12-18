@@ -133,3 +133,8 @@ tr.jsfcrud_even_row {
     height: 400px;
     overflow-y: hidden;
 }
+.pf-dock-container-bottom
+{
+   background-image: none;
+   background-color: none;
+}

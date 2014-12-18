@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -48,22 +49,14 @@
             <p:layoutUnit position="south" size="50" styleClass="ui-layout-unit" >
                 <div id="footer"> YOUR QUESTIONS ANSWERED BY THE GENIUSES </div>
             </p:layoutUnit>
-            <p:layoutUnit position="west" size="220" collapsible="false" styleClass="left-menu" >
+            <p:layoutUnit position="west" size="220" header="Categories" collapsible="false">
                 <h:form>
                     <p:menu>
                         <p:submenu>
-
-                            <p:menuitem outcome="/answer/List.xhtml" value="Show All Answer "/>
-                            <p:menuitem url="/category/List.xhtml" value="Show All Category "/>
-                            <p:menuitem url="/comment/List.xhtml" value="Show All Comment "/>
-                            <p:menuitem url="/question/questions.xhtml" value="Show All Question "/>
-                            <p:menuitem url="/reputation/List.xhtml" value="Show All Reputation "/>
-                            <p:menuitem url="/tag/List.xhtml" value="Show All Tag "/>
-                            <p:menuitem url="/user/List.xhtml" value="Show All User "/>
-                            <p:menuitem url="question/questions.xhtml" value="Question " />
-
+                            <c:forEach items="#{categoryController.all}" var="categories" >
+                                <p:menuitem value="#{categories.title}" outcome="/index.xhtml?categoryID=#{categories.id}"/>
+                            </c:forEach>
                         </p:submenu>
-
                     </p:menu>
                 </h:form>
             </p:layoutUnit>

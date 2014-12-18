@@ -45,7 +45,7 @@ public class QuestionFacade extends AbstractFacade<Question> {
         return query.getResultList();
     }
     public List<Question> getPopular(){
-        TypedQuery<Question> query = em.createQuery("SELECT q FROM Question q, QuestionVote v WHERE q = v.question ORDER BY v.vote DESC",Question.class);
+        TypedQuery<Question> query = em.createQuery("SELECT DISTINCT q FROM Question q LEFT JOIN QuestionVote v ON q = v.question ORDER BY v.vote DESC",Question.class);
         return query.getResultList();
     }
     public List<Question> getTopUnanswered(){
