@@ -93,6 +93,12 @@ public class QuestionUtilityController {
 
     }
 
+    public List<Answer> answerList(Question q){
+        return this.answerFacade.getAll(q);
+        
+    }
+    
+    
     public String getAnswerVoteMessage() {
         return answerVoteMessage;
     }

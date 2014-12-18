@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
@@ -22,6 +24,12 @@ import javax.persistence.Temporal;
  *
  * @author Chaulagai
  */
+
+
+@NamedQueries({
+
+@NamedQuery(name="question.answer.list",query="SELECT a from    Answer a WHERE a.question=:question ORDER BY(SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer=a) ")
+})
 @Entity
 public class Answer implements Serializable {
     private static final long serialVersionUID = 1L;

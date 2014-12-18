@@ -64,7 +64,7 @@
                             </p:row>
                         </p:panelGrid>
                     </p:panel>
-                    <c:forEach items="#{questionUtility.question.answers}" var="ans">
+                    <c:forEach items="#{questionUtility.answerList(questionUtility.question)}" var="ans">
                         <p:outputLabel id="answerMessage#{ans.id}" value="#{questionUtility.answerVoteMessage}"/>
                         <p:panel header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" styleClass="answer">
                             <p:panelGrid styleClass="question-detail-question-box">

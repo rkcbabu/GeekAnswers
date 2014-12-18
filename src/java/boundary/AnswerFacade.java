@@ -7,6 +7,8 @@ package boundary;
 
 import entities.Answer;
 import entities.AnswerVote;
+import entities.Question;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,6 +33,12 @@ public class AnswerFacade extends AbstractFacade<Answer> {
         super(Answer.class);
     }
 
+    public List<Answer> getAll(Question q){
+        TypedQuery<Answer> query = em.createNamedQuery("question.answer.list", Answer.class); 
+        query.setParameter("question", q);
+            return query.getResultList();
+    }
   
+   
 
 }
