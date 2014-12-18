@@ -1,5 +1,6 @@
 package presentation;
 
+import boundary.CategoryFacade;
 import entities.Question;
 import presentation.util.JsfUtil;
 import presentation.util.PaginationHelper;
@@ -41,6 +42,8 @@ import javax.persistence.TypedQuery;
 
 @RequestScoped
 public class QuestionController implements Serializable {
+    @EJB
+    private CategoryFacade categoryFacade;
     @EJB
     private UserInteractionFacade userInteractionFacade;
 
@@ -274,9 +277,39 @@ public class QuestionController implements Serializable {
         return "List";
     }
 
-    public List<Question> getAll() {
-        String query = "SELECT e FROM Question e ORDER BY e.createdDate DESC ";
+    public List<Question> getAll(){
+             String query = "SELECT e FROM Question e ";
+             String catID="";
+             try{
+            catID=FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("categoryID");
+        
+           
+    
+            if(!catID.isEmpty()){
+                query=query+" WHERE e.category=:category";
+            }
+             }
+             catch(NullPointerException e){
+                 
+             }
+            
+            
+            
+       
+        query+=" ORDER BY e.createdDate DESC ";
+        
+        
         TypedQuery<Question> q1 = ejbFacade.getEM().createQuery(query, Question.class);
+        
+        try{
+            if(!catID.isEmpty()){
+                q1.setParameter("category", this.categoryFacade.find(Long.parseLong(catID)));
+            }
+        }
+        catch(NullPointerException e){
+            
+        }
+        
         return q1.getResultList();
     }
 

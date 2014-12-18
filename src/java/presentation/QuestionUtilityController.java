@@ -71,6 +71,17 @@ public class QuestionUtilityController {
 
     private QuestionVote questionVote;
     private AnswerVote answerVote;
+    
+    private String answerErrorMessage="";
+
+    public String getAnswerErrorMessage() {
+        return answerErrorMessage;
+    }
+
+    public void setAnswerErrorMessage(String answerErrorMessage) {
+        this.answerErrorMessage = answerErrorMessage;
+    }
+    
 
     public QuestionUtilityController() {
         common = new Common();
@@ -355,11 +366,30 @@ public class QuestionUtilityController {
     }
 
     public void addAnswer() {
+         setAnswerErrorMessage("");
         answer.setCreatedDate(new Date());
         answer.setQuestion(question);
-        User usr = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
-        // User usr=(User)common.getSession("logged_in_user");
-        //  System.out.println("user="+usr.getFirstName());
+        User usr ;
+        
+        try{
+        
+        usr= (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("logged_in_user");
+       
+         System.out.println("user="+usr.getFirstName());
+        }
+        catch(NullPointerException e){
+             setAnswerErrorMessage("Please login first");
+            return;
+        }
+        
+        if(user==null){
+            setAnswerErrorMessage("Please login first");
+            return;
+        }
+        else{
+             setAnswerErrorMessage("");
+        }
+        
         answer.setUser(usr);
         answerFacade.create(answer);
         //questionFacade.getEM().refresh(question);
@@ -435,7 +465,7 @@ public class QuestionUtilityController {
                 //System.out.println("Logged in uid="+sessionUser.getId());
             }
         } catch (NullPointerException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             System.out.println("User is not logged in");
         }
 
