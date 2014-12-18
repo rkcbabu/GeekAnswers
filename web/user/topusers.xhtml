@@ -4,8 +4,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+    
+     
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -58,19 +59,17 @@
                             <f:facet name="header">
                                 <h:outputText value="Expertise"/>
                             </f:facet>
-
-                            
-                            <c:forEach items="#{userController.FetchExpertiseList(item)}" var="elist">
-                                
-                                <br/>  
-
-                                <h:link outcome="topusers.xhtml?courseID=#{elist.category.id}" value="#{elist.category.title}" />
+                            <h:outputLabel>
+                                size=  ${userController.FetchExpertiseList(item).size()}
+                            ${userController.FetchExpertiseList(item)}
+                                <c:forEach items="${userController.FetchExpertiseList(item)}" var="elist">${elist.category.title}<br/>
+                            <h:link outcome="topusers.xhtml?courseID=${elist.category.id}" value="${elist.category.title}" />
                                 
 
                             </c:forEach>
 
 
-
+</h:outputLabel>
 
 
                         </h:column>

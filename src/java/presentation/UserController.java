@@ -81,14 +81,22 @@ public class UserController implements Serializable {
     
     public List<User> getAllUsers(Long catid){
         Category c=null;
+        try{
         if(catid==null){
             catid=Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("courseID"));
             if(catid>0L){
                 c=this.categoryFacade.find(catid);
         }
+        }}
+        catch(NullPointerException e){
+                
+                }
+        catch(NumberFormatException m){
+            
+        }
         
        
-    }
+    
         return expertiseFacade.getAllExpert(c);
     }
     

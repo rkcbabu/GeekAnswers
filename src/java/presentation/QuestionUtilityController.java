@@ -306,15 +306,15 @@ public class QuestionUtilityController {
                     answerVote.setVote(1);
 
                    answerVoteFacade.edit(answerVote);
-                    System.out.println("vote down added");
-                    this.answerVoteMessage = "Vote changed to vote down";
+                    System.out.println("vote up added");
+                    this.answerVoteMessage = "Vote changed to vote up";
                 } else {
                     //  em.persist(questionVote);
 
                     answerVoteFacade.create(answerVote);
                      eventHandler.triggerEvent(EventList.ANSWER_LIKED,answer.getQuestion().getUser(),answer.getQuestion().getCategory());
 
-                    this.answerVoteMessage = "Vote added: Vote down";
+                    this.answerVoteMessage = "Vote added: Vote up";
                 }
 
             }

@@ -59,6 +59,8 @@ public class ExpertiseFacade extends AbstractFacade<Expertise> {
         query.setParameter("user", u);
 
         try {
+            System.out.println("expertlist="+query.getResultList());
+            
             return query.getResultList();
 
         } catch (Exception e) {
