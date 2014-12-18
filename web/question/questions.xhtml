@@ -23,16 +23,16 @@ and open the template in the editor.
             <h:outputStylesheet library="css" name="style.css"/>
                 <h:form>
                     <p:tabView>
-                        <p:tab title="Most Recent">
+                        <p:tab title="Recent">
                             <h:panelGrid >
                                 <c:forEach items="#{questionController.all}" var="questions" >
-                                    <p:panel>                        
+                                    <p:panel style="border-bottom: 5px;">                        
                                         <div class="panel-header">
                                             <h:outputLink value="#{questionController.baseLink}/Detail.xhtml?id=#{questions.id}" >
                                                 <h:outputText value="#{questions.title}" styleClass="questionHeader"/><br/>
-                                                <hr/>
                                             </h:outputLink>
                                         </div>
+                                         <hr/>
                                         <h:outputText value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
                                         <h:outputLink value="#{questionController.baseLink}/Detail.xhtml?id=#{questions.id}" rendered="#{questions.contentShrunk.length() gt 250}">
                                             <h:outputText value="(Read More....)" styleClass="questionContent"/>                                    
@@ -59,6 +59,7 @@ and open the template in the editor.
                                                 <h:outputText value="#{questions.title}" styleClass="questionHeader"/><br/>
                                             </h:outputLink>
                                         </div>
+                                          <hr/>
                                         <h:outputText style="question-content" value="#{questions.contentShrunk}" styleClass="questionContent"/><br/>
                                         <h:outputLink value="#{questionController.baseLink}/Detail.xhtml?id=#{questions.id}" rendered="#{questions.contentShrunk.length() gt 250}">
                                             <h:outputText value="(Read More....)" styleClass="questionContent"/>                                    

@@ -21,7 +21,7 @@
                         <p:growl id="msgs" />
                         <p:panel header="Create New Question" styleClass="dash-panel" style="margin-bottom:20px">
                             <h:panelGrid columns="2" cellpadding="100">
-                                <h:outputLabel value="Title " for="title" />
+                                <h:outputLabel style="margin-bottom: 10px;" value="Title " for="title" />
                                 <h:inputText id="title" size="60" value="#{questionController.selected.title}" title="#{bundle.CreateQuestionTitle_title}" required="true" requiredMessage="Please Enter the title"/>
 
                                 <h:outputLabel value="Content" for="content" />
@@ -33,14 +33,14 @@
                                         <f:selectItem itemValue="#{all.id}" itemLabel="#{all}" />
                                     </f:selectItems>
                                 </p:selectOneMenu>
-                                
+
                                 <h:commandButton styleClass="btn btn-primary btn-lg" action="#{questionController.create}" value="#{bundle.CreateQuestionSaveLink}" />
                             </h:panelGrid>
                         </p:panel>
-                        
-                      
+
+
                         <h:commandLink action="#{questionController.prepareList}" value="#{bundle.CreateQuestionShowAllLink}" immediate="true"/>
-                        
+
                         <h:link outcome="/index" value="#{bundle.CreateQuestionIndexLink}"/>
                     </h:form>
                 </c:when>

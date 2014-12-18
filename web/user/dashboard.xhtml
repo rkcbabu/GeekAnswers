@@ -14,9 +14,10 @@
             My GeekAnswers Dashboard
         </ui:define>
         <ui:define name="body">
-
+  <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="style.css"/>
 <!--            <h:inputSecret value="#{userController.isUserLoggedIn()}" id="user_id"/>-->
-            <p:panelGrid columns="4" styleClass="dashboard-panel">
+        <p:panelGrid columns="4" styleClass="dashboard-panel" style="width: 90%;border-color: white">
                 <p:column colspan="3">
                     <p:panel id="basic" styleClass="dashboard-panel box" header="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" style="margin-bottom: 10px">
                         <h:panelGrid columns="2" cellpadding="10">

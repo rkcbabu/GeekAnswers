@@ -59,7 +59,7 @@ left:auto;
     line-height: 26.3999996185303px;
 }
 table{
-  
+  border: transparent;
       width: 90%
 
 }
@@ -67,6 +67,17 @@ table th{
     text-align: center;
     background: #16A085;
     color: #fff;
+   
+}
+table tr{
+}
+.ui-panel-content ui-widget-content{
+}
+table td{
+  
+    border: transparent;
+    border-color: background;
+
     
 }
 
@@ -93,6 +104,7 @@ display: none;
 background: #f3f3f3;
 }
 .ui-widget-content {
+border: transparent;
 background: #f3f3f3;
 /* color: #E8E0E0; */
 }
@@ -101,9 +113,10 @@ background-color: #3E3E3E;
 color: white;
 }
 .ui-panel .ui-panel-content {
-/* border: 0; */
+border: 0;
 background: #DFE4E6;
 padding: 0.5em 1em;
+/* word-wrap: break-word; */
 }
 form.jsfcrud_list_form th, td th {
 /* font-size: x-small; */
@@ -157,9 +170,10 @@ font-size: small;
 }
 .dash-panel {
     /* font-family: Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif; */
-    width:75%;
+    width: 90%;
    alignment-baseline: central;
    
+    border-top: 20px;
 }
 .ui-panel-content ui-widget-content{
     background: red;
@@ -185,9 +199,10 @@ background: none;
 border-bottom-width: 0;
 /* padding-right: 20px; */
 }
-.dashboard-panel tr, .dashboard-panel td{
-    border:none;
+
+.question{
+    width: 90%;
 }
-.dashboard-panel .box{
-    height:300px;
+.answer{
+    width: 90%;
 }

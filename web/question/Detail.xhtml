@@ -64,9 +64,10 @@
                             </p:row>
                         </p:panelGrid>
                     </p:panel>
+                    <h3 style="color:green" > Answers:</h3>
                     <c:forEach items="#{questionUtility.answerList(questionUtility.question)}" var="ans">
                         <p:outputLabel id="answerMessage#{ans.id}" value="#{questionUtility.answerVoteMessage}"/>
-                        <p:panel header="By #{ans.user.firstName}  #{ans.user.firstName}  On #{ans.createdDate} " style="margin-bottom:20px" styleClass="answer">
+                        <p:panel header="By #{ans.user.firstName}  #{ans.user.lastName}  On #{ans.createdDate} " style="margin-bottom:20px" styleClass="answer">
                             <p:panelGrid styleClass="question-detail-question-box">
                                 <p:row>
                                     <p:column style="width:5%;border: none; text-align: center">
@@ -100,7 +101,7 @@
                         </p:panel>
                     </c:forEach>
   <h:outputLabel id="answerErrorMessage" value="#{questionUtility.answerErrorMessage}"/>
-                    <p:panel    header="Write your Answer" style="margin-bottom:20px">
+                    <p:panel    header="Write your Answer" style="margin-bottom:20px; width: 90%;">
                         <h:panelGrid columns="2" cellpadding="10">
                             <h:inputTextarea rows="10" cols="120" style="border: 1px solid #90b4bd" value="#{questionUtility.answer.content}"></h:inputTextarea>
                             <br/>

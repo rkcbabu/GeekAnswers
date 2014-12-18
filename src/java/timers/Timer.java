@@ -25,7 +25,7 @@ public class Timer {
     
     public static int count=0;
     
-    @Schedule (dayOfWeek="*")
+    //@Schedule (dayOfWeek="*")
     public void sendSubscriptionMail(){
         for (User u:userfacade.subscribedUsers()){
             sendSubscription(u);
