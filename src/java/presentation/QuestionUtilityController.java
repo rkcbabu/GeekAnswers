@@ -217,6 +217,7 @@ public class QuestionUtilityController {
     }
     public void questionThumbsUpHandller() {
         try {
+            System.out.println("before voting check, logged in userID="+this.user.getId());
             if (Objects.equals(this.user.getId(), this.question.getUser().getId())) {
                 this.questionVoteMessage = "You are not allowed to vote own question";
 
@@ -244,7 +245,8 @@ public class QuestionUtilityController {
 
             }
 
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
+             this.questionVoteMessage = "Please login first";
             e.printStackTrace();
             //common.redirectLogin();
         }
@@ -252,6 +254,7 @@ public class QuestionUtilityController {
 
     public void questionThumbsDownHandller() {
         try {
+             System.out.println("before voting check, logged in userID="+this.user.getId());
             if (Objects.equals(this.user.getId(), this.question.getUser().getId())) {
                 this.questionVoteMessage = "You are not allowed to vote own question";
 
@@ -281,7 +284,8 @@ public class QuestionUtilityController {
 
             }
 
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
+             this.questionVoteMessage = "Please login first";
             e.printStackTrace();
             //common.redirectLogin();
         }
@@ -291,6 +295,7 @@ public class QuestionUtilityController {
      public void answerThumbsUpHandller(Answer ans) {
          this.answer=ans;
         try {
+             System.out.println("before voting check, logged in userID="+this.user.getId());
             if (Objects.equals(this.user.getId(), this.answer.getUser().getId())) {
                 this.answerVoteMessage = "You are not allowed to vote own answer";
 
@@ -312,14 +317,19 @@ public class QuestionUtilityController {
                     //  em.persist(questionVote);
 
                     answerVoteFacade.create(answerVote);
-                     eventHandler.triggerEvent(EventList.ANSWER_LIKED,answer.getQuestion().getUser(),answer.getQuestion().getCategory());
 
                     this.answerVoteMessage = "Vote added: Vote up";
                 }
+                
+                
+                
+                                     eventHandler.triggerEvent(EventList.ANSWER_LIKED,answer.getQuestion().getUser(),answer.getQuestion().getCategory());
+
 
             }
 
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
+            this.answerVoteMessage = "Please login first";
             e.printStackTrace();
             //common.redirectLogin();
         }
@@ -329,6 +339,7 @@ public class QuestionUtilityController {
           public void answerThumbsDownHandller(Answer ans) {
               answer=ans;
         try {
+             System.out.println("before voting check, logged in userID="+this.user.getId());
             if (Objects.equals(this.user.getId(), this.answer.getUser().getId())) {
                 this.answerVoteMessage = "You are not allowed to vote own answer";
 
@@ -352,14 +363,17 @@ public class QuestionUtilityController {
                     //  em.persist(questionVote);
 
                     answerVoteFacade.create(answerVote);
-                     eventHandler.triggerEvent(EventList.ANSWER_DISLIKED,answer.getQuestion().getUser(),answer.getQuestion().getCategory());
 
                     this.answerVoteMessage = "Vote added: Vote down";
                 }
+                
+                                   eventHandler.triggerEvent(EventList.ANSWER_DISLIKED,answer.getQuestion().getUser(),answer.getQuestion().getCategory());
+  
 
             }
 
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
+             this.answerVoteMessage = "Please login first";
             e.printStackTrace();
             //common.redirectLogin();
         }

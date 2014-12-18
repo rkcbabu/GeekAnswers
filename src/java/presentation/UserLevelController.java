@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import boundary.AnswerVoteFacade;
 import boundary.ExpertiseFacade;
 import boundary.QuestionVoteFacade;
 import boundary.UserFacade;
@@ -22,6 +23,8 @@ import javax.inject.Inject;
  */
 @ManagedBean
 public class UserLevelController {
+    @EJB
+    private AnswerVoteFacade answerVoteFacade;
     @EJB
     private UserInteractionFacade userInteractionFacade;
     @EJB
@@ -93,7 +96,7 @@ public class UserLevelController {
         int expertPoint=0;
         
         interactionPoint=this.userInteractionFacade.countTotalInteractionPointOfUser(user);
-        expertPoint=this.expertiseFacade.getTotalExpertisePoint(user);
+        expertPoint=this.answerVoteFacade.countAnswerVote(user);
         contextualPoint=this.questionVoteFacade.countTotalQuestionVotesOfUser(user);
         int totalPoint=interactionPoint+contextualPoint+expertPoint;
         
@@ -101,7 +104,7 @@ public class UserLevelController {
         this.userFacade.edit(user);
         
         
-        System.out.println("User total point="+totalPoint);
+        System.out.println("User total point of user"+user.getEmail()+"="+totalPoint);
         
         
     }

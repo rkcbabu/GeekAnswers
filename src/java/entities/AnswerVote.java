@@ -20,6 +20,9 @@ import javax.persistence.NamedQuery;
  * @author acer
  */
 @NamedQueries({
+    
+        @NamedQuery(name = "answer.vote.count.all.user", query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer.user=:user"),
+
     @NamedQuery(name = "answer.vote.count", query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.answer=:answer"),
     @NamedQuery(name = "answer.vote.find.id", query = "SELECT v.id FROM AnswerVote v WHERE v.user=:user AND v.answer=:answer"),
     @NamedQuery(name = "answer.category.vote.count", query = "SELECT SUM(v.vote) FROM AnswerVote v WHERE v.user=:user AND v.answer.question.category=:category")

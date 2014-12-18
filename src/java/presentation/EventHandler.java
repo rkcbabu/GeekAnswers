@@ -59,7 +59,7 @@ public class EventHandler {
         uit.setInteractionDate(new Date());
         uit.setUser(user);
         try{
-        userInteractionFacade.create(uit);
+        userInteractionFacade.create(uit.getClass().newInstance());
         }
         catch(Exception e){
             try {
@@ -68,6 +68,7 @@ public class EventHandler {
                 newInteraction.setInteractionDate(new Date());
                 userInteractionFacade.create(newInteraction);
                 
+               
                 
                 
             } catch (InstantiationException ex) {

@@ -6,7 +6,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
     
      
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -60,13 +61,19 @@
                                 <h:outputText value="Expertise"/>
                             </f:facet>
                             <h:outputLabel>
-                                size=  ${userController.FetchExpertiseList(item).size()}
-                            ${userController.FetchExpertiseList(item)}
-                                <c:forEach items="${userController.FetchExpertiseList(item)}" var="elist">${elist.category.title}<br/>
+                                
+                                <p:panelGrid columns="1">
+                                     <c:forEach items="${userController.FetchExpertiseList(item)}" var="elist">
+                                    
+                                  
                             <h:link outcome="topusers.xhtml?courseID=${elist.category.id}" value="${elist.category.title}" />
                                 
 
                             </c:forEach>
+                                    
+                                </p:panelGrid>
+                               
+                               
 
 
 </h:outputLabel>
