@@ -185,3 +185,9 @@ background: none;
 border-bottom-width: 0;
 /* padding-right: 20px; */
 }
+.dashboard-panel tr, .dashboard-panel td{
+    border:none;
+}
+.dashboard-panel .box{
+    height:300px;
+}

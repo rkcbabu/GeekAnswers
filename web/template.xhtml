@@ -32,7 +32,8 @@
                             <p:menuitem value="#{bundle.Logout}" action="#{userController.logout()}" icon="ui-icon-power" rendered="#{userController.loggedIn eq true}"/>
                             <p:menuitem value="#{userController.loggedInUser().firstName} #{userController.loggedInUser().lastName}" icon="ui-icon-person" outcome="/user/dashboard" rendered="#{userController.loggedIn eq true}"/>
                             <p:menuitem value="Register" outcome="/user/Create" icon="ui-icon-unlocked" rendered="#{userController.loggedIn eq false}" />
-                            <p:menuitem value="Ask a Question" outcome="/question/Create" icon="ui-icon-lightbulb" rendered="#{userController.loggedIn eq true}"/>  
+                            <p:menuitem value="Ask a Question" outcome="/question/Create" icon="ui-icon-lightbulb" rendered="#{userController.loggedIn eq true}"/> 
+                            <p:menuitem value="Top Users" outcome="/user/topusers" icon="ui-icon-circle-arrow-n"/>
                             <f:facet name="options">
                                 <p:inputText value="#{searchController.searchKey}" style="margin-right:10px" placeholder="Search"/>
                                 <p:commandButton action="#{searchController.process()}" value="Search"  icon="ui-icon-search"/>
