@@ -136,18 +136,18 @@ public class UserController implements Serializable {
     @Asynchronous
     public void sendWelcomeEmail() throws MessagingException, UnsupportedEncodingException {
         MailServices.sendEmail(current.getEmail(), "Welcome to Geek Answers", ""
-                + "Hello, " + current.getFirstName() + " " +current.getLastName() + "\n"
-                + "\n\n"
-                + "Welcome to Geek Answers!!\n"
+                + "Hello, " + current.getFirstName() + " " +current.getLastName() + "<br/>"
+                + "<br/><br/>"
+                + "Welcome to Geek Answers!!<br/>"
                 + "Thank you for registering with us. We hope you will find all your questions "
                 + "answered by the best gurus around in MUM. Don't forget to upvote the answers "
                 + "you feel right so that the gurus will be encouraged to continue answering and "
-                + "sharing their valuable knowledge in future.\n\n"
-                + "Here is your login information \n"
-                + "Login :" + current.getEmail() + "\n"
-                + "Password :" + current.getPassword() + "\n\n"
-                + "Please report any problems, bugs or errors to geekanswers18@gmail.com\n"
-                + "Thank you,\n"
+                + "sharing their valuable knowledge in future.<br/><br/>"
+                + "Here is your login information <br/>"
+                + "Login :" + current.getEmail() + "<br/>"
+                + "Password :" + current.getPassword() + "<br/><br/>"
+                + "Please report any problems, bugs or errors to geekanswers18@gmail.com<br/>"
+                + "Thank you,<br/>"
                 + "Geek Answers Team");
 
     }
