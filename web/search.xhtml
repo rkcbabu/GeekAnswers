@@ -14,10 +14,12 @@ and open the template in the editor.
     <ui:composition template="/template.xhtml">
         <ui:define name="body">
             <h:panelGrid rendered="#{searchController.searchQuestions().size()>0}" >
-                <c:forEach items="#{searchController.searchQuestions()}" var="questions" >
-                 <p:panel>  
+                <p:panel>  
                      <b>"#{searchController.searchKey}"</b> search result:
                  </p:panel>
+                
+                <c:forEach items="#{searchController.searchQuestions()}" var="questions" >
+                 
                     <p:panel>                        
                         <div class="panel-header">
                             <h:outputLink value="#{questionController.baseLink}/Detail.xhtml?id=#{questions.id}" >
